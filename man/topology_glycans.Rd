@@ -21,7 +21,7 @@ topology_glycans
 \description{
 This is a simplified version of \code{fully_determined_glycans},
 removing all linkage information,
-e.g. "Fuc(??-?)Gal(??-?)\link{Fuc(??-?)}GlcNAc(??-".
+e.g. \verb{Fuc(??-?)Gal(??-?)[Fuc(??-?)]GlcNAc(??-}.
 The dataset is derived from the GlyTouCan v2.9.1 release,
 with 2955 glycan structures currently available.
 }

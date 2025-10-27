@@ -30,7 +30,7 @@ iupac_prepared <- iupac_temp[good_iupac, ] |>
 
 species_prepared <- species |>
   select(glytoucan_ac, species = tax_name) |>
-  summarise(species = str_c(species, collapse = ";"), .by = glytoucan_ac)
+  summarise(species = str_c(unique(species), collapse = ";"), .by = glytoucan_ac)
 
 glytoucan_glycans <- iupac_prepared |>
   left_join(species_prepared, by = "glytoucan_ac")

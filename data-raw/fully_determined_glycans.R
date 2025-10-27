@@ -32,7 +32,7 @@ species_prepared <- species |>
   select(glytoucan_ac, species = tax_name) |>
   summarise(species = str_c(unique(species), collapse = ";"), .by = glytoucan_ac)
 
-glytoucan_glycans <- iupac_prepared |>
+fully_determined_glycans <- iupac_prepared |>
   left_join(species_prepared, by = "glytoucan_ac")
 
-usethis::use_data(glytoucan_glycans, overwrite = TRUE)
+usethis::use_data(fully_determined_glycans, overwrite = TRUE)

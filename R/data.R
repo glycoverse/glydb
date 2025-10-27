@@ -12,4 +12,4 @@
 #' - `glycan_composition`: Glycan composition (glyrepr::glycan_composition()).
 #' - `species`: Species name. Unknown species are NAs.
 #' @source <https://data.glygen.org>
-"glytoucan_glycans"
+"fully_determined_glycans"

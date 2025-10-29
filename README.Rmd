@@ -28,13 +28,34 @@ Only fully defined glycan structures are included.
 
 ## Installation
 
-You can install the development version of glydb from [GitHub](https://github.com/) with:
+You can install the latest release of glydb from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("remotes")
+remotes::install_github("glycoverse/glydb@*release")
+```
+
+Or install the development version:
+
+``` r
 remotes::install_github("glycoverse/glydb")
 ```
 
 ## Example
 
-Coming soon.
+In glydb, we have two datasets.
+
+The first one is `fully_determined_glycans`, which contains a curated list of fully determined glycan structures from GlyTouCan.
+
+```{r}
+library(glydb)
+library(glyrepr)
+
+fully_determined_glycans
+```
+
+The second one is `topology_glycans`, derived from `fully_determined_glycans`, removing all linkage information.
+
+```{r}
+topology_glycans
+```

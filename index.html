@@ -23,7 +23,7 @@
 
     <a class="navbar-brand me-2" href="index.html">glydb</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,15 +58,55 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version of glydb from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<p>You can install the latest release of glydb from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"glycoverse/glydb"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"glycoverse/glydb@*release"</span><span class="op">)</span></span></code></pre></div>
+<p>Or install the development version:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"glycoverse/glydb"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
-<p>Coming soon.</p>
+<p>In glydb, we have two datasets.</p>
+<p>The first one is <code>fully_determined_glycans</code>, which contains a curated list of fully determined glycan structures from GlyTouCan.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://glycoverse.github.io/glydb/">glydb</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://glycoverse.github.io/glyrepr/" class="external-link">glyrepr</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">fully_determined_glycans</span></span>
+<span><span class="co">#&gt; # A data frame: 6,960 × 4</span></span>
+<span><span class="co">#&gt;    glytoucan_ac glycan_structure                      glycan_composition species</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;        &lt;struct&gt;                              &lt;comp&gt;             &lt;chr&gt;  </span></span>
+<span><span class="co">#&gt;  1 G00024MO     Glc(b1-3)Glc(b1-3)Glc(b1-             Glc(3)             Saccha…</span></span>
+<span><span class="co">#&gt;  2 G00025MO     Glc(b1-4)Glc(b1-4)Glc(b1-4)Glc(b1-    Glc(4)             &lt;NA&gt;   </span></span>
+<span><span class="co">#&gt;  3 G00027MO     Man(a1-3)[Man(a1-6)]Man(b1-4)GlcNAc(… Man(3)GlcNAc(1)    Mus mu…</span></span>
+<span><span class="co">#&gt;  4 G00030VN     Fuc(a1-2)[GalNAc(a1-3)]Gal(b1-4)GlcN… Gal(1)GlcNAc(1)Ga… Bos ta…</span></span>
+<span><span class="co">#&gt;  5 G00031MO     Gal(b1-3)GalNAc(a1-                   Gal(1)GalNAc(1)    Bos ta…</span></span>
+<span><span class="co">#&gt;  6 G00033MO     Gal(b1-3)[GlcNAc(b1-6)]GalNAc(a1-     Gal(1)GlcNAc(1)Ga… Bos ta…</span></span>
+<span><span class="co">#&gt;  7 G00035MO     GlcNAc(b1-3)GalNAc(a1-                GlcNAc(1)GalNAc(1) Bos ta…</span></span>
+<span><span class="co">#&gt;  8 G00037MO     GlcNAc(b1-3)[GlcNAc(b1-6)]GalNAc(a1-  GlcNAc(2)GalNAc(1) Bos ta…</span></span>
+<span><span class="co">#&gt;  9 G00039MO     GalNAc(a1-3)GalNAc(a1-                GalNAc(2)          Bos ta…</span></span>
+<span><span class="co">#&gt; 10 G00041MO     GlcNAc(b1-6)GalNAc(a1-                GlcNAc(1)GalNAc(1) Bos ta…</span></span>
+<span><span class="co">#&gt; # ℹ 6,950 more rows</span></span></code></pre></div>
+<p>The second one is <code>topology_glycans</code>, derived from <code>fully_determined_glycans</code>, removing all linkage information.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">topology_glycans</span></span>
+<span><span class="co">#&gt; # A tibble: 2,955 × 3</span></span>
+<span><span class="co">#&gt;    glycan_structure                                   glycan_composition species</span></span>
+<span><span class="co">#&gt;    &lt;struct&gt;                                           &lt;comp&gt;             &lt;chr&gt;  </span></span>
+<span><span class="co">#&gt;  1 Glc(??-?)Glc(??-?)Glc(??-                          Glc(3)             &lt;NA&gt;   </span></span>
+<span><span class="co">#&gt;  2 Glc(??-?)Glc(??-?)Glc(??-?)Glc(??-                 Glc(4)             &lt;NA&gt;   </span></span>
+<span><span class="co">#&gt;  3 Man(??-?)[Man(??-?)]Man(??-?)GlcNAc(??-            Man(3)GlcNAc(1)    &lt;NA&gt;   </span></span>
+<span><span class="co">#&gt;  4 Fuc(??-?)[GalNAc(??-?)]Gal(??-?)GlcNAc(??-?)[Neu5… Gal(1)GlcNAc(1)Ga… Bos ta…</span></span>
+<span><span class="co">#&gt;  5 Gal(??-?)GalNAc(??-                                Gal(1)GalNAc(1)    &lt;NA&gt;   </span></span>
+<span><span class="co">#&gt;  6 Gal(??-?)[GlcNAc(??-?)]GalNAc(??-                  Gal(1)GlcNAc(1)Ga… &lt;NA&gt;   </span></span>
+<span><span class="co">#&gt;  7 GlcNAc(??-?)GalNAc(??-                             GlcNAc(1)GalNAc(1) &lt;NA&gt;   </span></span>
+<span><span class="co">#&gt;  8 GlcNAc(??-?)[GlcNAc(??-?)]GalNAc(??-               GlcNAc(2)GalNAc(1) &lt;NA&gt;   </span></span>
+<span><span class="co">#&gt;  9 GalNAc(??-?)GalNAc(??-                             GalNAc(2)          &lt;NA&gt;   </span></span>
+<span><span class="co">#&gt; 10 Fuc(??-?)Gal(??-?)[Fuc(??-?)]GlcNAc(??-            Gal(1)GlcNAc(1)Fu… &lt;NA&gt;   </span></span>
+<span><span class="co">#&gt; # ℹ 2,945 more rows</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="license">

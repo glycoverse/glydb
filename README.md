@@ -68,18 +68,18 @@ The second one is `topology_glycans`, derived from
 
 ``` r
 topology_glycans
-#> # A tibble: 2,955 × 3
+#> # A tibble: 2,780 × 3
 #>    glycan_structure                                   glycan_composition species
 #>    <struct>                                           <comp>             <chr>  
 #>  1 Glc(??-?)Glc(??-?)Glc(??-                          Glc(3)             <NA>   
 #>  2 Glc(??-?)Glc(??-?)Glc(??-?)Glc(??-                 Glc(4)             <NA>   
 #>  3 Man(??-?)[Man(??-?)]Man(??-?)GlcNAc(??-            Man(3)GlcNAc(1)    <NA>   
-#>  4 Fuc(??-?)[GalNAc(??-?)]Gal(??-?)GlcNAc(??-?)[Neu5… Gal(1)GlcNAc(1)Ga… Bos ta…
+#>  4 GalNAc(??-?)[Fuc(??-?)]Gal(??-?)GlcNAc(??-?)[Neu5… Gal(1)GlcNAc(1)Ga… Bos ta…
 #>  5 Gal(??-?)GalNAc(??-                                Gal(1)GalNAc(1)    <NA>   
-#>  6 Gal(??-?)[GlcNAc(??-?)]GalNAc(??-                  Gal(1)GlcNAc(1)Ga… <NA>   
+#>  6 GlcNAc(??-?)[Gal(??-?)]GalNAc(??-                  Gal(1)GlcNAc(1)Ga… <NA>   
 #>  7 GlcNAc(??-?)GalNAc(??-                             GlcNAc(1)GalNAc(1) <NA>   
 #>  8 GlcNAc(??-?)[GlcNAc(??-?)]GalNAc(??-               GlcNAc(2)GalNAc(1) <NA>   
 #>  9 GalNAc(??-?)GalNAc(??-                             GalNAc(2)          <NA>   
 #> 10 Fuc(??-?)Gal(??-?)[Fuc(??-?)]GlcNAc(??-            Gal(1)GlcNAc(1)Fu… <NA>   
-#> # ℹ 2,945 more rows
+#> # ℹ 2,770 more rows
 ```

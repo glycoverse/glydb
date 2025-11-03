@@ -5,7 +5,7 @@
 \alias{topology_glycans}
 \title{GlyTouCan Glycan Structures with Only Topology Information}
 \format{
-A tibble with 2955 rows and 4 variables:
+A tibble with 2780 rows and 4 variables:
 \itemize{
 \item \code{glycan_structure}: Glycan structure (glyrepr::glycan_structure()).
 \item \code{glycan_composition}: Glycan composition (glyrepr::glycan_composition()).
@@ -23,6 +23,6 @@ This is a simplified version of \code{fully_determined_glycans},
 removing all linkage information,
 e.g. \verb{Fuc(??-?)Gal(??-?)[Fuc(??-?)]GlcNAc(??-}.
 The dataset is derived from the GlyTouCan v2.9.1 release,
-with 2955 glycan structures currently available.
+with 2780 glycan structures currently available.
 }
 \keyword{datasets}

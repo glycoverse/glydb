@@ -20,9 +20,9 @@
 #' removing all linkage information,
 #' e.g. `Fuc(??-?)Gal(??-?)[Fuc(??-?)]GlcNAc(??-`.
 #' The dataset is derived from the GlyTouCan v2.9.1 release,
-#' with 2955 glycan structures currently available.
+#' with 2780 glycan structures currently available.
 #'
-#' @format A tibble with 2955 rows and 4 variables:
+#' @format A tibble with 2780 rows and 4 variables:
 #' - `glycan_structure`: Glycan structure (glyrepr::glycan_structure()).
 #' - `glycan_composition`: Glycan composition (glyrepr::glycan_composition()).
 #' - `species`: Specie names. Unknown species are NAs.

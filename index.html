@@ -23,7 +23,7 @@
 
     <a class="navbar-brand me-2" href="index.html">glydb</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -93,20 +93,20 @@
 <p>The second one is <code>topology_glycans</code>, derived from <code>fully_determined_glycans</code>, removing all linkage information.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">topology_glycans</span></span>
-<span><span class="co">#&gt; # A tibble: 2,955 × 3</span></span>
+<span><span class="co">#&gt; # A tibble: 2,780 × 3</span></span>
 <span><span class="co">#&gt;    glycan_structure                                   glycan_composition species</span></span>
 <span><span class="co">#&gt;    &lt;struct&gt;                                           &lt;comp&gt;             &lt;chr&gt;  </span></span>
 <span><span class="co">#&gt;  1 Glc(??-?)Glc(??-?)Glc(??-                          Glc(3)             &lt;NA&gt;   </span></span>
 <span><span class="co">#&gt;  2 Glc(??-?)Glc(??-?)Glc(??-?)Glc(??-                 Glc(4)             &lt;NA&gt;   </span></span>
 <span><span class="co">#&gt;  3 Man(??-?)[Man(??-?)]Man(??-?)GlcNAc(??-            Man(3)GlcNAc(1)    &lt;NA&gt;   </span></span>
-<span><span class="co">#&gt;  4 Fuc(??-?)[GalNAc(??-?)]Gal(??-?)GlcNAc(??-?)[Neu5… Gal(1)GlcNAc(1)Ga… Bos ta…</span></span>
+<span><span class="co">#&gt;  4 GalNAc(??-?)[Fuc(??-?)]Gal(??-?)GlcNAc(??-?)[Neu5… Gal(1)GlcNAc(1)Ga… Bos ta…</span></span>
 <span><span class="co">#&gt;  5 Gal(??-?)GalNAc(??-                                Gal(1)GalNAc(1)    &lt;NA&gt;   </span></span>
-<span><span class="co">#&gt;  6 Gal(??-?)[GlcNAc(??-?)]GalNAc(??-                  Gal(1)GlcNAc(1)Ga… &lt;NA&gt;   </span></span>
+<span><span class="co">#&gt;  6 GlcNAc(??-?)[Gal(??-?)]GalNAc(??-                  Gal(1)GlcNAc(1)Ga… &lt;NA&gt;   </span></span>
 <span><span class="co">#&gt;  7 GlcNAc(??-?)GalNAc(??-                             GlcNAc(1)GalNAc(1) &lt;NA&gt;   </span></span>
 <span><span class="co">#&gt;  8 GlcNAc(??-?)[GlcNAc(??-?)]GalNAc(??-               GlcNAc(2)GalNAc(1) &lt;NA&gt;   </span></span>
 <span><span class="co">#&gt;  9 GalNAc(??-?)GalNAc(??-                             GalNAc(2)          &lt;NA&gt;   </span></span>
 <span><span class="co">#&gt; 10 Fuc(??-?)Gal(??-?)[Fuc(??-?)]GlcNAc(??-            Gal(1)GlcNAc(1)Fu… &lt;NA&gt;   </span></span>
-<span><span class="co">#&gt; # ℹ 2,945 more rows</span></span></code></pre></div>
+<span><span class="co">#&gt; # ℹ 2,770 more rows</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="license">

@@ -10,7 +10,7 @@ A tibble with 6960 rows and 4 variables:
 \item \code{glytoucan_ac}: GlyTouCan accession.
 \item \code{glycan_structure}: Glycan structure (glyrepr::glycan_structure()).
 \item \code{glycan_composition}: Glycan composition (glyrepr::glycan_composition()).
-\item \code{species}: Specie names. Unknown species are NAs.
+\item \code{species}: Specie names, separated by semicolons. Unknown species are NAs.
 }
 }
 \source{

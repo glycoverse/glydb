@@ -10,6 +10,6 @@
 #' - `glytoucan_ac`: GlyTouCan accession.
 #' - `glycan_structure`: Glycan structure (glyrepr::glycan_structure()).
 #' - `glycan_composition`: Glycan composition (glyrepr::glycan_composition()).
-#' - `species`: Specie names. Unknown species are NAs.
+#' - `species`: Specie names, separated by semicolons. Unknown species are NAs.
 #' @source <https://data.glygen.org>
 "glydb_data"

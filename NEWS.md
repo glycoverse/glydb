@@ -1,4 +1,4 @@
-# glydb (development version)
+# glydb 0.2.0
 
 ## Breaking changes
 

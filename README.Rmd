@@ -43,19 +43,19 @@ remotes::install_github("glycoverse/glydb")
 
 ## Example
 
-In glydb, we have two datasets.
-
-The first one is `fully_determined_glycans`, which contains a curated list of fully determined glycan structures from GlyTouCan.
+Get all data from `glydb`:
 
 ```{r}
 library(glydb)
-library(glyrepr)
-
-fully_determined_glycans
+glydb_data
 ```
 
-The second one is `topology_glycans`, derived from `fully_determined_glycans`, removing all linkage information.
+Or use the getter functions to get specific data:
 
 ```{r}
-topology_glycans
+glydb_compositions(mono_type = "generic")
+```
+
+```{r}
+glydb_structures(structure_level = "topological", species = "Homo sapiens")
 ```

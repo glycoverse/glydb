@@ -26,4 +26,16 @@ and monosaccharides are fully specified.
 The dataset is derived from the GlyTouCan v2.9.1 release,
 with 6960 glycan structures currently available.
 }
+\section{Duplicate Glycan Structures}{
+There are duplicate glycan structures in the dataset,
+due to the presence of rare monosaccharides in some glycans.
+For example, Fuc has L configuration in most cases,
+but in some situations it can have D configuration.
+\code{glyparse} and \code{glyrepr} doesn't support this kind of ambiguity for now,
+so we keep them all in the dataset.
+However, this situation is rare, and we have 6853 unique glycan structures in the dataset.
+If you need the detailed information, you can use the \code{glytoucan_ac} (GlyTouCan accession)
+to query the original data.
+}
+
 \keyword{datasets}

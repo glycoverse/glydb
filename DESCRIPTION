@@ -21,8 +21,8 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
 URL: https://glycoverse.github.io/glydb/
 Depends: 
-    R (>= 3.5)
+    R (>= 3.5),
+    glyrepr (>= 0.8.0)
 LazyData: true
 Imports: 
-    stringr,
-    glyrepr (>= 0.8.0)
+    stringr

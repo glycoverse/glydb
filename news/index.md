@@ -2,6 +2,8 @@
 
 ## glydb (development version)
 
+## glydb 0.2.0
+
 ### Breaking changes
 
 - Remove the `topology_glycans` dataset.

@@ -1,3 +1,5 @@
+utils::globalVariables(c("glydb_data", "concrete_comps", "generic_comps", "intact_strucs", "topological_strucs", "basic_strucs"))
+
 #' Get Supported Species From Glydb Data
 #'
 #' Get a character vector of supported species from [glydb_data].

@@ -3,3 +3,4 @@
 export(glydb_compositions)
 export(glydb_species)
 export(glydb_structures)
+import(glyrepr)

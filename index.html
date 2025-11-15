@@ -11,8 +11,8 @@
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Glycan Structure Database">
-<meta name="description" content="Provides a comprehensive database of glycan structures from GlyTouCan, including fully determined glycan structures with complete linkage, substituent, anomer, and monosaccharide information. The package contains curated datasets derived from GlyTouCan latest release, offering both fully determined structures and topology-only versions. This database serves as a foundational resource for the glycoverse ecosystem, enabling glycan structure analysis, comparison, and research applications.">
-<meta property="og:description" content="Provides a comprehensive database of glycan structures from GlyTouCan, including fully determined glycan structures with complete linkage, substituent, anomer, and monosaccharide information. The package contains curated datasets derived from GlyTouCan latest release, offering both fully determined structures and topology-only versions. This database serves as a foundational resource for the glycoverse ecosystem, enabling glycan structure analysis, comparison, and research applications.">
+<meta name="description" content="Provides a comprehensive database of glycan structures from GlyTouCan, including fully determined glycan structures with complete linkage, substituent, anomer, and monosaccharide information. This database serves as a foundational resource for the glycoverse ecosystem, enabling glycan structure analysis, comparison, and research applications.">
+<meta property="og:description" content="Provides a comprehensive database of glycan structures from GlyTouCan, including fully determined glycan structures with complete linkage, substituent, anomer, and monosaccharide information. This database serves as a foundational resource for the glycoverse ecosystem, enabling glycan structure analysis, comparison, and research applications.">
 <meta property="og:image" content="https://glycoverse.github.io/glydb/logo.png">
 </head>
 <body>
@@ -69,13 +69,11 @@
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
-<p>In glydb, we have two datasets.</p>
-<p>The first one is <code>fully_determined_glycans</code>, which contains a curated list of fully determined glycan structures from GlyTouCan.</p>
+<p>Get all data from <code>glydb</code>:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://glycoverse.github.io/glydb/">glydb</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://glycoverse.github.io/glyrepr/" class="external-link">glyrepr</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">fully_determined_glycans</span></span>
+<span><span class="co">#&gt; Loading required package: glyrepr</span></span>
+<span><span class="va">glydb_data</span></span>
 <span><span class="co">#&gt; # A data frame: 6,960 × 4</span></span>
 <span><span class="co">#&gt;    glytoucan_ac glycan_structure                      glycan_composition species</span></span>
 <span><span class="co">#&gt;    &lt;chr&gt;        &lt;struct&gt;                              &lt;comp&gt;             &lt;chr&gt;  </span></span>
@@ -90,23 +88,36 @@
 <span><span class="co">#&gt;  9 G00039MO     GalNAc(a1-3)GalNAc(a1-                GalNAc(2)          Bos ta…</span></span>
 <span><span class="co">#&gt; 10 G00041MO     GlcNAc(b1-6)GalNAc(a1-                GlcNAc(1)GalNAc(1) Bos ta…</span></span>
 <span><span class="co">#&gt; # ℹ 6,950 more rows</span></span></code></pre></div>
-<p>The second one is <code>topology_glycans</code>, derived from <code>fully_determined_glycans</code>, removing all linkage information.</p>
+<p>Or use the getter functions to get specific data:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">topology_glycans</span></span>
-<span><span class="co">#&gt; # A tibble: 2,780 × 3</span></span>
-<span><span class="co">#&gt;    glycan_structure                                   glycan_composition species</span></span>
-<span><span class="co">#&gt;    &lt;struct&gt;                                           &lt;comp&gt;             &lt;chr&gt;  </span></span>
-<span><span class="co">#&gt;  1 Glc(??-?)Glc(??-?)Glc(??-                          Glc(3)             &lt;NA&gt;   </span></span>
-<span><span class="co">#&gt;  2 Glc(??-?)Glc(??-?)Glc(??-?)Glc(??-                 Glc(4)             &lt;NA&gt;   </span></span>
-<span><span class="co">#&gt;  3 Man(??-?)[Man(??-?)]Man(??-?)GlcNAc(??-            Man(3)GlcNAc(1)    &lt;NA&gt;   </span></span>
-<span><span class="co">#&gt;  4 GalNAc(??-?)[Fuc(??-?)]Gal(??-?)GlcNAc(??-?)[Neu5… Gal(1)GlcNAc(1)Ga… Bos ta…</span></span>
-<span><span class="co">#&gt;  5 Gal(??-?)GalNAc(??-                                Gal(1)GalNAc(1)    &lt;NA&gt;   </span></span>
-<span><span class="co">#&gt;  6 GlcNAc(??-?)[Gal(??-?)]GalNAc(??-                  Gal(1)GlcNAc(1)Ga… &lt;NA&gt;   </span></span>
-<span><span class="co">#&gt;  7 GlcNAc(??-?)GalNAc(??-                             GlcNAc(1)GalNAc(1) &lt;NA&gt;   </span></span>
-<span><span class="co">#&gt;  8 GlcNAc(??-?)[GlcNAc(??-?)]GalNAc(??-               GlcNAc(2)GalNAc(1) &lt;NA&gt;   </span></span>
-<span><span class="co">#&gt;  9 GalNAc(??-?)GalNAc(??-                             GalNAc(2)          &lt;NA&gt;   </span></span>
-<span><span class="co">#&gt; 10 Fuc(??-?)Gal(??-?)[Fuc(??-?)]GlcNAc(??-            Gal(1)GlcNAc(1)Fu… &lt;NA&gt;   </span></span>
-<span><span class="co">#&gt; # ℹ 2,770 more rows</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/glydb_compositions.html">glydb_compositions</a></span><span class="op">(</span>mono_type <span class="op">=</span> <span class="st">"generic"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; &lt;glycan_composition[756]&gt;</span></span>
+<span><span class="co">#&gt; [1] Hex(3)</span></span>
+<span><span class="co">#&gt; [2] Hex(4)</span></span>
+<span><span class="co">#&gt; [3] Hex(3)HexNAc(1)</span></span>
+<span><span class="co">#&gt; [4] Hex(1)HexNAc(3)dHex(1)NeuGc(1)</span></span>
+<span><span class="co">#&gt; [5] Hex(1)HexNAc(1)</span></span>
+<span><span class="co">#&gt; [6] Hex(1)HexNAc(2)</span></span>
+<span><span class="co">#&gt; [7] HexNAc(2)</span></span>
+<span><span class="co">#&gt; [8] HexNAc(3)</span></span>
+<span><span class="co">#&gt; [9] Hex(1)HexNAc(1)dHex(2)</span></span>
+<span><span class="co">#&gt; [10] Hex(3)HexNAc(1)dHex(1)</span></span>
+<span><span class="co">#&gt; ... (746 more not shown)</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/glydb_structures.html">glydb_structures</a></span><span class="op">(</span>structure_level <span class="op">=</span> <span class="st">"topological"</span>, species <span class="op">=</span> <span class="st">"Homo sapiens"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; &lt;glycan_structure[833]&gt;</span></span>
+<span><span class="co">#&gt; [1] Gal(??-?)GalNAc(??-</span></span>
+<span><span class="co">#&gt; [2] GlcNAc(??-?)[Gal(??-?)]GalNAc(??-</span></span>
+<span><span class="co">#&gt; [3] GlcNAc(??-?)GalNAc(??-</span></span>
+<span><span class="co">#&gt; [4] GlcNAc(??-?)[GlcNAc(??-?)]GalNAc(??-</span></span>
+<span><span class="co">#&gt; [5] GalNAc(??-?)GalNAc(??-</span></span>
+<span><span class="co">#&gt; [6] Fuc(??-?)Gal(??-?)[Fuc(??-?)]GlcNAc(??-</span></span>
+<span><span class="co">#&gt; [7] Gal(??-?)GlcNAc(??-?)Gal(??-?)Glc(??-</span></span>
+<span><span class="co">#&gt; [8] Fuc(??-?)Gal(??-?)GlcNAc(??-?)Gal(??-?)Glc(??-</span></span>
+<span><span class="co">#&gt; [9] Gal(??-?)[Fuc(??-?)]GlcNAc(??-</span></span>
+<span><span class="co">#&gt; [10] Neu5Ac(??-?)Gal(??-?)[Fuc(??-?)]GlcNAc(??-</span></span>
+<span><span class="co">#&gt; ... (823 more not shown)</span></span>
+<span><span class="co">#&gt; # Unique structures: 833</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="license">

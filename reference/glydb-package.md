@@ -2,12 +2,9 @@
 
 Provides a comprehensive database of glycan structures from GlyTouCan,
 including fully determined glycan structures with complete linkage,
-substituent, anomer, and monosaccharide information. The package
-contains curated datasets derived from GlyTouCan latest release,
-offering both fully determined structures and topology-only versions.
-This database serves as a foundational resource for the glycoverse
-ecosystem, enabling glycan structure analysis, comparison, and research
-applications.
+substituent, anomer, and monosaccharide information. This database
+serves as a foundational resource for the glycoverse ecosystem, enabling
+glycan structure analysis, comparison, and research applications.
 
 ## See also
 

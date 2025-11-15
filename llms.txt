@@ -23,16 +23,12 @@ remotes::install_github("glycoverse/glydb")
 
 ## Example
 
-In glydb, we have two datasets.
-
-The first one is `fully_determined_glycans`, which contains a curated
-list of fully determined glycan structures from GlyTouCan.
+Get all data from `glydb`:
 
 ``` r
 library(glydb)
-library(glyrepr)
-
-fully_determined_glycans
+#> Loading required package: glyrepr
+glydb_data
 #> # A data frame: 6,960 × 4
 #>    glytoucan_ac glycan_structure                      glycan_composition species
 #>    <chr>        <struct>                              <comp>             <chr>  
@@ -49,25 +45,39 @@ fully_determined_glycans
 #> # ℹ 6,950 more rows
 ```
 
-The second one is `topology_glycans`, derived from
-`fully_determined_glycans`, removing all linkage information.
+Or use the getter functions to get specific data:
 
 ``` r
-topology_glycans
-#> # A tibble: 2,780 × 3
-#>    glycan_structure                                   glycan_composition species
-#>    <struct>                                           <comp>             <chr>  
-#>  1 Glc(??-?)Glc(??-?)Glc(??-                          Glc(3)             <NA>   
-#>  2 Glc(??-?)Glc(??-?)Glc(??-?)Glc(??-                 Glc(4)             <NA>   
-#>  3 Man(??-?)[Man(??-?)]Man(??-?)GlcNAc(??-            Man(3)GlcNAc(1)    <NA>   
-#>  4 GalNAc(??-?)[Fuc(??-?)]Gal(??-?)GlcNAc(??-?)[Neu5… Gal(1)GlcNAc(1)Ga… Bos ta…
-#>  5 Gal(??-?)GalNAc(??-                                Gal(1)GalNAc(1)    <NA>   
-#>  6 GlcNAc(??-?)[Gal(??-?)]GalNAc(??-                  Gal(1)GlcNAc(1)Ga… <NA>   
-#>  7 GlcNAc(??-?)GalNAc(??-                             GlcNAc(1)GalNAc(1) <NA>   
-#>  8 GlcNAc(??-?)[GlcNAc(??-?)]GalNAc(??-               GlcNAc(2)GalNAc(1) <NA>   
-#>  9 GalNAc(??-?)GalNAc(??-                             GalNAc(2)          <NA>   
-#> 10 Fuc(??-?)Gal(??-?)[Fuc(??-?)]GlcNAc(??-            Gal(1)GlcNAc(1)Fu… <NA>   
-#> # ℹ 2,770 more rows
+glydb_compositions(mono_type = "generic")
+#> <glycan_composition[756]>
+#> [1] Hex(3)
+#> [2] Hex(4)
+#> [3] Hex(3)HexNAc(1)
+#> [4] Hex(1)HexNAc(3)dHex(1)NeuGc(1)
+#> [5] Hex(1)HexNAc(1)
+#> [6] Hex(1)HexNAc(2)
+#> [7] HexNAc(2)
+#> [8] HexNAc(3)
+#> [9] Hex(1)HexNAc(1)dHex(2)
+#> [10] Hex(3)HexNAc(1)dHex(1)
+#> ... (746 more not shown)
+```
+
+``` r
+glydb_structures(structure_level = "topological", species = "Homo sapiens")
+#> <glycan_structure[833]>
+#> [1] Gal(??-?)GalNAc(??-
+#> [2] GlcNAc(??-?)[Gal(??-?)]GalNAc(??-
+#> [3] GlcNAc(??-?)GalNAc(??-
+#> [4] GlcNAc(??-?)[GlcNAc(??-?)]GalNAc(??-
+#> [5] GalNAc(??-?)GalNAc(??-
+#> [6] Fuc(??-?)Gal(??-?)[Fuc(??-?)]GlcNAc(??-
+#> [7] Gal(??-?)GlcNAc(??-?)Gal(??-?)Glc(??-
+#> [8] Fuc(??-?)Gal(??-?)GlcNAc(??-?)Gal(??-?)Glc(??-
+#> [9] Gal(??-?)[Fuc(??-?)]GlcNAc(??-
+#> [10] Neu5Ac(??-?)Gal(??-?)[Fuc(??-?)]GlcNAc(??-
+#> ... (823 more not shown)
+#> # Unique structures: 833
 ```
 
 # Package index

@@ -9,9 +9,23 @@ utils::globalVariables(c("glydb_data", "concrete_comps", "generic_comps", "intac
 #' glydb_species()
 #' @export
 glydb_species <- function() {
-  res <- unique(unlist(strsplit(glydb_data$species, ";")))
-  res <- res[!is.na(res)]
-  res
+  c(
+    "Saccharomyces cerevisiae",
+    "Mus musculus",
+    "Rattus",
+    "Rattus norvegicus",
+    "Bos taurus",
+    "Gallus gallus",
+    "Drosophila melanogaster",
+    "Cricetulus griseus",
+    "Homo sapiens",
+    "Sus scrofa",
+    "Sus scrofa domesticus",
+    "Severe acute respiratory syndrome coronavirus 2",
+    "Danio rerio",
+    "Arabidopsis thaliana",
+    "Dictyostelium discoideum"
+  )
 }
 
 #' Get Compositions From Glydb Data

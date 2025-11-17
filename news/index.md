@@ -1,5 +1,16 @@
 # Changelog
 
+## glydb (development version)
+
+## glydb 0.2.1
+
+### Minor improvements and bug fixes
+
+- Fix the bug that
+  [`glydb_species()`](https://glycoverse.github.io/glydb/reference/glydb_species.md)
+  fails when the package is used via `glydb::fun` and not attached with
+  [`library(glydb)`](https://glycoverse.github.io/glydb/).
+
 ## glydb 0.2.0
 
 ### Breaking changes

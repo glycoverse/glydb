@@ -19,10 +19,11 @@
 #' If you need the detailed information, you can use the `glytoucan_ac` (GlyTouCan accession)
 #' to query the original data.
 #'
-#' @format A tibble with 6960 rows and 4 variables:
+#' @format A tibble with 6960 rows and 5 variables:
 #' - `glytoucan_ac`: GlyTouCan accession.
 #' - `glycan_structure`: Glycan structure (glyrepr::glycan_structure()).
 #' - `glycan_composition`: Glycan composition (glyrepr::glycan_composition()).
 #' - `species`: Specie names, separated by semicolons. Unknown species are NAs.
+#' - `glycan_type`: Glycan type, one of "N", "O-GalNAc", "O-GlcNAc", "O-Man", "O-Fuc", "O-Glc".
 #' @source <https://data.glygen.org>
 "glydb_data"

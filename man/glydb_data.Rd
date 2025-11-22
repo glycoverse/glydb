@@ -5,12 +5,13 @@
 \alias{glydb_data}
 \title{Fully Determined GlyTouCan Glycan Data}
 \format{
-A tibble with 6960 rows and 4 variables:
+A tibble with 6960 rows and 5 variables:
 \itemize{
 \item \code{glytoucan_ac}: GlyTouCan accession.
 \item \code{glycan_structure}: Glycan structure (glyrepr::glycan_structure()).
 \item \code{glycan_composition}: Glycan composition (glyrepr::glycan_composition()).
 \item \code{species}: Specie names, separated by semicolons. Unknown species are NAs.
+\item \code{glycan_type}: Glycan type, one of "N", "O-GalNAc", "O-GlcNAc", "O-Man", "O-Fuc", "O-Glc".
 }
 }
 \source{

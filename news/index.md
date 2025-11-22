@@ -1,7 +1,5 @@
 # Changelog
 
-## glydb (development version)
-
 ## glydb 0.3.0
 
 ### New features

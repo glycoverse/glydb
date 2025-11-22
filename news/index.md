@@ -2,6 +2,17 @@
 
 ## glydb (development version)
 
+## glydb 0.3.0
+
+### New features
+
+- Add a `glycan_type` column to `glydb_data`. Can be “N”, “O-GalNAc”,
+  “O-GlcNAc”, “O-Man”, “O-Fuc”, “O-Glc”.
+- Add a `glycan_type` parameter to
+  [`glydb_compositions()`](https://glycoverse.github.io/glydb/reference/glydb_compositions.md)
+  and
+  [`glydb_structures()`](https://glycoverse.github.io/glydb/reference/glydb_structures.md).
+
 ## glydb 0.2.1
 
 ### Minor improvements and bug fixes

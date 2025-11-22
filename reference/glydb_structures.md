@@ -9,7 +9,11 @@ vector.
 ## Usage
 
 ``` r
-glydb_structures(structure_level = "intact", species = NULL)
+glydb_structures(
+  structure_level = "intact",
+  species = NULL,
+  glycan_type = NULL
+)
 ```
 
 ## Arguments
@@ -26,6 +30,12 @@ glydb_structures(structure_level = "intact", species = NULL)
   [`glydb_species()`](https://glycoverse.github.io/glydb/reference/glydb_species.md)
   for available specie names. Default is NULL, which means glycans from
   all species are included.
+
+- glycan_type:
+
+  A string of glycan types. Can be "N", "O-GalNAc", "O-GlcNAc", "O-Man",
+  "O-Fuc", "O-Glc". Default is NULL, which means glycans of all types
+  are included.
 
 ## Value
 
@@ -92,4 +102,18 @@ glydb_structures(species = "Homo sapiens")
 #> [10] Fuc(a1-3)[Gal(b1-4)]GlcNAc(b1-
 #> ... (1188 more not shown)
 #> # Unique structures: 1198
+glydb_structures(glycan_type = "N")
+#> <glycan_structure[2517]>
+#> [1] GlcNAc(b1-2)[GlcNAc(b1-4)]Man(a1-3)[GlcNAc(b1-2)[GlcNAc(b1-6)]Man(a1-6)]Man(b1-4)GlcNAc(b1-4)[Fuc(a1-6)]GlcNAc(b1-
+#> [2] Fuc(a1-3)[Gal(b1-4)]GlcNAc(b1-4)Man(a1-3)Man(b1-4)GlcNAc(b1-4)[Fuc(a1-6)]GlcNAc(b1-
+#> [3] Neu5Ac(a2-3)Gal(b1-3)[Neu5Ac(a2-6)]GlcNAc(b1-2)Man(a1-3)[Neu5Ac(a2-3)Gal(b1-3)GlcNAc(b1-2)Man(a1-6)]Man(b1-4)GlcNAc(b1-4)GlcNAc(b1-
+#> [4] Man(a1-2)Man(a1-2)Man(a1-6)[Man(a1-2)Man(a1-3)]Man(b1-4)GlcNAc(b1-4)GlcNAc(b1-
+#> [5] Neu5Gc(a2-3)Gal(b1-4)GlcNAc(b1-4)[Gal(b1-4)GlcNAc(b1-2)]Man(a1-3)[Gal(b1-4)GlcNAc(b1-2)Man(a1-6)]Man(b1-4)GlcNAc(b1-4)[Fuc(a1-6)]GlcNAc(b1-
+#> [6] Man(a1-6)Man(b1-4)GlcNAc(b1-4)[Fuc(a1-6)]GlcNAc(b1-
+#> [7] Neu5Ac(a2-6)Gal(b1-4)GlcNAc(b1-2)[Neu5Ac(a2-6)Gal(b1-4)GlcNAc(b1-4)]Man(a1-3)[Gal(b1-4)GlcNAc(b1-2)Man(a1-6)]Man(b1-4)GlcNAc(b1-4)GlcNAc(b1-
+#> [8] GlcNAc(b1-3)Man(a1-6)Man(b1-4)GlcNAc(b1-4)GlcNAc(b1-
+#> [9] GlcNAc(b1-2)[GlcNAc(b1-6)]Man(a1-3)[GlcNAc(b1-4)][GlcNAc(b1-2)[GlcNAc(b1-4)]Man(a1-6)]Man(b1-4)GlcNAc(b1-4)[Fuc(a1-6)]GlcNAc(b1-
+#> [10] GlcNAc(b1-2)[GlcNAc(b1-4)]Man(a1-3)[GlcNAc(b1-2)[GlcNAc(b1-4)]Man(a1-6)]Man(b1-4)GlcNAc(b1-4)[Fuc(a1-3)]GlcNAc(b1-
+#> ... (2507 more not shown)
+#> # Unique structures: 2517
 ```

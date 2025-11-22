@@ -9,7 +9,7 @@ vector.
 ## Usage
 
 ``` r
-glydb_compositions(mono_type = "concrete", species = NULL)
+glydb_compositions(mono_type = "concrete", species = NULL, glycan_type = NULL)
 ```
 
 ## Arguments
@@ -26,6 +26,12 @@ glydb_compositions(mono_type = "concrete", species = NULL)
   [`glydb_species()`](https://glycoverse.github.io/glydb/reference/glydb_species.md)
   for available specie names. Default is NULL, which means glycans from
   all species are included.
+
+- glycan_type:
+
+  A string of glycan types. Can be "N", "O-GalNAc", "O-GlcNAc", "O-Man",
+  "O-Fuc", "O-Glc". Default is NULL, which means glycans of all types
+  are included.
 
 ## Value
 
@@ -75,4 +81,17 @@ glydb_compositions(species = "Homo sapiens")
 #> [9] Glc(1)Gal(2)GlcNAc(1)Fuc(1)
 #> [10] Gal(1)GlcNAc(1)Fuc(1)
 #> ... (568 more not shown)
+glydb_compositions(glycan_type = "N")
+#> <glycan_composition[515]>
+#> [1] Man(3)GlcNAc(6)Fuc(1)
+#> [2] Man(2)Gal(1)GlcNAc(3)Fuc(2)
+#> [3] Man(3)Gal(2)GlcNAc(4)Neu5Ac(3)
+#> [4] Man(6)GlcNAc(2)
+#> [5] Man(3)Gal(3)GlcNAc(5)Fuc(1)Neu5Gc(1)
+#> [6] Man(2)GlcNAc(2)Fuc(1)
+#> [7] Man(3)Gal(3)GlcNAc(5)Neu5Ac(2)
+#> [8] Man(2)GlcNAc(3)
+#> [9] Man(3)GlcNAc(7)Fuc(1)
+#> [10] Man(3)Gal(2)GlcNAc(4)Fuc(1)Neu5Ac(1)
+#> ... (505 more not shown)
 ```

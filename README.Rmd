@@ -57,5 +57,5 @@ glydb_compositions(mono_type = "generic")
 ```
 
 ```{r}
-glydb_structures(structure_level = "topological", species = "Homo sapiens")
+glydb_structures(structure_level = "topological", species = "Homo sapiens", glycan_type = "N")
 ```

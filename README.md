@@ -43,19 +43,19 @@ Get all data from `glydb`:
 library(glydb)
 #> Loading required package: glyrepr
 glydb_data
-#> # A data frame: 6,960 × 4
-#>    glytoucan_ac glycan_structure                      glycan_composition species
-#>    <chr>        <struct>                              <comp>             <chr>  
-#>  1 G00024MO     Glc(b1-3)Glc(b1-3)Glc(b1-             Glc(3)             Saccha…
-#>  2 G00025MO     Glc(b1-4)Glc(b1-4)Glc(b1-4)Glc(b1-    Glc(4)             <NA>   
-#>  3 G00027MO     Man(a1-3)[Man(a1-6)]Man(b1-4)GlcNAc(… Man(3)GlcNAc(1)    Mus mu…
-#>  4 G00030VN     Fuc(a1-2)[GalNAc(a1-3)]Gal(b1-4)GlcN… Gal(1)GlcNAc(1)Ga… Bos ta…
-#>  5 G00031MO     Gal(b1-3)GalNAc(a1-                   Gal(1)GalNAc(1)    Bos ta…
-#>  6 G00033MO     Gal(b1-3)[GlcNAc(b1-6)]GalNAc(a1-     Gal(1)GlcNAc(1)Ga… Bos ta…
-#>  7 G00035MO     GlcNAc(b1-3)GalNAc(a1-                GlcNAc(1)GalNAc(1) Bos ta…
-#>  8 G00037MO     GlcNAc(b1-3)[GlcNAc(b1-6)]GalNAc(a1-  GlcNAc(2)GalNAc(1) Bos ta…
-#>  9 G00039MO     GalNAc(a1-3)GalNAc(a1-                GalNAc(2)          Bos ta…
-#> 10 G00041MO     GlcNAc(b1-6)GalNAc(a1-                GlcNAc(1)GalNAc(1) Bos ta…
+#> # A data frame: 6,960 × 5
+#>    glytoucan_ac glycan_structure          glycan_composition species glycan_type
+#>    <chr>        <struct>                  <comp>             <chr>   <fct>      
+#>  1 G00024MO     Glc(b1-3)Glc(b1-3)Glc(b1- Glc(3)             Saccha… O-Glc      
+#>  2 G00025MO     Glc(b1-4)Glc(b1-4)Glc(b1… Glc(4)             <NA>    O-Glc      
+#>  3 G00027MO     Man(a1-3)[Man(a1-6)]Man(… Man(3)GlcNAc(1)    Mus mu… O-GlcNAc   
+#>  4 G00030VN     Fuc(a1-2)[GalNAc(a1-3)]G… Gal(1)GlcNAc(1)Ga… Bos ta… O-GalNAc   
+#>  5 G00031MO     Gal(b1-3)GalNAc(a1-       Gal(1)GalNAc(1)    Bos ta… O-GalNAc   
+#>  6 G00033MO     Gal(b1-3)[GlcNAc(b1-6)]G… Gal(1)GlcNAc(1)Ga… Bos ta… O-GalNAc   
+#>  7 G00035MO     GlcNAc(b1-3)GalNAc(a1-    GlcNAc(1)GalNAc(1) Bos ta… O-GalNAc   
+#>  8 G00037MO     GlcNAc(b1-3)[GlcNAc(b1-6… GlcNAc(2)GalNAc(1) Bos ta… O-GalNAc   
+#>  9 G00039MO     GalNAc(a1-3)GalNAc(a1-    GalNAc(2)          Bos ta… O-GalNAc   
+#> 10 G00041MO     GlcNAc(b1-6)GalNAc(a1-    GlcNAc(1)GalNAc(1) Bos ta… O-GalNAc   
 #> # ℹ 6,950 more rows
 ```
 
@@ -78,18 +78,18 @@ glydb_compositions(mono_type = "generic")
 ```
 
 ``` r
-glydb_structures(structure_level = "topological", species = "Homo sapiens")
-#> <glycan_structure[833]>
-#> [1] Gal(??-?)GalNAc(??-
-#> [2] GlcNAc(??-?)[Gal(??-?)]GalNAc(??-
-#> [3] GlcNAc(??-?)GalNAc(??-
-#> [4] GlcNAc(??-?)[GlcNAc(??-?)]GalNAc(??-
-#> [5] GalNAc(??-?)GalNAc(??-
-#> [6] Fuc(??-?)Gal(??-?)[Fuc(??-?)]GlcNAc(??-
-#> [7] Gal(??-?)GlcNAc(??-?)Gal(??-?)Glc(??-
-#> [8] Fuc(??-?)Gal(??-?)GlcNAc(??-?)Gal(??-?)Glc(??-
-#> [9] Gal(??-?)[Fuc(??-?)]GlcNAc(??-
-#> [10] Neu5Ac(??-?)Gal(??-?)[Fuc(??-?)]GlcNAc(??-
-#> ... (823 more not shown)
-#> # Unique structures: 833
+glydb_structures(structure_level = "topological", species = "Homo sapiens", glycan_type = "N")
+#> <glycan_structure[291]>
+#> [1] GlcNAc(??-?)[GlcNAc(??-?)]Man(??-?)[GlcNAc(??-?)[GlcNAc(??-?)]Man(??-?)]Man(??-?)GlcNAc(??-?)[Fuc(??-?)]GlcNAc(??-
+#> [2] Gal(??-?)[Fuc(??-?)]GlcNAc(??-?)Man(??-?)Man(??-?)GlcNAc(??-?)[Fuc(??-?)]GlcNAc(??-
+#> [3] Man(??-?)Man(??-?)GlcNAc(??-?)[Fuc(??-?)]GlcNAc(??-
+#> [4] Neu5Ac(??-?)Gal(??-?)GlcNAc(??-?)[Neu5Ac(??-?)Gal(??-?)GlcNAc(??-?)]Man(??-?)[Gal(??-?)GlcNAc(??-?)Man(??-?)]Man(??-?)GlcNAc(??-?)GlcNAc(??-
+#> [5] GlcNAc(??-?)[GlcNAc(??-?)]Man(??-?)[GlcNAc(??-?)[GlcNAc(??-?)]Man(??-?)][GlcNAc(??-?)]Man(??-?)GlcNAc(??-?)[Fuc(??-?)]GlcNAc(??-
+#> [6] Neu5Ac(??-?)Gal(??-?)GlcNAc(??-?)Man(??-?)[Gal(??-?)GlcNAc(??-?)Man(??-?)]Man(??-?)GlcNAc(??-?)[Fuc(??-?)]GlcNAc(??-
+#> [7] Neu5Ac(??-?)Gal(??-?)GlcNAc(??-?)Gal(??-?)GlcNAc(??-?)[Neu5Ac(??-?)Gal(??-?)GlcNAc(??-?)]Man(??-?)[Neu5Ac(??-?)Gal(??-?)GlcNAc(??-?)[Neu5Ac(??-?)Gal(??-?)GlcNAc(??-?)]Man(??-?)]Man(??-?)GlcNAc(??-?)[Fuc(??-?)]GlcNAc(??-
+#> [8] Gal(??-?)GlcNAc(??-?)Man(??-?)[Gal(??-?)GlcNAc(??-?)[Gal(??-?)GlcNAc(??-?)]Man(??-?)]Man(??-?)GlcNAc(??-?)[Fuc(??-?)]GlcNAc(??-
+#> [9] Man(??-?)Man(??-?)[Man(??-?)]Man(??-?)GlcNAc(??-?)GlcNAc(??-
+#> [10] Neu5Ac(??-?)Gal(??-?)GlcNAc(??-?)Man(??-?)[Neu5Ac(??-?)Gal(??-?)GlcNAc(??-?)[Neu5Ac(??-?)Gal(??-?)GlcNAc(??-?)]Man(??-?)]Man(??-?)GlcNAc(??-?)GlcNAc(??-
+#> ... (281 more not shown)
+#> # Unique structures: 291
 ```

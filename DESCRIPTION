@@ -24,6 +24,7 @@ Depends:
 LazyData: true
 Imports: 
     checkmate,
+    purrr,
     stringr
 Remotes: 
     glycoverse/glyrepr

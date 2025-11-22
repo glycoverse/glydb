@@ -36,25 +36,41 @@ glydb_species <- function() {
 #'   See [glyrepr::get_mono_type()] for details.
 #' @param species A string of specie names. See [glydb_species()] for available specie names.
 #'   Default is NULL, which means glycans from all species are included.
+#' @param glycan_type A string of glycan types.
+#'   Can be "N", "O-GalNAc", "O-GlcNAc", "O-Man", "O-Fuc", "O-Glc".
+#'   Default is NULL, which means glycans of all types are included.
 #'
 #' @returns A [glyrepr::glycan_composition()] vector.
 #' @examples
 #' glydb_compositions()
 #' glydb_compositions(mono_type = "generic")
 #' glydb_compositions(species = "Homo sapiens")
+#' glydb_compositions(glycan_type = "N")
 #' @export
-glydb_compositions <- function(mono_type = "concrete", species = NULL) {
+glydb_compositions <- function(mono_type = "concrete", species = NULL, glycan_type = NULL) {
   checkmate::assert_choice(mono_type, c("generic", "concrete"))
   checkmate::assert_choice(species, glydb_species(), null.ok = TRUE)
-  data <- switch(mono_type, concrete = concrete_comps, generic = generic_comps)
-  if (is.null(species)) {
-    comps <- data$glycan_composition
-  } else {
-    right_specie <- stringr::str_detect(data$species, species)
+  checkmate::assert_choice(glycan_type, c("N", "O-GalNAc", "O-GlcNAc", "O-Man", "O-Fuc", "O-Glc"), null.ok = TRUE)
+  data <- switch(mono_type,
+    concrete = concrete_comps,
+    generic = generic_comps
+  )
+
+  if (!is.null(species)) {
+    species_list <- stringr::str_split(data$species, ";")
+    right_specie <- purrr::map_lgl(species_list, ~ species %in% .x)
     right_specie[is.na(right_specie)] <- FALSE
-    comps <- data$glycan_composition[right_specie]
+    data <- data[right_specie, ]
   }
-  unique(comps)
+
+  if (!is.null(glycan_type)) {
+    types_list <- stringr::str_split(data$glycan_type, ";")
+    right_type <- purrr::map_lgl(types_list, ~ glycan_type %in% .x)
+    right_type[is.na(right_type)] <- FALSE
+    data <- data[right_type, ]
+  }
+
+  unique(data$glycan_composition)
 }
 
 #' Get Structures From Glydb Data
@@ -65,6 +81,9 @@ glydb_compositions <- function(mono_type = "concrete", species = NULL) {
 #'   See [glyrepr::get_structure_level()] for details.
 #' @param species A string of specie names. See [glydb_species()] for available specie names.
 #'   Default is NULL, which means glycans from all species are included.
+#' @param glycan_type A string of glycan types.
+#'   Can be "N", "O-GalNAc", "O-GlcNAc", "O-Man", "O-Fuc", "O-Glc".
+#'   Default is NULL, which means glycans of all types are included.
 #'
 #' @returns A [glyrepr::glycan_structure()] vector.
 #' @examples
@@ -72,21 +91,31 @@ glydb_compositions <- function(mono_type = "concrete", species = NULL) {
 #' glydb_structures(structure_level = "topological")
 #' glydb_structures(structure_level = "basic")
 #' glydb_structures(species = "Homo sapiens")
+#' glydb_structures(glycan_type = "N")
 #' @export
-glydb_structures <- function(structure_level = "intact", species = NULL) {
+glydb_structures <- function(structure_level = "intact", species = NULL, glycan_type = NULL) {
   checkmate::assert_choice(structure_level, c("intact", "topological", "basic"))
   checkmate::assert_choice(species, glydb_species(), null.ok = TRUE)
+  checkmate::assert_choice(glycan_type, c("N", "O-GalNAc", "O-GlcNAc", "O-Man", "O-Fuc", "O-Glc"), null.ok = TRUE)
   data <- switch(structure_level,
     intact = intact_strucs,
     topological = topological_strucs,
     basic = basic_strucs
   )
-  if (is.null(species)) {
-    strucs <- data$glycan_structure
-  } else {
-    right_specie <- stringr::str_detect(data$species, species)
+
+  if (!is.null(species)) {
+    species_list <- stringr::str_split(data$species, ";")
+    right_specie <- purrr::map_lgl(species_list, ~ species %in% .x)
     right_specie[is.na(right_specie)] <- FALSE
-    strucs <- data$glycan_structure[right_specie]
+    data <- data[right_specie, ]
   }
-  unique(strucs)
+
+  if (!is.null(glycan_type)) {
+    types_list <- stringr::str_split(data$glycan_type, ";")
+    right_type <- purrr::map_lgl(types_list, ~ glycan_type %in% .x)
+    right_type[is.na(right_type)] <- FALSE
+    data <- data[right_type, ]
+  }
+
+  unique(data$glycan_structure)
 }

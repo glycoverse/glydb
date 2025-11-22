@@ -4,7 +4,11 @@
 \alias{glydb_structures}
 \title{Get Structures From Glydb Data}
 \usage{
-glydb_structures(structure_level = "intact", species = NULL)
+glydb_structures(
+  structure_level = "intact",
+  species = NULL,
+  glycan_type = NULL
+)
 }
 \arguments{
 \item{structure_level}{Either "intact", "topological", or "basic". Default is "intact".
@@ -12,6 +16,10 @@ See \code{\link[glyrepr:get_structure_level]{glyrepr::get_structure_level()}} fo
 
 \item{species}{A string of specie names. See \code{\link[=glydb_species]{glydb_species()}} for available specie names.
 Default is NULL, which means glycans from all species are included.}
+
+\item{glycan_type}{A string of glycan types.
+Can be "N", "O-GalNAc", "O-GlcNAc", "O-Man", "O-Fuc", "O-Glc".
+Default is NULL, which means glycans of all types are included.}
 }
 \value{
 A \code{\link[glyrepr:glycan_structure]{glyrepr::glycan_structure()}} vector.
@@ -24,4 +32,5 @@ glydb_structures()
 glydb_structures(structure_level = "topological")
 glydb_structures(structure_level = "basic")
 glydb_structures(species = "Homo sapiens")
+glydb_structures(glycan_type = "N")
 }

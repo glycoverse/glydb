@@ -4,7 +4,7 @@
 \alias{glydb_compositions}
 \title{Get Compositions From Glydb Data}
 \usage{
-glydb_compositions(mono_type = "concrete", species = NULL)
+glydb_compositions(mono_type = "concrete", species = NULL, glycan_type = NULL)
 }
 \arguments{
 \item{mono_type}{Either "generic" or "concrete". Default is "concrete".
@@ -12,6 +12,10 @@ See \code{\link[glyrepr:get_mono_type]{glyrepr::get_mono_type()}} for details.}
 
 \item{species}{A string of specie names. See \code{\link[=glydb_species]{glydb_species()}} for available specie names.
 Default is NULL, which means glycans from all species are included.}
+
+\item{glycan_type}{A string of glycan types.
+Can be "N", "O-GalNAc", "O-GlcNAc", "O-Man", "O-Fuc", "O-Glc".
+Default is NULL, which means glycans of all types are included.}
 }
 \value{
 A \code{\link[glyrepr:glycan_composition]{glyrepr::glycan_composition()}} vector.
@@ -23,4 +27,5 @@ Get unique glycan compositions from \link{glydb_data} as a \code{\link[glyrepr:g
 glydb_compositions()
 glydb_compositions(mono_type = "generic")
 glydb_compositions(species = "Homo sapiens")
+glydb_compositions(glycan_type = "N")
 }

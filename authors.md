@@ -8,12 +8,12 @@
 ## Citation
 
 Fu B (2025). *glydb: Glycan Structure Database*. R package version
-0.3.0.9000, <https://glycoverse.github.io/glydb/>.
+0.3.1.9000, <https://glycoverse.github.io/glydb/>.
 
     @Manual{,
       title = {glydb: Glycan Structure Database},
       author = {Bin Fu},
       year = {2025},
-      note = {R package version 0.3.0.9000},
+      note = {R package version 0.3.1.9000},
       url = {https://glycoverse.github.io/glydb/},
     }

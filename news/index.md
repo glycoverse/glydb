@@ -2,6 +2,12 @@
 
 ## glydb (development version)
 
+## glydb 0.3.1
+
+### Minor improvements and bug fixes
+
+- glydb now depends on CRAN version of glyrepr 0.9.0.
+
 ## glydb 0.3.0
 
 ### New features

@@ -14,7 +14,7 @@ glydb_data
 
 ## Format
 
-A tibble with 6960 rows and 4 variables:
+A tibble with 6960 rows and 5 variables:
 
 - `glytoucan_ac`: GlyTouCan accession.
 
@@ -25,6 +25,9 @@ A tibble with 6960 rows and 4 variables:
 
 - `species`: Specie names, separated by semicolons. Unknown species are
   NAs.
+
+- `glycan_type`: Glycan type, one of "N", "O-GalNAc", "O-GlcNAc",
+  "O-Man", "O-Fuc", "O-Glc".
 
 ## Source
 

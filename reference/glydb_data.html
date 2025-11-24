@@ -15,7 +15,7 @@ with 6960 glycan structures currently available.'><meta property="og:image" cont
 
     <a class="navbar-brand me-2" href="../index.html">glydb</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,10 +54,11 @@ with 6960 glycan structures currently available.</p>
 
     <div class="section level2">
     <h2 id="format">Format<a class="anchor" aria-label="anchor" href="#format"></a></h2>
-    <p>A tibble with 6960 rows and 4 variables:</p><ul><li><p><code>glytoucan_ac</code>: GlyTouCan accession.</p></li>
+    <p>A tibble with 6960 rows and 5 variables:</p><ul><li><p><code>glytoucan_ac</code>: GlyTouCan accession.</p></li>
 <li><p><code>glycan_structure</code>: Glycan structure (glyrepr::glycan_structure()).</p></li>
 <li><p><code>glycan_composition</code>: Glycan composition (glyrepr::glycan_composition()).</p></li>
 <li><p><code>species</code>: Specie names, separated by semicolons. Unknown species are NAs.</p></li>
+<li><p><code>glycan_type</code>: Glycan type, one of "N", "O-GalNAc", "O-GlcNAc", "O-Man", "O-Fuc", "O-Glc".</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="source">Source<a class="anchor" aria-label="anchor" href="#source"></a></h2>

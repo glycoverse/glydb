@@ -8,7 +8,13 @@ ecosystem. Only fully defined glycan structures are included.
 ## Installation
 
 You can install the latest release of glydb from
-[GitHub](https://github.com/) with:
+[r-universe](https://glycoverse.r-universe.dev/glydb):
+
+``` r
+install.packages('glydb', repos = c('https://glycoverse.r-universe.dev', 'https://cloud.r-project.org'))
+```
+
+Or from [GitHub](https://github.com/glycoverse/glydb):
 
 ``` r
 # install.packages("remotes")
@@ -29,7 +35,7 @@ Get all data from `glydb`:
 library(glydb)
 #> Loading required package: glyrepr
 glydb_data
-#> # A data frame: 6,960 × 5
+#> # A tibble: 6,960 × 5
 #>    glytoucan_ac glycan_structure          glycan_composition species glycan_type
 #>    <chr>        <struct>                  <comp>             <chr>   <fct>      
 #>  1 G00024MO     Glc(b1-3)Glc(b1-3)Glc(b1- Glc(3)             Saccha… O-Glc      

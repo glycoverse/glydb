@@ -28,7 +28,13 @@ Only fully defined glycan structures are included.
 
 ## Installation
 
-You can install the latest release of glydb from [GitHub](https://github.com/) with:
+You can install the latest release of glydb from [r-universe](https://glycoverse.r-universe.dev/glydb):
+
+```r
+install.packages('glydb', repos = c('https://glycoverse.r-universe.dev', 'https://cloud.r-project.org'))
+```
+
+Or from [GitHub](https://github.com/glycoverse/glydb):
 
 ``` r
 # install.packages("remotes")

@@ -20,11 +20,9 @@ RoxygenNote: 7.3.3
 URL: https://glycoverse.github.io/glydb/
 Depends: 
     R (>= 4.1),
-    glyrepr (>= 0.9.0.9000)
+    glyrepr (>= 0.10.0)
 LazyData: true
 Imports: 
     checkmate,
     purrr,
     stringr
-Remotes:  
-    glycoverse/glyrepr

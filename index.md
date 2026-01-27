@@ -33,7 +33,8 @@ Get all data from `glydb`:
 
 ``` r
 library(glydb)
-#> Loading required package: glyrepr
+#> 载入需要的程序包：glyrepr
+#> Warning: 程序包'glyrepr'是用R版本4.5.2 来建造的
 glydb_data
 #> # A tibble: 6,960 × 5
 #>    glytoucan_ac glycan_structure          glycan_composition species glycan_type

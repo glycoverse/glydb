@@ -2,6 +2,10 @@
 
 ## glydb (development version)
 
+### Minor improvements and bug fixes
+
+- Adapt to glyrepr 0.10.0.
+
 ## glydb 0.3.1
 
 ### Minor improvements and bug fixes

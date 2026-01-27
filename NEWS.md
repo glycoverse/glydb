@@ -1,4 +1,4 @@
-# glydb (development version)
+# glydb 0.3.2
 
 ## Minor improvements and bug fixes
 

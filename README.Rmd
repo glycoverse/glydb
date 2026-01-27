@@ -18,6 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![CRAN status](https://www.r-pkg.org/badges/version/glydb)](https://CRAN.R-project.org/package=glydb)
+[![R-universe version](https://glycoverse.r-universe.dev/glydb/badges/version)](https://glycoverse.r-universe.dev/glydb)
 [![R-CMD-check](https://github.com/glycoverse/glydb/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/glycoverse/glydb/actions/workflows/R-CMD-check.yaml)
 [![Codecov test coverage](https://codecov.io/gh/glycoverse/glydb/graph/badge.svg)](https://app.codecov.io/gh/glycoverse/glydb)
 <!-- badges: end -->

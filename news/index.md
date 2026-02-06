@@ -1,6 +1,10 @@
 # Changelog
 
-## glydb (development version)
+## glydb 0.3.3
+
+### Minor improvements and bug fixes
+
+- Update internal data to use GlyGen Datasets v2.10.1.
 
 ## glydb 0.3.2
 

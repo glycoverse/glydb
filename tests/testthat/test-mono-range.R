@@ -23,35 +23,40 @@ test_that("validate_mono_range errors on invalid monosaccharide names", {
 })
 
 test_that("filter_by_mono_range works with compositions", {
-  # Create test compositions: Gal2Man1, Gal1Man2, Gal3Man3
+  # Create test compositions using generic monos: Hex3, Hex3, Hex6
   comps <- glyrepr::glycan_composition(
-    c(Gal = 2L, Man = 1L), c(Gal = 1L, Man = 2L), c(Gal = 3L, Man = 3L)
+    c(Hex = 3L), c(Hex = 3L), c(Hex = 6L)
   )
 
-  # Filter for Hex between 2 and 4 (Gal + Man = Hex)
+  # Filter for Hex between 2 and 4
   result <- filter_by_mono_range(comps, list(Hex = c(2L, 4L)))
-  expect_length(result, 2)  # Gal2Man1=3, Gal1Man2=3 pass; Gal3Man3=6 fails
+  expect_length(result, 2)  # Hex3, Hex3 pass; Hex6 fails
 })
 
 test_that("filter_by_mono_range defaults missing monos to 0", {
+  # Create compositions with Hex and dHex
   comps <- glyrepr::glycan_composition(
-    c(Gal = 2L, Man = 1L), c(Gal = 1L, Man = 2L, Fuc = 1L)
+    c(Hex = 3L), c(Hex = 3L, dHex = 1L)
   )
 
-  # Filter for Fuc = c(0, 0) - should exclude glycans with Fuc
-  result <- filter_by_mono_range(comps, list(Fuc = c(0L, 0L)))
+  # Filter for dHex = c(0, 0) - should exclude glycans with dHex
+  # Also need to allow Hex since some glycans have Hex
+  result <- filter_by_mono_range(comps, list(dHex = c(0L, 0L), Hex = c(0L, Inf)))
   expect_length(result, 1)
-  expect_true(all(glyrepr::count_mono(result, "Fuc") == 0))
+  expect_true(all(glyrepr::count_mono(result, "dHex") == 0))
 })
 
 test_that("filter_by_mono_range works with structures", {
-  structs <- glyrepr::as_glycan_structure(c("Gal(b1-4)Glc(b1-", "Gal(b1-4)Fuc(a1-"))
+  # Create structures with only Hex (no other monos)
+  # Two Man structures: one with 2 Hex, one with 3 Hex
+  structs <- glyrepr::as_glycan_structure(c("Man(a1-3)Man(a1-", "Man(a1-3)Man(a1-3)Man(a1-"))
+  # Filter for exactly 2 Hex - should only match the first
   result <- filter_by_mono_range(structs, list(Hex = c(2L, 2L)))
-  expect_length(result, 1)  # Only Gal-Glc has 2 Hex
+  expect_length(result, 1)
 })
 
 test_that("filter_by_mono_range returns all when mono_range is NULL", {
-  comps <- glyrepr::glycan_composition(c(Gal = 2L, Man = 1L))
+  comps <- glyrepr::glycan_composition(c(Hex = 3L))
   result <- filter_by_mono_range(comps, NULL)
   expect_length(result, 1)
 })

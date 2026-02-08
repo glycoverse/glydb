@@ -153,5 +153,31 @@ filter_by_mono_range <- function(x, mono_range) {
     keep <- keep & counts >= min_val & counts <= max_val
   }
 
+  # For generic monos NOT in mono_range, ensure count is 0
+  # Only check generic monos since concrete monos are covered by their generic counterparts
+  all_generic_monos <- glyrepr::available_monosaccharides("generic")
+  # Get generic equivalents of specified monos
+  specified_generics <- character()
+  for (mono in names(mono_range)) {
+    mono_type <- glyrepr::get_mono_type(mono)
+    if (mono_type == "generic") {
+      specified_generics <- c(specified_generics, mono)
+    } else if (mono_type == "concrete") {
+      # Convert concrete to generic using glyrepr's internal mapping
+      # We can use convert_to_generic on a composition with just this mono
+      temp_comp <- glyrepr::glycan_composition(stats::setNames(1L, mono))
+      generic_comp <- glyrepr::convert_to_generic(temp_comp)
+      generic_name <- names(glyrepr::vec_data(generic_comp)[[1]])
+      specified_generics <- c(specified_generics, generic_name)
+    }
+  }
+  excluded_generics <- setdiff(all_generic_monos, specified_generics)
+
+  for (mono in excluded_generics) {
+    counts <- glyrepr::count_mono(x, mono)
+    counts[is.na(counts)] <- 0L
+    keep <- keep & counts == 0L
+  }
+
   x[keep]
 }

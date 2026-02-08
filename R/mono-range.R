@@ -124,3 +124,34 @@ validate_mono_range <- function(mono_range) {
 
   invisible(NULL)
 }
+
+#' Filter Glycans by Monosaccharide Range
+#'
+#' @param x A glycan composition or structure vector
+#' @param mono_range A validated named list or NULL
+#' @returns Filtered vector of same type as input
+#' @noRd
+filter_by_mono_range <- function(x, mono_range) {
+  if (is.null(mono_range)) {
+    return(x)
+  }
+
+  # Start with all TRUE
+  keep <- rep(TRUE, length(x))
+
+  # For each mono in mono_range, check if count is within range
+  for (mono in names(mono_range)) {
+    range <- mono_range[[mono]]
+    min_val <- range[1]
+    max_val <- range[2]
+
+    counts <- glyrepr::count_mono(x, mono)
+
+    # NA counts should be treated as 0 (no such mono)
+    counts[is.na(counts)] <- 0L
+
+    keep <- keep & counts >= min_val & counts <= max_val
+  }
+
+  x[keep]
+}

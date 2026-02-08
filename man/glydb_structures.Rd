@@ -7,7 +7,8 @@
 glydb_structures(
   structure_level = "intact",
   species = NULL,
-  glycan_type = NULL
+  glycan_type = NULL,
+  mono_range = NULL
 )
 }
 \arguments{
@@ -20,6 +21,11 @@ Default is NULL, which means glycans from all species are included.}
 \item{glycan_type}{A string of glycan types.
 Can be "N", "O-GalNAc", "O-GlcNAc", "O-Man", "O-Fuc", "O-Glc".
 Default is NULL, which means glycans of all types are included.}
+
+\item{mono_range}{A named list for filtering structures by monosaccharide counts.
+Each element should be an integer vector of length 2 specifying the minimum and maximum
+count for that monosaccharide. Monosaccharides not specified will be excluded (count = 0).
+Use \code{NULL} for no filtering. See examples for usage.}
 }
 \value{
 A \code{\link[glyrepr:glycan_structure]{glyrepr::glycan_structure()}} vector.
@@ -33,4 +39,6 @@ glydb_structures(structure_level = "topological")
 glydb_structures(structure_level = "basic")
 glydb_structures(species = "Homo sapiens")
 glydb_structures(glycan_type = "N")
+glydb_structures(glycan_type = "N", mono_range = list(Hex = c(5L, 10L)))
+glydb_structures(mono_range = list(Hex = c(3L, 9L), HexNAc = c(2L, 6L)))
 }

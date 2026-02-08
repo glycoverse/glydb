@@ -68,3 +68,34 @@ test_that("glydb_compositions validates mono_range", {
   expect_error(glydb_compositions(mono_range = "invalid"), "list")
   expect_error(glydb_compositions(mono_range = list(Hex = c(3L, 2L))), "min")
 })
+
+test_that("glydb_structures filters by mono_range", {
+  # Get all structures first
+  all_structs <- glydb_structures()
+
+  # Filter for N-glycans with specific Hex range
+  result <- glydb_structures(glycan_type = "N", mono_range = list(Hex = c(5L, 10L)))
+  expect_s3_class(result, "glyrepr_structure")
+  expect_true(length(result) <= length(all_structs))
+
+  # Verify all results have Hex in range
+  hex_counts <- glyrepr::count_mono(result, "Hex")
+  expect_true(all(hex_counts >= 5 & hex_counts <= 10, na.rm = TRUE))
+})
+
+test_that("glydb_structures mono_range excludes unspecified monos", {
+  # Only allow Hex and HexNAc, no Fuc
+  result <- glydb_structures(
+    glycan_type = "N",
+    mono_range = list(Hex = c(3L, 10L), HexNAc = c(2L, 10L))
+  )
+
+  # All results should have 0 Fuc
+  fuc_counts <- glyrepr::count_mono(result, "Fuc")
+  expect_true(all(fuc_counts == 0, na.rm = TRUE))
+})
+
+test_that("glydb_structures validates mono_range", {
+  expect_error(glydb_structures(mono_range = "invalid"), "list")
+  expect_error(glydb_structures(mono_range = list(Hex = c(3L, 2L))), "min")
+})

@@ -92,6 +92,10 @@ glydb_compositions <- function(mono_type = "concrete", species = NULL, glycan_ty
 #' @param glycan_type A string of glycan types.
 #'   Can be "N", "O-GalNAc", "O-GlcNAc", "O-Man", "O-Fuc", "O-Glc".
 #'   Default is NULL, which means glycans of all types are included.
+#' @param mono_range A named list for filtering structures by monosaccharide counts.
+#'   Each element should be an integer vector of length 2 specifying the minimum and maximum
+#'   count for that monosaccharide. Monosaccharides not specified will be excluded (count = 0).
+#'   Use `NULL` for no filtering. See examples for usage.
 #'
 #' @returns A [glyrepr::glycan_structure()] vector.
 #' @examples
@@ -100,11 +104,14 @@ glydb_compositions <- function(mono_type = "concrete", species = NULL, glycan_ty
 #' glydb_structures(structure_level = "basic")
 #' glydb_structures(species = "Homo sapiens")
 #' glydb_structures(glycan_type = "N")
+#' glydb_structures(glycan_type = "N", mono_range = list(Hex = c(5L, 10L)))
+#' glydb_structures(mono_range = list(Hex = c(3L, 9L), HexNAc = c(2L, 6L)))
 #' @export
-glydb_structures <- function(structure_level = "intact", species = NULL, glycan_type = NULL) {
+glydb_structures <- function(structure_level = "intact", species = NULL, glycan_type = NULL, mono_range = NULL) {
   checkmate::assert_choice(structure_level, c("intact", "topological", "basic"))
   checkmate::assert_choice(species, glydb_species(), null.ok = TRUE)
   checkmate::assert_choice(glycan_type, c("N", "O-GalNAc", "O-GlcNAc", "O-Man", "O-Fuc", "O-Glc"), null.ok = TRUE)
+  validate_mono_range(mono_range)
   data <- switch(structure_level,
     intact = intact_strucs,
     topological = topological_strucs,
@@ -125,5 +132,6 @@ glydb_structures <- function(structure_level = "intact", species = NULL, glycan_
     data <- data[right_type, ]
   }
 
-  unique(data$glycan_structure)
+  result <- unique(data$glycan_structure)
+  filter_by_mono_range(result, mono_range)
 }

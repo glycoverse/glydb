@@ -33,17 +33,21 @@ test_that("filter_by_mono_range works with compositions", {
   expect_length(result, 2)  # Hex3, Hex3 pass; Hex6 fails
 })
 
-test_that("filter_by_mono_range defaults missing monos to 0", {
+test_that("filter_by_mono_range defaults missing monos to 0 for generic glycan compositions", {
   # Create compositions with Hex and dHex
-  comps <- glyrepr::glycan_composition(
-    c(Hex = 3L), c(Hex = 3L, dHex = 1L)
-  )
+  comps <- glyrepr::glycan_composition(c(Hex = 3L), c(Hex = 3L, dHex = 1L))
 
   # Filter for dHex = c(0, 0) - should exclude glycans with dHex
   # Also need to allow Hex since some glycans have Hex
   result <- filter_by_mono_range(comps, list(dHex = c(0L, 0L), Hex = c(0L, Inf)))
   expect_length(result, 1)
   expect_true(all(glyrepr::count_mono(result, "dHex") == 0))
+})
+
+test_that("filter_by_mono_range defaults missing monos to 0 for concrete glycan compositions", {
+  comps <- glyrepr::glycan_composition(c(Glc = 1L), c(Glc = 1L, Gal = 1L))
+  result <- filter_by_mono_range(comps, list(Glc = c(0L, 2L)))
+  expect_equal(result, glyrepr::glycan_composition(c(Glc = 1L)))
 })
 
 test_that("filter_by_mono_range works with structures", {

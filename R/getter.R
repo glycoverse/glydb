@@ -39,6 +39,10 @@ glydb_species <- function() {
 #' @param glycan_type A string of glycan types.
 #'   Can be "N", "O-GalNAc", "O-GlcNAc", "O-Man", "O-Fuc", "O-Glc".
 #'   Default is NULL, which means glycans of all types are included.
+#' @param mono_range A named list for filtering compositions by monosaccharide counts.
+#'   Each element should be an integer vector of length 2 specifying the minimum and maximum
+#'   count for that monosaccharide. Monosaccharides not specified will be excluded (count = 0).
+#'   Use `NULL` for no filtering. See examples for usage.
 #'
 #' @returns A [glyrepr::glycan_composition()] vector.
 #' @examples
@@ -46,11 +50,14 @@ glydb_species <- function() {
 #' glydb_compositions(mono_type = "generic")
 #' glydb_compositions(species = "Homo sapiens")
 #' glydb_compositions(glycan_type = "N")
+#' glydb_compositions(glycan_type = "N", mono_range = list(Hex = c(5L, 10L)))
+#' glydb_compositions(mono_range = list(Hex = c(3L, 9L), HexNAc = c(2L, 6L)))
 #' @export
-glydb_compositions <- function(mono_type = "concrete", species = NULL, glycan_type = NULL) {
+glydb_compositions <- function(mono_type = "concrete", species = NULL, glycan_type = NULL, mono_range = NULL) {
   checkmate::assert_choice(mono_type, c("generic", "concrete"))
   checkmate::assert_choice(species, glydb_species(), null.ok = TRUE)
   checkmate::assert_choice(glycan_type, c("N", "O-GalNAc", "O-GlcNAc", "O-Man", "O-Fuc", "O-Glc"), null.ok = TRUE)
+  validate_mono_range(mono_range)
   data <- switch(mono_type,
     concrete = concrete_comps,
     generic = generic_comps
@@ -70,7 +77,8 @@ glydb_compositions <- function(mono_type = "concrete", species = NULL, glycan_ty
     data <- data[right_type, ]
   }
 
-  unique(data$glycan_composition)
+  result <- unique(data$glycan_composition)
+  filter_by_mono_range(result, mono_range)
 }
 
 #' Get Structures From Glydb Data

@@ -4,7 +4,12 @@
 \alias{glydb_compositions}
 \title{Get Compositions From Glydb Data}
 \usage{
-glydb_compositions(mono_type = "concrete", species = NULL, glycan_type = NULL)
+glydb_compositions(
+  mono_type = "concrete",
+  species = NULL,
+  glycan_type = NULL,
+  mono_range = NULL
+)
 }
 \arguments{
 \item{mono_type}{Either "generic" or "concrete". Default is "concrete".
@@ -16,6 +21,11 @@ Default is NULL, which means glycans from all species are included.}
 \item{glycan_type}{A string of glycan types.
 Can be "N", "O-GalNAc", "O-GlcNAc", "O-Man", "O-Fuc", "O-Glc".
 Default is NULL, which means glycans of all types are included.}
+
+\item{mono_range}{A named list for filtering compositions by monosaccharide counts.
+Each element should be an integer vector of length 2 specifying the minimum and maximum
+count for that monosaccharide. Monosaccharides not specified will be excluded (count = 0).
+Use \code{NULL} for no filtering. See examples for usage.}
 }
 \value{
 A \code{\link[glyrepr:glycan_composition]{glyrepr::glycan_composition()}} vector.
@@ -28,4 +38,6 @@ glydb_compositions()
 glydb_compositions(mono_type = "generic")
 glydb_compositions(species = "Homo sapiens")
 glydb_compositions(glycan_type = "N")
+glydb_compositions(glycan_type = "N", mono_range = list(Hex = c(5L, 10L)))
+glydb_compositions(mono_range = list(Hex = c(3L, 9L), HexNAc = c(2L, 6L)))
 }

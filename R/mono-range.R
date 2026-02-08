@@ -167,7 +167,7 @@ filter_by_mono_range <- function(x, mono_range) {
       # We can use convert_to_generic on a composition with just this mono
       temp_comp <- glyrepr::glycan_composition(stats::setNames(1L, mono))
       generic_comp <- glyrepr::convert_to_generic(temp_comp)
-      generic_name <- names(glyrepr::vec_data(generic_comp)[[1]])
+      generic_name <- names(vctrs::vec_data(generic_comp)[[1]])
       specified_generics <- c(specified_generics, generic_name)
     }
   }

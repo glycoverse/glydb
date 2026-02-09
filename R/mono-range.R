@@ -6,6 +6,7 @@
 #'   specifying the minimum and maximum count for a monosaccharide.
 #'   Names must be valid monosaccharide names from [glyrepr::available_monosaccharides()].
 #'   Use `NULL` for no filtering.
+#' @param mono_type The `mono_type` parameter passed to [glydb_compositions()] or [glydb_structures()].
 #'
 #' @returns Invisible `NULL` on success. Aborts with an error message on invalid input.
 #'
@@ -15,7 +16,7 @@
 #' validate_mono_range(NULL)
 #'
 #' @noRd
-validate_mono_range <- function(mono_range) {
+validate_mono_range <- function(mono_range, mono_type) {
   # NULL is valid (no filtering)
   if (is.null(mono_range)) {
     return(invisible(NULL))
@@ -48,6 +49,23 @@ validate_mono_range <- function(mono_range) {
     cli::cli_abort(c(
       "All monosaccharide names in {.arg mono_range} must be known.",
       "x" = "Unknown name{?s}: {.val {invalid_monos}}."
+    ))
+  }
+
+  # Check that all names are of the same mono_type
+  range_mono_types <- glyrepr::get_mono_type(names_list)
+  if (length(unique(range_mono_types)) != 1) {
+    cli::cli_abort(c(
+      "All monosaccharide names in {.arg mono_range} must be of the same type (generic or concrete).",
+      "x" = "Found both types."
+    ))
+  }
+
+  # Special case: When `mono_type` is generic, mono type of the range names must be generic.
+  range_mono_type <- glyrepr::get_mono_type(names(mono_range)[[1]])
+  if (mono_type == "generic" && range_mono_type == "concrete") {
+    cli::cli_abort(c(
+      "Monosaccharide names in {.arg mono_range} must be {.val generic} (e.g. 'Hex') when {.arg mono_type} is {.val generic}."
     ))
   }
 

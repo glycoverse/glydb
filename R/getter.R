@@ -57,7 +57,7 @@ glydb_compositions <- function(mono_type = "concrete", species = NULL, glycan_ty
   checkmate::assert_choice(mono_type, c("generic", "concrete"))
   checkmate::assert_choice(species, glydb_species(), null.ok = TRUE)
   checkmate::assert_choice(glycan_type, c("N", "O-GalNAc", "O-GlcNAc", "O-Man", "O-Fuc", "O-Glc"), null.ok = TRUE)
-  validate_mono_range(mono_range)
+  validate_mono_range(mono_range, mono_type)
   data <- switch(mono_type,
     concrete = concrete_comps,
     generic = generic_comps
@@ -111,7 +111,7 @@ glydb_structures <- function(structure_level = "intact", species = NULL, glycan_
   checkmate::assert_choice(structure_level, c("intact", "topological", "basic"))
   checkmate::assert_choice(species, glydb_species(), null.ok = TRUE)
   checkmate::assert_choice(glycan_type, c("N", "O-GalNAc", "O-GlcNAc", "O-Man", "O-Fuc", "O-Glc"), null.ok = TRUE)
-  validate_mono_range(mono_range)
+  validate_mono_range(mono_range, mono_type)
   data <- switch(structure_level,
     intact = intact_strucs,
     topological = topological_strucs,

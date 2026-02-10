@@ -147,55 +147,45 @@ validate_mono_range <- function(mono_range, mono_type) {
 #'
 #' @param x A glycan composition or structure vector
 #' @param mono_range A validated named list or NULL
+#' @param mono_type Monosaccharide type of `x`
 #' @returns Filtered vector of same type as input
 #' @noRd
-filter_by_mono_range <- function(x, mono_range) {
+filter_by_mono_range <- function(x, mono_range, mono_type) {
   if (is.null(mono_range)) {
     return(x)
   }
 
-  # Start with all TRUE
-  keep <- rep(TRUE, length(x))
-
-  # For each mono in mono_range, check if count is within range
-  for (mono in names(mono_range)) {
-    range <- mono_range[[mono]]
-    min_val <- range[1]
-    max_val <- range[2]
-
-    counts <- glyrepr::count_mono(x, mono)
-
-    # NA counts should be treated as 0 (no such mono)
-    counts[is.na(counts)] <- 0L
-
-    keep <- keep & counts >= min_val & counts <= max_val
+  if (glyrepr::is_glycan_structure(x)) {
+    comps <- glyrepr::as_glycan_composition(x)
+  } else {  # must be glycan compositions
+    comps <- x
   }
 
-  # For generic monos NOT in mono_range, ensure count is 0
-  # Only check generic monos since concrete monos are covered by their generic counterparts
-  all_generic_monos <- glyrepr::available_monosaccharides("generic")
-  # Get generic equivalents of specified monos
-  specified_generics <- character()
-  for (mono in names(mono_range)) {
-    mono_type <- glyrepr::get_mono_type(mono)
-    if (mono_type == "generic") {
-      specified_generics <- c(specified_generics, mono)
-    } else if (mono_type == "concrete") {
-      # Convert concrete to generic using glyrepr's internal mapping
-      # We can use convert_to_generic on a composition with just this mono
-      temp_comp <- glyrepr::glycan_composition(stats::setNames(1L, mono))
-      generic_comp <- glyrepr::convert_to_generic(temp_comp)
-      generic_name <- names(vctrs::vec_data(generic_comp)[[1]])
-      specified_generics <- c(specified_generics, generic_name)
-    }
-  }
-  excluded_generics <- setdiff(all_generic_monos, specified_generics)
-
-  for (mono in excluded_generics) {
-    counts <- glyrepr::count_mono(x, mono)
-    counts[is.na(counts)] <- 0L
-    keep <- keep & counts == 0L
+  range_mono_type <- glyrepr::get_mono_type(names(mono_range)[[1]])
+  if (range_mono_type == "generic" && mono_type == "concrete") {
+    comps <- glyrepr::convert_to_generic(comps)
   }
 
-  x[keep]
+  # 1. Check if within `mono_range`
+  check_one_mono_range <- function(mono, range, comps) {
+    # Checks one range in `mono_range`.
+    # Returns a logical vector with the same length of `comps`, whether to keep.
+    min_ <- range[[1]]
+    max_ <- range[[2]]
+    mono_counts <- glyrepr::count_mono(comps, mono)
+    (mono_counts >= min_) & (mono_counts <= max_)
+  }
+
+  check_results <- purrr::map2(
+    names(mono_range),
+    mono_range,
+    ~ check_one_mono_range(.x, .y, comps)
+  )
+  check_result_1 <- purrr::reduce(check_results, `&`)
+
+  # 2. Check if other monos do not exist
+  mono_names <- purrr::map(vctrs::field(comps, "data"), names)
+  check_result_2 <- purrr::map_lgl(mono_names, ~ length(setdiff(.x, names(mono_range))) == 0)
+
+  x[check_result_1 & check_result_2]
 }

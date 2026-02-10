@@ -78,7 +78,7 @@ glydb_compositions <- function(mono_type = "concrete", species = NULL, glycan_ty
   }
 
   result <- unique(data$glycan_composition)
-  filter_by_mono_range(result, mono_range)
+  filter_by_mono_range(result, mono_range, mono_type)
 }
 
 #' Get Structures From Glydb Data
@@ -111,6 +111,7 @@ glydb_structures <- function(structure_level = "intact", species = NULL, glycan_
   checkmate::assert_choice(structure_level, c("intact", "topological", "basic"))
   checkmate::assert_choice(species, glydb_species(), null.ok = TRUE)
   checkmate::assert_choice(glycan_type, c("N", "O-GalNAc", "O-GlcNAc", "O-Man", "O-Fuc", "O-Glc"), null.ok = TRUE)
+  mono_type <- ifelse(structure_level == "basic", "generic", "concrete")
   validate_mono_range(mono_range, mono_type)
   data <- switch(structure_level,
     intact = intact_strucs,
@@ -133,5 +134,5 @@ glydb_structures <- function(structure_level = "intact", species = NULL, glycan_
   }
 
   result <- unique(data$glycan_structure)
-  filter_by_mono_range(result, mono_range)
+  filter_by_mono_range(result, mono_range, mono_type)
 }

@@ -11,9 +11,9 @@
 #' @returns Invisible `NULL` on success. Aborts with an error message on invalid input.
 #'
 #' @examples
-#' validate_mono_range(list(Hex = c(3L, 9L)))
-#' validate_mono_range(list(Hex = c(0L, Inf), HexNAc = c(2L, 6L)))
-#' validate_mono_range(NULL)
+#' validate_mono_range(list(Hex = c(3L, 9L)), mono_type = "generic")
+#' validate_mono_range(list(Hex = c(0L, Inf), HexNAc = c(2L, 6L)), mono_type = "generic")
+#' validate_mono_range(NULL, mono_type = "generic")
 #'
 #' @noRd
 validate_mono_range <- function(mono_range, mono_type) {

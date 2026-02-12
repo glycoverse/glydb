@@ -6,3 +6,4 @@
 .quarto
 docs
 .worktrees/
+data-raw/*.csv

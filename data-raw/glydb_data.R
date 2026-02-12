@@ -5,6 +5,7 @@ library(glyrepr)
 accessions <- read_csv("data-raw/glycan_fully_determined_v2_10_1.csv")
 iupac <- read_csv("data-raw/glycan_sequences_iupac_condensed_v2_10_1.csv")
 species <- read_csv("data-raw/glycan_species_v2_10_1.csv")
+citations <- read_csv("data-raw/glycan_citations_glytoucan_v2_10_1.csv")
 
 iupac_temp <- iupac |>
   semi_join(accessions, by = "glytoucan_ac") |>
@@ -34,6 +35,9 @@ species_prepared <- species |>
     species = str_c(unique(species), collapse = ";"),
     .by = glytoucan_ac
   )
+
+confidence <- citations |>
+  summarise(confidence = log(n()), .by = glytoucan_ac)
 
 get_glycan_type <- function(glycan_structure) {
   motifs <- c(
@@ -66,6 +70,8 @@ get_glycan_type <- function(glycan_structure) {
 
 glydb_data <- iupac_prepared |>
   left_join(species_prepared, by = "glytoucan_ac") |>
+  left_join(confidence, by = "glytoucan_ac") |>
+  mutate(confidence = if_else(is.na(confidence), -1, confidence)) |>
   mutate(glycan_type = get_glycan_type(glycan_structure))
 
 usethis::use_data(glydb_data, overwrite = TRUE)

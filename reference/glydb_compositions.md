@@ -9,7 +9,12 @@ vector.
 ## Usage
 
 ``` r
-glydb_compositions(mono_type = "concrete", species = NULL, glycan_type = NULL)
+glydb_compositions(
+  mono_type = "concrete",
+  species = NULL,
+  glycan_type = NULL,
+  mono_range = NULL
+)
 ```
 
 ## Arguments
@@ -32,6 +37,14 @@ glydb_compositions(mono_type = "concrete", species = NULL, glycan_type = NULL)
   A string of glycan types. Can be "N", "O-GalNAc", "O-GlcNAc", "O-Man",
   "O-Fuc", "O-Glc". Default is NULL, which means glycans of all types
   are included.
+
+- mono_range:
+
+  A named list for filtering compositions by monosaccharide counts. Each
+  element should be an integer vector of length 2 specifying the minimum
+  and maximum count for that monosaccharide. Monosaccharides not
+  specified will be excluded (count = 0). Use `NULL` for no filtering.
+  See examples for usage.
 
 ## Value
 
@@ -94,4 +107,19 @@ glydb_compositions(glycan_type = "N")
 #> [9] Man(2)GlcNAc(3)
 #> [10] Man(3)GlcNAc(7)Fuc(1)
 #> ... (463 more not shown)
+glydb_compositions(glycan_type = "N", mono_range = list(Hex = c(5L, 10L)))
+#> <glycan_composition[0]>
+glydb_compositions(mono_range = list(Hex = c(3L, 9L), HexNAc = c(2L, 6L)))
+#> <glycan_composition[105]>
+#> [1] Glc(1)Gal(2)GlcNAc(1)GalNAc(1)
+#> [2] Man(6)GlcNAc(2)
+#> [3] Man(6)GlcNAc(3)
+#> [4] Man(4)GlcNAc(2)
+#> [5] Gal(5)GlcNAc(5)
+#> [6] Glc(1)Man(8)GlcNAc(2)
+#> [7] Man(3)Gal(2)GlcNAc(4)
+#> [8] Man(2)Gal(2)GlcNAc(2)
+#> [9] Man(3)GlcNAc(5)
+#> [10] Gal(4)GlcNAc(3)GalNAc(1)
+#> ... (95 more not shown)
 ```

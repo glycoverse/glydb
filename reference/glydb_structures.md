@@ -12,7 +12,8 @@ vector.
 glydb_structures(
   structure_level = "intact",
   species = NULL,
-  glycan_type = NULL
+  glycan_type = NULL,
+  mono_range = NULL
 )
 ```
 
@@ -36,6 +37,14 @@ glydb_structures(
   A string of glycan types. Can be "N", "O-GalNAc", "O-GlcNAc", "O-Man",
   "O-Fuc", "O-Glc". Default is NULL, which means glycans of all types
   are included.
+
+- mono_range:
+
+  A named list for filtering structures by monosaccharide counts. Each
+  element should be an integer vector of length 2 specifying the minimum
+  and maximum count for that monosaccharide. Monosaccharides not
+  specified will be excluded (count = 0). Use `NULL` for no filtering.
+  See examples for usage.
 
 ## Value
 
@@ -116,4 +125,21 @@ glydb_structures(glycan_type = "N")
 #> [10] GlcNAc(b1-2)[GlcNAc(b1-4)]Man(a1-3)[GlcNAc(b1-2)[GlcNAc(b1-4)]Man(a1-6)]Man(b1-4)GlcNAc(b1-4)[Fuc(a1-3)]GlcNAc(b1-
 #> ... (2563 more not shown)
 #> # Unique structures: 2573
+glydb_structures(glycan_type = "N", mono_range = list(Hex = c(5L, 10L)))
+#> <glycan_structure[0]>
+#> # Unique structures: 0
+glydb_structures(mono_range = list(Hex = c(3L, 9L), HexNAc = c(2L, 6L)))
+#> <glycan_structure[1028]>
+#> [1] GlcNAc(a1-3)GalNAc(b1-3)Gal(a1-4)Gal(b1-4)Glc(b1-
+#> [2] Man(a1-2)Man(a1-2)Man(a1-6)[Man(a1-2)Man(a1-3)]Man(b1-4)GlcNAc(b1-4)GlcNAc(b1-
+#> [3] Man(a1-2)Man(a1-3)[GlcNAc(b1-4)][Man(a1-3)[Man(a1-6)]Man(a1-6)]Man(b1-4)GlcNAc(b1-4)GlcNAc(a1-
+#> [4] Man(a1-3)Man(a1-6)[Man(b1-3)]Man(b1-4)GlcNAc(b1-4)GlcNAc(b1-
+#> [5] Gal(b1-4)GlcNAc(b1-3)[Gal(b1-4)GlcNAc(b1-6)]Gal(b1-4)GlcNAc(b1-3)[Gal(b1-4)GlcNAc(b1-6)]Gal(b1-4)GlcNAc(b1-
+#> [6] Man(a1-2)Man(a1-3)[Man(a1-3)[Man(a1-6)]Man(a1-6)]Man(a1-4)GlcNAc(b1-4)GlcNAc(b1-
+#> [7] Man(a1-6)Man(a1-3)[Man(a1-6)]Man(b1-4)GlcNAc(b1-4)GlcNAc(b1-
+#> [8] Glc(b1-3)Man(a1-2)Man(a1-2)Man(a1-3)[Man(a1-2)Man(a1-6)[Man(a1-3)]Man(a1-6)]Man(b1-4)GlcNAc(b1-4)GlcNAc(b1-
+#> [9] Gal(b1-4)GlcNAc(b1-4)Man(a1-3)[Gal(b1-4)GlcNAc(b1-4)Man(a1-6)]Man(b1-4)GlcNAc(b1-4)GlcNAc(b1-
+#> [10] Gal(b1-4)GlcNAc(b1-3)Gal(b1-4)GlcNAc(b1-6)Man(a1-6)Man(b1-
+#> ... (1018 more not shown)
+#> # Unique structures: 1028
 ```

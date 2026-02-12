@@ -90,7 +90,7 @@ glydb_compositions <- function(
     data <- data[right_type, ]
   }
 
-  result <- unique(data$glycan_composition)
+  result <- data$glycan_composition
 
   if (!is.null(mono_range)) {
     result <- filter_by_mono_range(result, mono_range, mono_type)
@@ -161,7 +161,7 @@ glydb_structures <- function(
     data <- data[right_type, ]
   }
 
-  result <- unique(data$glycan_structure)
+  result <- data$glycan_structure
 
   if (!is.null(mono_range)) {
     result <- filter_by_mono_range(result, mono_range, mono_type)

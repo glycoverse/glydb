@@ -26,6 +26,5 @@ Imports:
     checkmate,
     cli,
     purrr,
-    stats,
     stringr,
     vctrs

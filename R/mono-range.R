@@ -154,15 +154,11 @@ validate_mono_range <- function(mono_range, mono_type) {
 #' Filter Glycans by Monosaccharide Range
 #'
 #' @param x A glycan composition or structure vector
-#' @param mono_range A validated named list or NULL
+#' @param mono_range A validated named list
 #' @param mono_type Monosaccharide type of `x`
 #' @returns Filtered vector of same type as input
 #' @noRd
 filter_by_mono_range <- function(x, mono_range, mono_type) {
-  if (is.null(mono_range)) {
-    return(x)
-  }
-
   if (glyrepr::is_glycan_structure(x)) {
     comps <- glyrepr::as_glycan_composition(x)
   } else {

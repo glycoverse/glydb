@@ -94,9 +94,3 @@ test_that("filter_by_mono_range works with structures", {
   result <- filter_by_mono_range(structs, list(Hex = c(2L, 2L)), "concrete")
   expect_length(result, 1)
 })
-
-test_that("filter_by_mono_range returns all when mono_range is NULL", {
-  comps <- glyrepr::glycan_composition(c(Hex = 3L))
-  result <- filter_by_mono_range(comps, NULL, "generic")
-  expect_length(result, 1)
-})

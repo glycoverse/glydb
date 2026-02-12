@@ -91,7 +91,12 @@ glydb_compositions <- function(
   }
 
   result <- unique(data$glycan_composition)
-  filter_by_mono_range(result, mono_range, mono_type)
+
+  if (!is.null(mono_range)) {
+    result <- filter_by_mono_range(result, mono_range, mono_type)
+  }
+
+  result
 }
 
 #' Get Structures From Glydb Data
@@ -157,5 +162,10 @@ glydb_structures <- function(
   }
 
   result <- unique(data$glycan_structure)
-  filter_by_mono_range(result, mono_range, mono_type)
+
+  if (!is.null(mono_range)) {
+    result <- filter_by_mono_range(result, mono_range, mono_type)
+  }
+
+  result
 }

@@ -22,7 +22,9 @@ Depends:
     R (>= 4.1),
     glyrepr (>= 0.10.0)
 LazyData: true
-Imports: 
+Imports:
     checkmate,
+    cli,
     purrr,
-    stringr
+    stringr,
+    vctrs

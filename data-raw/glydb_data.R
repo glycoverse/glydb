@@ -30,7 +30,10 @@ iupac_prepared <- iupac_temp |>
 
 species_prepared <- species |>
   select(glytoucan_ac, species = tax_name) |>
-  summarise(species = str_c(unique(species), collapse = ";"), .by = glytoucan_ac)
+  summarise(
+    species = str_c(unique(species), collapse = ";"),
+    .by = glytoucan_ac
+  )
 
 get_glycan_type <- function(glycan_structure) {
   motifs <- c(
@@ -41,7 +44,11 @@ get_glycan_type <- function(glycan_structure) {
     "O-Fuc" = "Fuc(a1-",
     "O-Glc" = "Glc(b1-"
   )
-  motif_mat <- glymotif::have_motifs(glycan_structure, motifs, alignment = "core")
+  motif_mat <- glymotif::have_motifs(
+    glycan_structure,
+    motifs,
+    alignment = "core"
+  )
   res <- dplyr::case_when(
     motif_mat[, "N"] ~ "N",
     motif_mat[, "O-GalNAc"] ~ "O-GalNAc",
@@ -51,7 +58,10 @@ get_glycan_type <- function(glycan_structure) {
     motif_mat[, "O-Glc"] ~ "O-Glc",
     .default = NA_character_
   )
-  factor(res, levels = c("N", "O-GalNAc", "O-GlcNAc", "O-Man", "O-Fuc", "O-Glc"))
+  factor(
+    res,
+    levels = c("N", "O-GalNAc", "O-GlcNAc", "O-Man", "O-Fuc", "O-Glc")
+  )
 }
 
 glydb_data <- iupac_prepared |>

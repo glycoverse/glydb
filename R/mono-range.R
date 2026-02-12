@@ -22,8 +22,14 @@ validate_mono_range <- function(mono_range, mono_type) {
     return(invisible(NULL))
   }
 
-  # Check that mono_range is a list
+  # Check that mono_range is a non-empty list
   checkmate::assert_list(mono_range)
+  if (length(mono_range) == 0L) {
+    cli::cli_abort(c(
+      "{.arg mono_range} must contain at least one named monosaccharide range.",
+      "i" = "Provide one or more named entries, e.g. {.code list(Hex = c(3L, 9L))}, or use {.code NULL} for no filtering."
+    ))
+  }
 
   # Check for duplicate names
   names_list <- names(mono_range)

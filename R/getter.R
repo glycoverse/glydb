@@ -1,4 +1,11 @@
-utils::globalVariables(c("glydb_data", "concrete_comps", "generic_comps", "intact_strucs", "topological_strucs", "basic_strucs"))
+utils::globalVariables(c(
+  "glydb_data",
+  "concrete_comps",
+  "generic_comps",
+  "intact_strucs",
+  "topological_strucs",
+  "basic_strucs"
+))
 
 #' Get Supported Species From Glydb Data
 #'
@@ -53,15 +60,21 @@ glydb_species <- function() {
 #' glydb_compositions(glycan_type = "N", mono_range = list(Hex = c(5L, 10L)))
 #' glydb_compositions(mono_range = list(Hex = c(3L, 9L), HexNAc = c(2L, 6L)))
 #' @export
-glydb_compositions <- function(mono_type = "concrete", species = NULL, glycan_type = NULL, mono_range = NULL) {
+glydb_compositions <- function(
+  mono_type = "concrete",
+  species = NULL,
+  glycan_type = NULL,
+  mono_range = NULL
+) {
   checkmate::assert_choice(mono_type, c("generic", "concrete"))
   checkmate::assert_choice(species, glydb_species(), null.ok = TRUE)
-  checkmate::assert_choice(glycan_type, c("N", "O-GalNAc", "O-GlcNAc", "O-Man", "O-Fuc", "O-Glc"), null.ok = TRUE)
-  validate_mono_range(mono_range, mono_type)
-  data <- switch(mono_type,
-    concrete = concrete_comps,
-    generic = generic_comps
+  checkmate::assert_choice(
+    glycan_type,
+    c("N", "O-GalNAc", "O-GlcNAc", "O-Man", "O-Fuc", "O-Glc"),
+    null.ok = TRUE
   )
+  validate_mono_range(mono_range, mono_type)
+  data <- switch(mono_type, concrete = concrete_comps, generic = generic_comps)
 
   if (!is.null(species)) {
     species_list <- stringr::str_split(data$species, ";")
@@ -107,13 +120,23 @@ glydb_compositions <- function(mono_type = "concrete", species = NULL, glycan_ty
 #' glydb_structures(glycan_type = "N", mono_range = list(Hex = c(5L, 10L)))
 #' glydb_structures(mono_range = list(Hex = c(3L, 9L), HexNAc = c(2L, 6L)))
 #' @export
-glydb_structures <- function(structure_level = "intact", species = NULL, glycan_type = NULL, mono_range = NULL) {
+glydb_structures <- function(
+  structure_level = "intact",
+  species = NULL,
+  glycan_type = NULL,
+  mono_range = NULL
+) {
   checkmate::assert_choice(structure_level, c("intact", "topological", "basic"))
   checkmate::assert_choice(species, glydb_species(), null.ok = TRUE)
-  checkmate::assert_choice(glycan_type, c("N", "O-GalNAc", "O-GlcNAc", "O-Man", "O-Fuc", "O-Glc"), null.ok = TRUE)
+  checkmate::assert_choice(
+    glycan_type,
+    c("N", "O-GalNAc", "O-GlcNAc", "O-Man", "O-Fuc", "O-Glc"),
+    null.ok = TRUE
+  )
   mono_type <- ifelse(structure_level == "basic", "generic", "concrete")
   validate_mono_range(mono_range, mono_type)
-  data <- switch(structure_level,
+  data <- switch(
+    structure_level,
     intact = intact_strucs,
     topological = topological_strucs,
     basic = basic_strucs

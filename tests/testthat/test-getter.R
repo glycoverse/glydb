@@ -43,7 +43,10 @@ test_that("glydb_compositions filters by mono_range", {
   all_comps <- glydb_compositions()
 
   # Filter for N-glycans with specific Hex range
-  result <- glydb_compositions(glycan_type = "N", mono_range = list(Hex = c(5L, 10L)))
+  result <- glydb_compositions(
+    glycan_type = "N",
+    mono_range = list(Hex = c(5L, 10L))
+  )
   expect_s3_class(result, "glyrepr_composition")
   expect_true(length(result) <= length(all_comps))
 
@@ -74,7 +77,10 @@ test_that("glydb_structures filters by mono_range", {
   all_structs <- glydb_structures()
 
   # Filter for N-glycans with specific Hex range
-  result <- glydb_structures(glycan_type = "N", mono_range = list(Hex = c(5L, 10L)))
+  result <- glydb_structures(
+    glycan_type = "N",
+    mono_range = list(Hex = c(5L, 10L))
+  )
   expect_s3_class(result, "glyrepr_structure")
   expect_true(length(result) <= length(all_structs))
 

@@ -87,7 +87,9 @@ validate_mono_range <- function(mono_range, mono_type) {
     # Check that min is an integer (not double, not Inf)
     # Special case: c(0L, Inf) creates a double vector due to R's type coercion
     # We allow this when max is Inf and min is a whole number
-    is_special_case <- is.infinite(max_val) && is.double(min_val) && min_val == as.integer(min_val)
+    is_special_case <- is.infinite(max_val) &&
+      is.double(min_val) &&
+      min_val == as.integer(min_val)
 
     if (is.infinite(min_val)) {
       cli::cli_abort(c(
@@ -157,7 +159,8 @@ filter_by_mono_range <- function(x, mono_range, mono_type) {
 
   if (glyrepr::is_glycan_structure(x)) {
     comps <- glyrepr::as_glycan_composition(x)
-  } else {  # must be glycan compositions
+  } else {
+    # must be glycan compositions
     comps <- x
   }
 
@@ -185,7 +188,10 @@ filter_by_mono_range <- function(x, mono_range, mono_type) {
 
   # 2. Check if other monos do not exist
   mono_names <- purrr::map(vctrs::field(comps, "data"), names)
-  check_result_2 <- purrr::map_lgl(mono_names, ~ length(setdiff(.x, names(mono_range))) == 0)
+  check_result_2 <- purrr::map_lgl(
+    mono_names,
+    ~ length(setdiff(.x, names(mono_range))) == 0
+  )
 
   x[check_result_1 & check_result_2]
 }

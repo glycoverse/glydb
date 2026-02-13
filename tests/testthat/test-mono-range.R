@@ -79,7 +79,11 @@ test_that("filter_by_mono_range defaults missing monos to 0 for generic glycan c
 
 test_that("filter_by_mono_range defaults missing monos to 0 for concrete glycan compositions", {
   comps <- glyrepr::glycan_composition(c(Glc = 1L), c(Glc = 1L, Gal = 1L))
-  result <- comps[filter_by_mono_range(comps, list(Glc = c(0L, 2L)), "concrete")]
+  result <- comps[filter_by_mono_range(
+    comps,
+    list(Glc = c(0L, 2L)),
+    "concrete"
+  )]
   expect_equal(result, glyrepr::glycan_composition(c(Glc = 1L)))
 })
 
@@ -91,6 +95,10 @@ test_that("filter_by_mono_range works with structures", {
     "Man(a1-3)Man(a1-3)Man(a1-"
   ))
   # Filter for exactly 2 Hex - should only match the first
-  result <- structs[filter_by_mono_range(structs, list(Hex = c(2L, 2L)), "concrete")]
+  result <- structs[filter_by_mono_range(
+    structs,
+    list(Hex = c(2L, 2L)),
+    "concrete"
+  )]
   expect_length(result, 1)
 })

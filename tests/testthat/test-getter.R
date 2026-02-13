@@ -105,3 +105,24 @@ test_that("glydb_structures validates mono_range", {
   expect_error(glydb_structures(mono_range = "invalid"), "list")
   expect_error(glydb_structures(mono_range = list(Hex = c(3L, 2L))), "min")
 })
+
+test_that("glydb_compositions returns vectors with confidence", {
+  res <- glydb_compositions()
+  conf <- attr(res, "confidence")
+  expect_type(conf, "double")
+  expect_length(conf, length(res))
+})
+
+test_that("glydb_compositions mono_range returns vectors with confidence of correct length", {
+  res <- glydb_compositions(mono_range = list(Hex = c(3L, 10L)))
+  conf <- attr(res, "confidence")
+  expect_type(conf, "double")
+  expect_length(conf, length(res))
+})
+
+test_that("glydb_structures returns vectors with confidence", {
+  res <- glydb_structures()
+  conf <- attr(res, "confidence")
+  expect_type(conf, "double")
+  expect_length(conf, length(res))
+})

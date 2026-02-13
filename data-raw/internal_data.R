@@ -25,6 +25,7 @@ concrete_comps <- glydb_data |>
   summarise(
     species = combine_terms(species),
     glycan_type = combine_terms(glycan_type),
+    confidence = max(confidence),
     .by = glycan_composition
   )
 
@@ -33,17 +34,19 @@ generic_comps <- glydb_data |>
   summarise(
     species = combine_terms(species),
     glycan_type = combine_terms(glycan_type),
+    confidence = max(confidence),
     .by = glycan_composition
   )
 
 intact_strucs <- glydb_data |>
-  select(glycan_structure, species, glycan_type)
+  select(glycan_structure, species, glycan_type, confidence)
 
 topological_strucs <- glydb_data |>
   mutate(glycan_structure = remove_linkages(glycan_structure)) |>
   summarise(
     species = combine_terms(species),
     glycan_type = combine_terms(glycan_type),
+    confidence = max(confidence),
     .by = glycan_structure
   )
 
@@ -55,6 +58,7 @@ basic_strucs <- glydb_data |>
   summarise(
     species = combine_terms(species),
     glycan_type = combine_terms(glycan_type),
+    confidence = max(confidence),
     .by = glycan_structure
   )
 

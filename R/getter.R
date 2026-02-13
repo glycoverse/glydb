@@ -39,6 +39,16 @@ glydb_species <- function() {
 #'
 #' Get unique glycan compositions from [glydb_data] as a [glyrepr::glycan_composition()] vector.
 #'
+#' @section Confidence:
+#' The returned value has a `confidence` attribute:
+#' a numeric vector of the same length as the result containing log-transformed
+#' citation counts for each glycan in `glydb_data`.
+#' When multiple glycans are aggregated into lower-resolution structures or compositions,
+#' the maximum confidence score is retained.
+#'
+#' Note that the `confidence` attribute will be lost after any vector operation like subsetting.
+#' Therefore, if used with `glyanno`, the returned value should not be modified manually.
+#'
 #' @param mono_type Either "generic" or "concrete". Default is "concrete".
 #'   See [glyrepr::get_mono_type()] for details.
 #' @param species A string of specie names. See [glydb_species()] for available specie names.
@@ -51,7 +61,8 @@ glydb_species <- function() {
 #'   count for that monosaccharide. Monosaccharides not specified will be excluded (count = 0).
 #'   Use `NULL` for no filtering. See examples for usage.
 #'
-#' @returns A [glyrepr::glycan_composition()] vector.
+#' @returns A [glyrepr::glycan_composition()] vector, with a `confidence` attribute as a
+#'   numeric vector with the same length.
 #' @examples
 #' glydb_compositions()
 #' glydb_compositions(mono_type = "generic")
@@ -90,10 +101,14 @@ glydb_compositions <- function(
     data <- data[right_type, ]
   }
 
-  result <- unique(data$glycan_composition)
+  result <- data$glycan_composition
 
   if (!is.null(mono_range)) {
-    result <- filter_by_mono_range(result, mono_range, mono_type)
+    mask <- filter_by_mono_range(result, mono_range, mono_type)
+    result <- result[mask]
+    attr(result, "confidence") <- data$confidence[mask]
+  } else {
+    attr(result, "confidence") <- data$confidence
   }
 
   result
@@ -115,7 +130,10 @@ glydb_compositions <- function(
 #'   count for that monosaccharide. Monosaccharides not specified will be excluded (count = 0).
 #'   Use `NULL` for no filtering. See examples for usage.
 #'
-#' @returns A [glyrepr::glycan_structure()] vector.
+#' @inheritSection glydb_compositions Confidence
+#'
+#' @returns A [glyrepr::glycan_structure()] vector, with a `confidence` attribute as a
+#'   numeric vector with the same length.
 #' @examples
 #' glydb_structures()
 #' glydb_structures(structure_level = "topological")
@@ -161,10 +179,14 @@ glydb_structures <- function(
     data <- data[right_type, ]
   }
 
-  result <- unique(data$glycan_structure)
+  result <- data$glycan_structure
 
   if (!is.null(mono_range)) {
-    result <- filter_by_mono_range(result, mono_range, mono_type)
+    mask <- filter_by_mono_range(result, mono_range, mono_type)
+    result <- result[mask]
+    attr(result, "confidence") <- data$confidence[mask]
+  } else {
+    attr(result, "confidence") <- data$confidence
   }
 
   result

@@ -156,7 +156,7 @@ validate_mono_range <- function(mono_range, mono_type) {
 #' @param x A glycan composition or structure vector
 #' @param mono_range A validated named list
 #' @param mono_type Monosaccharide type of `x`
-#' @returns Filtered vector of same type as input
+#' @returns A logical vector with the same length as `x`, indicating whether to keep
 #' @noRd
 filter_by_mono_range <- function(x, mono_range, mono_type) {
   if (glyrepr::is_glycan_structure(x)) {
@@ -195,5 +195,5 @@ filter_by_mono_range <- function(x, mono_range, mono_type) {
     ~ length(setdiff(.x, names(mono_range))) == 0
   )
 
-  x[check_result_1 & check_result_2]
+  check_result_1 & check_result_2
 }

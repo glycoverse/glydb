@@ -1,5 +1,11 @@
 # glydb (development version)
 
+## New features
+
+* Add a `mono_range` parameter to `glydb_compositions()` and `glydb_structures()`.
+* `glydb_compositions()` and `glydb_structures()` now return a vector with a `confidence` attribute, readily used by the `glyanno` package to rank the results.
+* `glydb_data` now has new `confidence` column.
+
 # glydb 0.3.3
 
 ## Minor improvements and bug fixes

@@ -7,6 +7,10 @@ ecosystem. Only fully defined glycan structures are included.
 
 ## Installation
 
+The glydb package is not a core glycoverse package. You need to install
+it individually even if you have installed the meta-package
+[glycoverse](https://github.com/glycoverse/glycoverse).
+
 You can install the latest release of glydb from
 [r-universe](https://glycoverse.r-universe.dev/glydb) (**recommended**):
 
@@ -27,6 +31,11 @@ Or install the development version (NOT recommended):
 ``` r
 pak::pkg_install("glycoverse/glydb")
 ```
+
+**Note:** Tips and troubleshooting for the meta-package
+[glycoverse](https://github.com/glycoverse/glycoverse) are also
+applicable here: [Installation of
+glycoverse](https://github.com/glycoverse/glycoverse#installation).
 
 ## Role in `glycoverse`
 

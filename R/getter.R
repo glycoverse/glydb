@@ -95,7 +95,9 @@ glydb_compositions <- function(
   if (!is.null(mono_range)) {
     mask <- filter_by_mono_range(result, mono_range, mono_type)
     result <- result[mask]
+    attr(result, "confidence") <- data$confidence[mask]
   }
+  attr(result, "confidence") <- data$confidence
 
   result
 }
@@ -167,7 +169,9 @@ glydb_structures <- function(
   if (!is.null(mono_range)) {
     mask <- filter_by_mono_range(result, mono_range, mono_type)
     result <- result[mask]
+    attr(result, "confidence") <- data$confidence[mask]
   }
+  attr(result, "confidence") <- data$confidence
 
   result
 }

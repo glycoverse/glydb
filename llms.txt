@@ -28,29 +28,35 @@ Or install the development version (NOT recommended):
 pak::pkg_install("glycoverse/glydb")
 ```
 
+## Role in `glycoverse`
+
+The main purpose of `glydb` is to provide “databases” for the
+[glyanno](https://github.com/glycoverse/glyanno) package. It is also
+useful for users who want to systematically analyze glycan structures in
+the database.
+
 ## Example
 
 Get all data from `glydb`:
 
 ``` r
 library(glydb)
-#> 载入需要的程序包：glyrepr
-#> Warning: 程序包'glyrepr'是用R版本4.5.2 来建造的
 glydb_data
-#> # A tibble: 7,074 × 5
-#>    glytoucan_ac glycan_structure          glycan_composition species glycan_type
-#>    <chr>        <struct>                  <comp>             <chr>   <fct>      
-#>  1 G00024MO     Glc(b1-3)Glc(b1-3)Glc(b1- Glc(3)             Saccha… O-Glc      
-#>  2 G00025MO     Glc(b1-4)Glc(b1-4)Glc(b1… Glc(4)             <NA>    O-Glc      
-#>  3 G00027MO     Man(a1-3)[Man(a1-6)]Man(… Man(3)GlcNAc(1)    Mus mu… O-GlcNAc   
-#>  4 G00030VN     Fuc(a1-2)[GalNAc(a1-3)]G… Gal(1)GlcNAc(1)Ga… Bos ta… O-GalNAc   
-#>  5 G00031MO     Gal(b1-3)GalNAc(a1-       Gal(1)GalNAc(1)    Bos ta… O-GalNAc   
-#>  6 G00033MO     Gal(b1-3)[GlcNAc(b1-6)]G… Gal(1)GlcNAc(1)Ga… Bos ta… O-GalNAc   
-#>  7 G00035MO     GlcNAc(b1-3)GalNAc(a1-    GlcNAc(1)GalNAc(1) Bos ta… O-GalNAc   
-#>  8 G00037MO     GlcNAc(b1-3)[GlcNAc(b1-6… GlcNAc(2)GalNAc(1) Bos ta… O-GalNAc   
-#>  9 G00039MO     GalNAc(a1-3)GalNAc(a1-    GalNAc(2)          Bos ta… O-GalNAc   
-#> 10 G00041MO     GlcNAc(b1-6)GalNAc(a1-    GlcNAc(1)GalNAc(1) Bos ta… O-GalNAc   
+#> # A tibble: 7,074 × 6
+#>    glytoucan_ac glycan_structure           glycan_composition species confidence
+#>    <chr>        <struct>                   <comp>             <chr>        <dbl>
+#>  1 G00024MO     Glc(b1-3)Glc(b1-3)Glc(b1-  Glc(3)             Saccha…      -1   
+#>  2 G00025MO     Glc(b1-4)Glc(b1-4)Glc(b1-… Glc(4)             <NA>         -1   
+#>  3 G00027MO     Man(a1-3)[Man(a1-6)]Man(b… Man(3)GlcNAc(1)    Mus mu…       0   
+#>  4 G00030VN     Fuc(a1-2)[GalNAc(a1-3)]Ga… Gal(1)GlcNAc(1)Ga… Bos ta…       0   
+#>  5 G00031MO     Gal(b1-3)GalNAc(a1-        Gal(1)GalNAc(1)    Bos ta…       5.16
+#>  6 G00033MO     Gal(b1-3)[GlcNAc(b1-6)]Ga… Gal(1)GlcNAc(1)Ga… Bos ta…       3.33
+#>  7 G00035MO     GlcNAc(b1-3)GalNAc(a1-     GlcNAc(1)GalNAc(1) Bos ta…       2.64
+#>  8 G00037MO     GlcNAc(b1-3)[GlcNAc(b1-6)… GlcNAc(2)GalNAc(1) Bos ta…       1.10
+#>  9 G00039MO     GalNAc(a1-3)GalNAc(a1-     GalNAc(2)          Bos ta…       1.61
+#> 10 G00041MO     GlcNAc(b1-6)GalNAc(a1-     GlcNAc(1)GalNAc(1) Bos ta…       1.10
 #> # ℹ 7,064 more rows
+#> # ℹ 1 more variable: glycan_type <fct>
 ```
 
 Or use the getter functions to get specific data:

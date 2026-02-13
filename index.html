@@ -71,28 +71,33 @@
 <code class="sourceCode R"><span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pkg_install.html" class="external-link">pkg_install</a></span><span class="op">(</span><span class="st">"glycoverse/glydb"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
+<h2 id="role-in-glycoverse">Role in <code>glycoverse</code>
+<a class="anchor" aria-label="anchor" href="#role-in-glycoverse"></a>
+</h2>
+<p>The main purpose of <code>glydb</code> is to provide “databases” for the <a href="https://github.com/glycoverse/glyanno" class="external-link">glyanno</a> package. It is also useful for users who want to systematically analyze glycan structures in the database.</p>
+</div>
+<div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
 <p>Get all data from <code>glydb</code>:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://glycoverse.github.io/glydb/">glydb</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; 载入需要的程序包：glyrepr</span></span>
-<span><span class="co">#&gt; Warning: 程序包'glyrepr'是用R版本4.5.2 来建造的</span></span>
 <span><span class="va">glydb_data</span></span>
-<span><span class="co">#&gt; # A tibble: 7,074 × 5</span></span>
-<span><span class="co">#&gt;    glytoucan_ac glycan_structure          glycan_composition species glycan_type</span></span>
-<span><span class="co">#&gt;    &lt;chr&gt;        &lt;struct&gt;                  &lt;comp&gt;             &lt;chr&gt;   &lt;fct&gt;      </span></span>
-<span><span class="co">#&gt;  1 G00024MO     Glc(b1-3)Glc(b1-3)Glc(b1- Glc(3)             Saccha… O-Glc      </span></span>
-<span><span class="co">#&gt;  2 G00025MO     Glc(b1-4)Glc(b1-4)Glc(b1… Glc(4)             &lt;NA&gt;    O-Glc      </span></span>
-<span><span class="co">#&gt;  3 G00027MO     Man(a1-3)[Man(a1-6)]Man(… Man(3)GlcNAc(1)    Mus mu… O-GlcNAc   </span></span>
-<span><span class="co">#&gt;  4 G00030VN     Fuc(a1-2)[GalNAc(a1-3)]G… Gal(1)GlcNAc(1)Ga… Bos ta… O-GalNAc   </span></span>
-<span><span class="co">#&gt;  5 G00031MO     Gal(b1-3)GalNAc(a1-       Gal(1)GalNAc(1)    Bos ta… O-GalNAc   </span></span>
-<span><span class="co">#&gt;  6 G00033MO     Gal(b1-3)[GlcNAc(b1-6)]G… Gal(1)GlcNAc(1)Ga… Bos ta… O-GalNAc   </span></span>
-<span><span class="co">#&gt;  7 G00035MO     GlcNAc(b1-3)GalNAc(a1-    GlcNAc(1)GalNAc(1) Bos ta… O-GalNAc   </span></span>
-<span><span class="co">#&gt;  8 G00037MO     GlcNAc(b1-3)[GlcNAc(b1-6… GlcNAc(2)GalNAc(1) Bos ta… O-GalNAc   </span></span>
-<span><span class="co">#&gt;  9 G00039MO     GalNAc(a1-3)GalNAc(a1-    GalNAc(2)          Bos ta… O-GalNAc   </span></span>
-<span><span class="co">#&gt; 10 G00041MO     GlcNAc(b1-6)GalNAc(a1-    GlcNAc(1)GalNAc(1) Bos ta… O-GalNAc   </span></span>
-<span><span class="co">#&gt; # ℹ 7,064 more rows</span></span></code></pre></div>
+<span><span class="co">#&gt; # A tibble: 7,074 × 6</span></span>
+<span><span class="co">#&gt;    glytoucan_ac glycan_structure           glycan_composition species confidence</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;        &lt;struct&gt;                   &lt;comp&gt;             &lt;chr&gt;        &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt;  1 G00024MO     Glc(b1-3)Glc(b1-3)Glc(b1-  Glc(3)             Saccha…      -1   </span></span>
+<span><span class="co">#&gt;  2 G00025MO     Glc(b1-4)Glc(b1-4)Glc(b1-… Glc(4)             &lt;NA&gt;         -1   </span></span>
+<span><span class="co">#&gt;  3 G00027MO     Man(a1-3)[Man(a1-6)]Man(b… Man(3)GlcNAc(1)    Mus mu…       0   </span></span>
+<span><span class="co">#&gt;  4 G00030VN     Fuc(a1-2)[GalNAc(a1-3)]Ga… Gal(1)GlcNAc(1)Ga… Bos ta…       0   </span></span>
+<span><span class="co">#&gt;  5 G00031MO     Gal(b1-3)GalNAc(a1-        Gal(1)GalNAc(1)    Bos ta…       5.16</span></span>
+<span><span class="co">#&gt;  6 G00033MO     Gal(b1-3)[GlcNAc(b1-6)]Ga… Gal(1)GlcNAc(1)Ga… Bos ta…       3.33</span></span>
+<span><span class="co">#&gt;  7 G00035MO     GlcNAc(b1-3)GalNAc(a1-     GlcNAc(1)GalNAc(1) Bos ta…       2.64</span></span>
+<span><span class="co">#&gt;  8 G00037MO     GlcNAc(b1-3)[GlcNAc(b1-6)… GlcNAc(2)GalNAc(1) Bos ta…       1.10</span></span>
+<span><span class="co">#&gt;  9 G00039MO     GalNAc(a1-3)GalNAc(a1-     GalNAc(2)          Bos ta…       1.61</span></span>
+<span><span class="co">#&gt; 10 G00041MO     GlcNAc(b1-6)GalNAc(a1-     GlcNAc(1)GalNAc(1) Bos ta…       1.10</span></span>
+<span><span class="co">#&gt; # ℹ 7,064 more rows</span></span>
+<span><span class="co">#&gt; # ℹ 1 more variable: glycan_type &lt;fct&gt;</span></span></code></pre></div>
 <p>Or use the getter functions to get specific data:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/glydb_compositions.html">glydb_compositions</a></span><span class="op">(</span>mono_type <span class="op">=</span> <span class="st">"generic"</span><span class="op">)</span></span>

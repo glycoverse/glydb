@@ -2,6 +2,19 @@
 
 ## glydb (development version)
 
+### New features
+
+- Add a `mono_range` parameter to
+  [`glydb_compositions()`](https://glycoverse.github.io/glydb/reference/glydb_compositions.md)
+  and
+  [`glydb_structures()`](https://glycoverse.github.io/glydb/reference/glydb_structures.md).
+- [`glydb_compositions()`](https://glycoverse.github.io/glydb/reference/glydb_compositions.md)
+  and
+  [`glydb_structures()`](https://glycoverse.github.io/glydb/reference/glydb_structures.md)
+  now return a vector with a `confidence` attribute, readily used by the
+  `glyanno` package to rank the results.
+- `glydb_data` now has new `confidence` column.
+
 ## glydb 0.3.3
 
 ### Minor improvements and bug fixes

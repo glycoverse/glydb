@@ -74,7 +74,20 @@ Use <code>NULL</code> for no filtering. See examples for usage.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A <code><a href="https://glycoverse.github.io/glyrepr/reference/glycan_structure.html" class="external-link">glyrepr::glycan_structure()</a></code> vector.</p>
+    <p>A <code><a href="https://glycoverse.github.io/glyrepr/reference/glycan_structure.html" class="external-link">glyrepr::glycan_structure()</a></code> vector, with a <code>confidence</code> attribute as a
+numeric vector with the same length.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="confidence">Confidence<a class="anchor" aria-label="anchor" href="#confidence"></a></h2>
+
+
+<p>The returned value has a <code>confidence</code> attribute:
+a numeric vector of the same length as the result containing log-transformed
+citation counts for each glycan in <code>glydb_data</code>.
+When multiple glycans are aggregated into lower-resolution structures or compositions,
+the maximum confidence score is retained.</p>
+<p>Note that the <code>confidence</code> attribute will be lost after any vector operation like subsetting.
+Therefore, if used with <code>glyanno</code>, the returned value should not be modified manually.</p>
     </div>
 
     <div class="section level2">

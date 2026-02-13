@@ -50,7 +50,20 @@ glydb_compositions(
 
 A
 [`glyrepr::glycan_composition()`](https://glycoverse.github.io/glyrepr/reference/glycan_composition.html)
-vector.
+vector, with a `confidence` attribute as a numeric vector with the same
+length.
+
+## Confidence
+
+The returned value has a `confidence` attribute: a numeric vector of the
+same length as the result containing log-transformed citation counts for
+each glycan in `glydb_data`. When multiple glycans are aggregated into
+lower-resolution structures or compositions, the maximum confidence
+score is retained.
+
+Note that the `confidence` attribute will be lost after any vector
+operation like subsetting. Therefore, if used with `glyanno`, the
+returned value should not be modified manually.
 
 ## Examples
 

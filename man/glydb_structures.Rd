@@ -28,11 +28,24 @@ count for that monosaccharide. Monosaccharides not specified will be excluded (c
 Use \code{NULL} for no filtering. See examples for usage.}
 }
 \value{
-A \code{\link[glyrepr:glycan_structure]{glyrepr::glycan_structure()}} vector.
+A \code{\link[glyrepr:glycan_structure]{glyrepr::glycan_structure()}} vector, with a \code{confidence} attribute as a
+numeric vector with the same length.
 }
 \description{
 Get unique glycan structures from \link{glydb_data} as a \code{\link[glyrepr:glycan_structure]{glyrepr::glycan_structure()}} vector.
 }
+\section{Confidence}{
+
+The returned value has a \code{confidence} attribute:
+a numeric vector of the same length as the result containing log-transformed
+citation counts for each glycan in \code{glydb_data}.
+When multiple glycans are aggregated into lower-resolution structures or compositions,
+the maximum confidence score is retained.
+
+Note that the \code{confidence} attribute will be lost after any vector operation like subsetting.
+Therefore, if used with \code{glyanno}, the returned value should not be modified manually.
+}
+
 \examples{
 glydb_structures()
 glydb_structures(structure_level = "topological")

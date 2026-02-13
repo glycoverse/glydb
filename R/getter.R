@@ -107,8 +107,9 @@ glydb_compositions <- function(
     mask <- filter_by_mono_range(result, mono_range, mono_type)
     result <- result[mask]
     attr(result, "confidence") <- data$confidence[mask]
+  } else {
+    attr(result, "confidence") <- data$confidence
   }
-  attr(result, "confidence") <- data$confidence
 
   result
 }

@@ -1,0 +1,118 @@
+# glydb
+
+The goal of glydb is to provide a comprehensive database of glycan
+structures, including common glycan structures and their modifications.
+The database is updated periodically and is used by the glycoverse
+ecosystem. Only fully defined glycan structures are included.
+
+## Installation
+
+The glydb package is not a core glycoverse package. You need to install
+it individually even if you have installed the meta-package
+[glycoverse](https://github.com/glycoverse/glycoverse).
+
+You can install the latest release of glydb from
+[r-universe](https://glycoverse.r-universe.dev/glydb) (**recommended**):
+
+``` r
+# install.packages("pak")
+pak::repo_add(glycoverse = "https://glycoverse.r-universe.dev")
+pak::pkg_install("glydb")
+```
+
+Or from [GitHub](https://github.com/glycoverse/glydb):
+
+``` r
+pak::pkg_install("glycoverse/glydb@*release")
+```
+
+Or install the development version (NOT recommended):
+
+``` r
+pak::pkg_install("glycoverse/glydb")
+```
+
+**Note:** Tips and troubleshooting for the meta-package
+[glycoverse](https://github.com/glycoverse/glycoverse) are also
+applicable here: [Installation of
+glycoverse](https://github.com/glycoverse/glycoverse#installation).
+
+## Role in `glycoverse`
+
+The main purpose of `glydb` is to provide “databases” for the
+[glyanno](https://github.com/glycoverse/glyanno) package. It is also
+useful for users who want to systematically analyze glycan structures in
+the database.
+
+## Example
+
+Get all data from `glydb`:
+
+``` r
+library(glydb)
+glydb_data
+#> # A tibble: 7,074 × 6
+#>    glytoucan_ac glycan_structure           glycan_composition species confidence
+#>    <chr>        <struct>                   <comp>             <chr>        <dbl>
+#>  1 G00024MO     Glc(b1-3)Glc(b1-3)Glc(b1-  Glc(3)             Saccha…      -1   
+#>  2 G00025MO     Glc(b1-4)Glc(b1-4)Glc(b1-… Glc(4)             <NA>         -1   
+#>  3 G00027MO     Man(a1-3)[Man(a1-6)]Man(b… Man(3)GlcNAc(1)    Mus mu…       0   
+#>  4 G00030VN     Fuc(a1-2)[GalNAc(a1-3)]Ga… Gal(1)GlcNAc(1)Ga… Bos ta…       0   
+#>  5 G00031MO     Gal(b1-3)GalNAc(a1-        Gal(1)GalNAc(1)    Bos ta…       5.16
+#>  6 G00033MO     Gal(b1-3)[GlcNAc(b1-6)]Ga… Gal(1)GlcNAc(1)Ga… Bos ta…       3.33
+#>  7 G00035MO     GlcNAc(b1-3)GalNAc(a1-     GlcNAc(1)GalNAc(1) Bos ta…       2.64
+#>  8 G00037MO     GlcNAc(b1-3)[GlcNAc(b1-6)… GlcNAc(2)GalNAc(1) Bos ta…       1.10
+#>  9 G00039MO     GalNAc(a1-3)GalNAc(a1-     GalNAc(2)          Bos ta…       1.61
+#> 10 G00041MO     GlcNAc(b1-6)GalNAc(a1-     GlcNAc(1)GalNAc(1) Bos ta…       1.10
+#> # ℹ 7,064 more rows
+#> # ℹ 1 more variable: glycan_type <fct>
+```
+
+Or use the getter functions to get specific data:
+
+``` r
+glydb_compositions(mono_type = "generic")
+#> <glycan_composition[652]>
+#> [1] Hex(3)
+#> [2] Hex(4)
+#> [3] Hex(3)HexNAc(1)
+#> [4] Hex(1)HexNAc(3)dHex(1)NeuGc(1)
+#> [5] Hex(1)HexNAc(1)
+#> [6] Hex(1)HexNAc(2)
+#> [7] HexNAc(2)
+#> [8] HexNAc(3)
+#> [9] Hex(1)HexNAc(1)dHex(2)
+#> [10] Hex(3)HexNAc(1)dHex(1)
+#> ... (642 more not shown)
+```
+
+``` r
+glydb_structures(structure_level = "topological", species = "Homo sapiens", glycan_type = "N")
+#> <glycan_structure[289]>
+#> [1] GlcNAc(??-?)[GlcNAc(??-?)]Man(??-?)[GlcNAc(??-?)[GlcNAc(??-?)]Man(??-?)]Man(??-?)GlcNAc(??-?)[Fuc(??-?)]GlcNAc(??-
+#> [2] Gal(??-?)[Fuc(??-?)]GlcNAc(??-?)Man(??-?)Man(??-?)GlcNAc(??-?)[Fuc(??-?)]GlcNAc(??-
+#> [3] Man(??-?)Man(??-?)Man(??-?)[Man(??-?)Man(??-?)]Man(??-?)GlcNAc(??-?)GlcNAc(??-
+#> [4] Man(??-?)Man(??-?)GlcNAc(??-?)[Fuc(??-?)]GlcNAc(??-
+#> [5] Neu5Ac(??-?)Gal(??-?)GlcNAc(??-?)[Neu5Ac(??-?)Gal(??-?)GlcNAc(??-?)]Man(??-?)[Gal(??-?)GlcNAc(??-?)Man(??-?)]Man(??-?)GlcNAc(??-?)GlcNAc(??-
+#> [6] GlcNAc(??-?)Man(??-?)Man(??-?)GlcNAc(??-?)GlcNAc(??-
+#> [7] GlcNAc(??-?)[GlcNAc(??-?)]Man(??-?)[GlcNAc(??-?)[GlcNAc(??-?)]Man(??-?)][GlcNAc(??-?)]Man(??-?)GlcNAc(??-?)[Fuc(??-?)]GlcNAc(??-
+#> [8] Neu5Ac(??-?)Gal(??-?)GlcNAc(??-?)Gal(??-?)GlcNAc(??-?)[Neu5Ac(??-?)Gal(??-?)GlcNAc(??-?)]Man(??-?)[Neu5Ac(??-?)Gal(??-?)GlcNAc(??-?)[Neu5Ac(??-?)Gal(??-?)GlcNAc(??-?)]Man(??-?)]Man(??-?)GlcNAc(??-?)[Fuc(??-?)]GlcNAc(??-
+#> [9] Man(??-?)Man(??-?)[Man(??-?)]Man(??-?)GlcNAc(??-?)GlcNAc(??-
+#> [10] Neu5Ac(??-?)Gal(??-?)GlcNAc(??-?)Man(??-?)[Neu5Ac(??-?)Gal(??-?)GlcNAc(??-?)[Neu5Ac(??-?)Gal(??-?)GlcNAc(??-?)]Man(??-?)]Man(??-?)GlcNAc(??-?)GlcNAc(??-
+#> ... (279 more not shown)
+#> # Unique structures: 289
+```
+
+# Package index
+
+## All functions
+
+- [`glydb_compositions()`](https://glycoverse.github.io/glydb/dev/reference/glydb_compositions.md)
+  : Get Compositions From Glydb Data
+- [`glydb_data`](https://glycoverse.github.io/glydb/dev/reference/glydb_data.md)
+  : Fully Determined GlyTouCan Glycan Data
+- [`glydb_species()`](https://glycoverse.github.io/glydb/dev/reference/glydb_species.md)
+  : Get Supported Species From Glydb Data
+- [`glydb_structures()`](https://glycoverse.github.io/glydb/dev/reference/glydb_structures.md)
+  : Get Structures From Glydb Data
+

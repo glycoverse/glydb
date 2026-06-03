@@ -3,4 +3,5 @@
 export(glydb_compositions)
 export(glydb_species)
 export(glydb_structures)
+export(glytoucan_to_struc)
 import(glyrepr)

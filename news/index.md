@@ -1,5 +1,18 @@
 # Changelog
 
+## glydb 0.5.0
+
+### New features
+
+- Add
+  [`glytoucan_to_struc()`](https://glycoverse.github.io/glydb/reference/glytoucan_to_struc.md)
+  to fetch GlyTouCan accessions from the GlyGen API and parse returned
+  IUPAC strings into glycan structures (#7).
+
+### Minor improvements and bug fixes
+
+- Update internal data to use the GlyTouCan v2.11.1 release.
+
 ## glydb 0.4.1
 
 ### Minor improvements and bug fixes

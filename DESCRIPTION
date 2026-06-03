@@ -25,6 +25,8 @@ LazyData: true
 Imports:
     checkmate,
     cli,
+    glyparse,
+    httr2,
     purrr,
     stringr,
     vctrs

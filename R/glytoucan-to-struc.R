@@ -25,7 +25,7 @@ glytoucan_to_struc <- function(glytoucan_ac) {
   if (any(failed)) {
     failed_accessions <- glytoucan_ac[failed]
     cli::cli_warn(c(
-      "Failed to parse {sum(failed)} GlyTouCan accession{?s}.",
+      "Failed to fetch or parse {sum(failed)} GlyTouCan accession{?s}.",
       "x" = "Failed accession{?s}: {paste(failed_accessions, collapse = ', ')}"
     ))
   }
@@ -121,10 +121,19 @@ glygen_glycan_detail_body <- function(response) {
   }
 
   if (httr2::resp_is_error(response)) {
-    cli::cli_abort("GlyGen returned HTTP {httr2::resp_status(response)}.")
+    return(errorCondition(
+      message = paste0(
+        "GlyGen returned HTTP ",
+        httr2::resp_status(response),
+        "."
+      )
+    ))
   }
 
-  httr2::resp_body_json(response, simplifyVector = TRUE)
+  tryCatch(
+    httr2::resp_body_json(response, simplifyVector = TRUE),
+    error = function(error) error
+  )
 }
 
 #' Parse a GlyGen IUPAC string

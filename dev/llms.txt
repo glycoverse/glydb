@@ -15,6 +15,7 @@ You can install the latest release of glydb from
 [r-universe](https://glycoverse.r-universe.dev/glydb) (**recommended**):
 
 ``` r
+
 # install.packages("pak")
 pak::repo_add(glycoverse = "https://glycoverse.r-universe.dev")
 pak::pkg_install("glydb")
@@ -23,12 +24,14 @@ pak::pkg_install("glydb")
 Or from [GitHub](https://github.com/glycoverse/glydb):
 
 ``` r
+
 pak::pkg_install("glycoverse/glydb@*release")
 ```
 
 Or install the development version (NOT recommended):
 
 ``` r
+
 pak::pkg_install("glycoverse/glydb")
 ```
 
@@ -49,6 +52,7 @@ the database.
 Get all data from `glydb`:
 
 ``` r
+
 library(glydb)
 #> 载入需要的程序包：glyrepr
 #> Warning: 程序包'glyrepr'是用R版本4.5.2 来建造的
@@ -73,6 +77,7 @@ glydb_data
 Or use the getter functions to get specific data:
 
 ``` r
+
 glydb_compositions(mono_type = "generic")
 #> <glycan_composition[652]>
 #> [1] Hex(3)
@@ -89,6 +94,7 @@ glydb_compositions(mono_type = "generic")
 ```
 
 ``` r
+
 glydb_structures(structure_level = "topological", species = "Homo sapiens", glycan_type = "N")
 #> <glycan_structure[289]>
 #> [1] GlcNAc(??-?)[GlcNAc(??-?)]Man(??-?)[GlcNAc(??-?)[GlcNAc(??-?)]Man(??-?)]Man(??-?)GlcNAc(??-?)[Fuc(??-?)]GlcNAc(??-

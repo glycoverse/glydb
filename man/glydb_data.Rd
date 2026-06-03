@@ -5,7 +5,7 @@
 \alias{glydb_data}
 \title{Fully Determined GlyTouCan Glycan Data}
 \format{
-A tibble with 7,074 rows and 5 variables:
+A tibble with 7,125 rows and 5 variables:
 \itemize{
 \item \code{glytoucan_ac}: GlyTouCan accession.
 \item \code{glycan_structure}: Glycan structure (glyrepr::glycan_structure()).
@@ -24,7 +24,7 @@ glydb_data
 A curated dataset of fully determined glycans from GlyTouCan.
 "Fully determined" means that all linkages, substituents, anomers,
 and monosaccharides are fully specified.
-The dataset is derived from the GlyTouCan v2.10.1 release,
-with 7,074 glycan structures currently available.
+The dataset is derived from the GlyTouCan v2.11.1 release,
+with 7,125 glycan structures currently available.
 }
 \keyword{datasets}

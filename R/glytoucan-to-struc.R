@@ -18,7 +18,8 @@ glytoucan_to_struc <- function(glytoucan_ac) {
     return(glyrepr::glycan_structure())
   }
 
-  results <- purrr::map(glytoucan_ac, glytoucan_to_struc_safely)
+  details <- glygen_glycan_details(glytoucan_ac)
+  results <- purrr::map(details, glytoucan_detail_to_struc_safely)
   failed <- purrr::map_lgl(results, "failed")
 
   if (any(failed)) {
@@ -33,16 +34,19 @@ glytoucan_to_struc <- function(glytoucan_ac) {
   vctrs::vec_c(!!!strucs)
 }
 
-#' Convert one GlyTouCan accession to a glycan structure
+#' Convert one GlyGen detail record to a glycan structure
 #'
-#' Fetch one GlyTouCan detail record from GlyGen and parse its `iupac` field.
+#' Parse the `iupac` field from one GlyGen detail record.
 #'
-#' @param glytoucan_ac A single GlyTouCan accession.
+#' @param detail A GlyGen detail record or request error.
 #'
 #' @returns A scalar [glyrepr::glycan_structure()] vector.
 #' @noRd
-glytoucan_to_struc_one <- function(glytoucan_ac) {
-  detail <- glygen_glycan_detail(glytoucan_ac)
+glytoucan_detail_to_struc <- function(detail) {
+  if (inherits(detail, "error")) {
+    stop(detail)
+  }
+
   iupac <- detail$iupac
 
   checkmate::assert_string(iupac, min.chars = 1)
@@ -51,37 +55,74 @@ glytoucan_to_struc_one <- function(glytoucan_ac) {
 
 #' Convert one GlyTouCan accession without raising errors
 #'
-#' Wrap `glytoucan_to_struc_one()` so vector conversion can retain failed
+#' Wrap `glytoucan_detail_to_struc()` so vector conversion can retain failed
 #' positions as missing glycan structures.
 #'
-#' @param glytoucan_ac A single GlyTouCan accession.
+#' @param detail A GlyGen detail record or request error.
 #'
 #' @returns A list with `struc` and `failed` fields.
 #' @noRd
-glytoucan_to_struc_safely <- function(glytoucan_ac) {
+glytoucan_detail_to_struc_safely <- function(detail) {
   tryCatch(
-    list(struc = glytoucan_to_struc_one(glytoucan_ac), failed = FALSE),
+    list(struc = glytoucan_detail_to_struc(detail), failed = FALSE),
     error = function(error) {
       list(struc = glyrepr::glycan_structure(NA), failed = TRUE)
     }
   )
 }
 
-#' Fetch a GlyGen glycan detail record
+#' Fetch GlyGen glycan detail records
 #'
-#' Submit a POST request to the GlyGen glycan detail endpoint.
+#' Submit POST requests to the GlyGen glycan detail endpoint in parallel.
+#'
+#' @param glytoucan_ac A character vector of GlyTouCan accessions.
+#'
+#' @returns A list of parsed GlyGen JSON responses or request errors.
+#' @noRd
+glygen_glycan_details <- function(glytoucan_ac) {
+  requests <- purrr::map(glytoucan_ac, glygen_glycan_detail_request)
+  responses <- httr2::req_perform_parallel(
+    requests,
+    on_error = "return",
+    progress = FALSE
+  )
+
+  purrr::map(responses, glygen_glycan_detail_body)
+}
+
+#' Build a GlyGen glycan detail request
+#'
+#' Create one POST request for the GlyGen glycan detail endpoint.
 #'
 #' @param glytoucan_ac A single GlyTouCan accession.
 #'
-#' @returns A list parsed from the GlyGen JSON response.
+#' @returns An [httr2::request()] object.
 #' @noRd
-glygen_glycan_detail <- function(glytoucan_ac) {
+glygen_glycan_detail_request <- function(glytoucan_ac) {
   url <- paste0("https://api.glygen.org/glycan/detail/", glytoucan_ac, "/")
 
   httr2::request(url) |>
-    httr2::req_method("POST") |>
-    httr2::req_perform() |>
-    httr2::resp_body_json(simplifyVector = TRUE)
+    httr2::req_method("POST")
+}
+
+#' Parse a GlyGen glycan detail response
+#'
+#' Parse one response body, preserving request errors for downstream handling.
+#'
+#' @param response An [httr2::response()] object or request error.
+#'
+#' @returns A parsed GlyGen JSON response or request error.
+#' @noRd
+glygen_glycan_detail_body <- function(response) {
+  if (inherits(response, "error")) {
+    return(response)
+  }
+
+  if (httr2::resp_is_error(response)) {
+    cli::cli_abort("GlyGen returned HTTP {httr2::resp_status(response)}.")
+  }
+
+  httr2::resp_body_json(response, simplifyVector = TRUE)
 }
 
 #' Parse a GlyGen IUPAC string

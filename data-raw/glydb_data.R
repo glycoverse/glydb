@@ -9,7 +9,12 @@ citations <- read_csv("data-raw/glycan_citations_glytoucan_v2_11_1.csv")
 
 iupac_prepared <- iupac |>
   semi_join(accessions, by = "glytoucan_ac") |>
-  mutate(glycan_structure = parse_iupac_condensed(sequence_iupac_condensed, on_failure = "na")) |>
+  mutate(
+    glycan_structure = parse_iupac_condensed(
+      sequence_iupac_condensed,
+      on_failure = "na"
+    )
+  ) |>
   filter(!is.na(glycan_structure)) |>
   mutate(glycan_composition = as_glycan_composition(glycan_structure)) |>
   select(glytoucan_ac, glycan_structure, glycan_composition)

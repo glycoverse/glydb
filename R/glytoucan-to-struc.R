@@ -102,7 +102,9 @@ glygen_glycan_detail_request <- function(glytoucan_ac) {
   url <- paste0("https://api.glygen.org/glycan/detail/", glytoucan_ac, "/")
 
   httr2::request(url) |>
-    httr2::req_method("POST")
+    httr2::req_method("POST") |>
+    httr2::req_throttle(capacity = 30) |>
+    httr2::req_retry(max_tries = 3)
 }
 
 #' Parse a GlyGen glycan detail response

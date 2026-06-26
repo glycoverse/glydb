@@ -1,10 +1,7 @@
-# Fully Determined GlyTouCan Glycan Data
+# GlyGen Glycan Data
 
-A curated dataset of fully determined glycans from GlyTouCan. "Fully
-determined" means that all linkages, substituents, anomers, and
-monosaccharides are fully specified. The dataset is derived from the
-GlyTouCan v2.11.1 release, with 7,125 glycan structures currently
-available.
+A curated dataset glycan structures from GlyGen Data v2.11.1, with
+19,436 glycan structures currently available.
 
 ## Usage
 
@@ -14,7 +11,7 @@ glydb_data
 
 ## Format
 
-A tibble with 7,125 rows and 5 variables:
+A tibble with 19,436 rows and 6 variables:
 
 - `glytoucan_ac`: GlyTouCan accession.
 
@@ -28,6 +25,8 @@ A tibble with 7,125 rows and 5 variables:
 
 - `glycan_type`: Glycan type, one of "N", "O-GalNAc", "O-GlcNAc",
   "O-Man", "O-Fuc", "O-Glc".
+
+- `confidence`: Confidence score used to rank glycans.
 
 ## Source
 

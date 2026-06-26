@@ -5,7 +5,7 @@
 - [`glydb_compositions()`](https://glycoverse.github.io/glydb/dev/reference/glydb_compositions.md)
   : Get Compositions From Glydb Data
 - [`glydb_data`](https://glycoverse.github.io/glydb/dev/reference/glydb_data.md)
-  : Fully Determined GlyTouCan Glycan Data
+  : GlyGen Glycan Data
 - [`glydb_species()`](https://glycoverse.github.io/glydb/dev/reference/glydb_species.md)
   : Get Supported Species From Glydb Data
 - [`glydb_structures()`](https://glycoverse.github.io/glydb/dev/reference/glydb_structures.md)

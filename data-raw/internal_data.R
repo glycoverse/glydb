@@ -38,11 +38,13 @@ generic_comps <- glydb_data |>
     .by = glycan_composition
   )
 
+fully_determined <- read_csv("data-raw/glycan_fully_determined_v2_11_1.csv")
 intact_strucs <- glydb_data |>
+  semi_join(fully_determined, by = join_by(glytoucan_ac)) |>
   select(glycan_structure, species, glycan_type, confidence)
 
 topological_strucs <- glydb_data |>
-  mutate(glycan_structure = remove_linkages(glycan_structure)) |>
+  mutate(glycan_structure = reduce_structure_level(glycan_structure, "topological")) |>
   summarise(
     species = combine_terms(species),
     glycan_type = combine_terms(glycan_type),
@@ -51,10 +53,7 @@ topological_strucs <- glydb_data |>
   )
 
 basic_strucs <- glydb_data |>
-  mutate(
-    glycan_structure = convert_to_generic(glycan_structure),
-    glycan_structure = remove_linkages(glycan_structure)
-  ) |>
+  mutate(glycan_structure = reduce_structure_level(glycan_structure, "basic")) |>
   summarise(
     species = combine_terms(species),
     glycan_type = combine_terms(glycan_type),

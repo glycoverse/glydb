@@ -44,7 +44,9 @@ intact_strucs <- glydb_data |>
   select(glycan_structure, species, glycan_type, confidence)
 
 topological_strucs <- glydb_data |>
-  mutate(glycan_structure = reduce_structure_level(glycan_structure, "topological")) |>
+  mutate(
+    glycan_structure = reduce_structure_level(glycan_structure, "topological")
+  ) |>
   summarise(
     species = combine_terms(species),
     glycan_type = combine_terms(glycan_type),
@@ -53,7 +55,9 @@ topological_strucs <- glydb_data |>
   )
 
 basic_strucs <- glydb_data |>
-  mutate(glycan_structure = reduce_structure_level(glycan_structure, "basic")) |>
+  mutate(
+    glycan_structure = reduce_structure_level(glycan_structure, "basic")
+  ) |>
   summarise(
     species = combine_terms(species),
     glycan_type = combine_terms(glycan_type),

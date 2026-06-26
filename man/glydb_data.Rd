@@ -25,16 +25,4 @@ glydb_data
 A curated dataset glycan structures from GlyGen Data v2.11.1,
 with 19,436 glycan structures currently available.
 }
-\section{Confidence}{
-
-The returned value has a \code{confidence} attribute:
-a numeric vector of the same length as the result containing log-transformed
-citation counts for each glycan in \code{glydb_data}.
-When multiple glycans are aggregated into lower-resolution structures or compositions,
-the maximum confidence score is retained.
-
-Note that the \code{confidence} attribute will be lost after any vector operation like subsetting.
-Therefore, if used with \code{glyanno}, the returned value should not be modified manually.
-}
-
 \keyword{datasets}

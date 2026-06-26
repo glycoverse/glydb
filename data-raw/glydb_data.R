@@ -2,13 +2,11 @@ library(tidyverse)
 library(glyparse)
 library(glyrepr)
 
-accessions <- read_csv("data-raw/glycan_fully_determined_v2_11_1.csv")
 iupac <- read_csv("data-raw/glycan_sequences_iupac_condensed_v2_11_1.csv")
 species <- read_csv("data-raw/glycan_species_v2_11_1.csv")
 citations <- read_csv("data-raw/glycan_citations_glytoucan_v2_11_1.csv")
 
 iupac_prepared <- iupac |>
-  semi_join(accessions, by = "glytoucan_ac") |>
   mutate(
     glycan_structure = parse_iupac_condensed(
       sequence_iupac_condensed,
@@ -31,12 +29,12 @@ confidence <- citations |>
 
 get_glycan_type <- function(glycan_structure) {
   motifs <- c(
-    "N" = "Man(b1-4)GlcNAc(b1-4)GlcNAc(b1-",
-    "O-GalNAc" = "GalNAc(a1-",
-    "O-GlcNAc" = "GlcNAc(b1-",
-    "O-Man" = "Man(a1-",
-    "O-Fuc" = "Fuc(a1-",
-    "O-Glc" = "Xyl(a1-3)Glc(b1-"
+    "N" = "Man(??-?)GlcNAc(??-?)GlcNAc(??-",
+    "O-GalNAc" = "GalNAc(??-",
+    "O-GlcNAc" = "GlcNAc(??-",
+    "O-Man" = "Man(??-",
+    "O-Fuc" = "Fuc(??-",
+    "O-Glc" = "Xyl(??-?)Glc(??-"
   )
   motif_mat <- glymotif::have_motifs(
     glycan_structure,

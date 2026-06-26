@@ -1,5 +1,9 @@
 # glydb (development version)
 
+## New features
+
+* Add more glycans. Now the package contains 19,436 glycan structures, including non-intact glycans from GlyGen. (#9)
+
 # glydb 0.5.0
 
 ## New features

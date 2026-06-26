@@ -22,6 +22,7 @@ Depends:
     R (>= 4.1),
     glyrepr (>= 0.10.0)
 LazyData: true
+LazyDataCompression: bzip2
 Imports:
     checkmate,
     cli,

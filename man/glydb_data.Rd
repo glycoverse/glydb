@@ -3,15 +3,16 @@
 \docType{data}
 \name{glydb_data}
 \alias{glydb_data}
-\title{Fully Determined GlyTouCan Glycan Data}
+\title{GlyGen Glycan Data}
 \format{
-A tibble with 7,125 rows and 5 variables:
+A tibble with 19,436 rows and 6 variables:
 \itemize{
 \item \code{glytoucan_ac}: GlyTouCan accession.
 \item \code{glycan_structure}: Glycan structure (glyrepr::glycan_structure()).
 \item \code{glycan_composition}: Glycan composition (glyrepr::glycan_composition()).
 \item \code{species}: Specie names, separated by semicolons. Unknown species are NAs.
 \item \code{glycan_type}: Glycan type, one of "N", "O-GalNAc", "O-GlcNAc", "O-Man", "O-Fuc", "O-Glc".
+\item \code{confidence}: Confidence score used to rank glycans.
 }
 }
 \source{
@@ -21,10 +22,7 @@ A tibble with 7,125 rows and 5 variables:
 glydb_data
 }
 \description{
-A curated dataset of fully determined glycans from GlyTouCan.
-"Fully determined" means that all linkages, substituents, anomers,
-and monosaccharides are fully specified.
-The dataset is derived from the GlyTouCan v2.11.1 release,
-with 7,125 glycan structures currently available.
+A curated dataset glycan structures from GlyGen Data v2.11.1,
+with 19,436 glycan structures currently available.
 }
 \keyword{datasets}

@@ -15,8 +15,9 @@ fetched or parsed are returned as \code{NA} values in their original positions,
 and a warning is emitted.
 }
 \description{
-Fetch GlyTouCan accessions from the GlyGen API and parse the returned IUPAC
-strings as \code{\link[glyrepr:glycan_structure]{glyrepr::glycan_structure()}} values.
+Look up GlyTouCan accessions from \link{glydb_data}, then fetch missing
+accessions from the GlyGen API and parse the returned IUPAC strings as
+\code{\link[glyrepr:glycan_structure]{glyrepr::glycan_structure()}} values.
 }
 \examples{
 \dontshow{if (interactive()) withAutoprint(\{ # examplesIf}

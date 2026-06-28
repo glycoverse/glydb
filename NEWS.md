@@ -3,6 +3,7 @@
 ## New features
 
 * Add more glycans. Now the package contains 19,436 glycan structures, including non-intact glycans from GlyGen. (#9)
+* `glytoucan_to_struc()` now looks up accessions from `glydb_data` first and only falls back to the online GlyGen API for missing accessions. (#10)
 
 # glydb 0.5.0
 

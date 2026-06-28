@@ -1,7 +1,8 @@
 #' Convert GlyTouCan Accessions to Glycan Structures
 #'
-#' Fetch GlyTouCan accessions from the GlyGen API and parse the returned IUPAC
-#' strings as [glyrepr::glycan_structure()] values.
+#' Look up GlyTouCan accessions from [glydb_data], then fetch missing
+#' accessions from the GlyGen API and parse the returned IUPAC strings as
+#' [glyrepr::glycan_structure()] values.
 #'
 #' @param glytoucan_ac A character vector of GlyTouCan accessions.
 #'
@@ -18,8 +19,14 @@ glytoucan_to_struc <- function(glytoucan_ac) {
     return(glyrepr::glycan_structure())
   }
 
-  details <- glygen_glycan_details(glytoucan_ac)
-  results <- purrr::map(details, glytoucan_detail_to_struc_safely)
+  results <- local_glytoucan_struc_results(glytoucan_ac)
+  missing <- purrr::map_lgl(results, is.null)
+
+  if (any(missing)) {
+    details <- glygen_glycan_details(glytoucan_ac[missing])
+    results[missing] <- purrr::map(details, glytoucan_detail_to_struc_safely)
+  }
+
   failed <- purrr::map_lgl(results, "failed")
 
   if (any(failed)) {
@@ -32,6 +39,28 @@ glytoucan_to_struc <- function(glytoucan_ac) {
 
   strucs <- purrr::map(results, "struc")
   vctrs::vec_c(!!!strucs)
+}
+
+#' Look up GlyTouCan accessions from glydb data
+#'
+#' Match GlyTouCan accessions to bundled `glydb_data` structures while
+#' preserving input order and unresolved positions.
+#'
+#' @param glytoucan_ac A character vector of GlyTouCan accessions.
+#'
+#' @returns A list of conversion result records or `NULL` for accessions that
+#'   are not available in `glydb_data`.
+#' @noRd
+local_glytoucan_struc_results <- function(glytoucan_ac) {
+  data_position <- match(glytoucan_ac, glydb_data$glytoucan_ac)
+
+  purrr::map(data_position, function(position) {
+    if (is.na(position)) {
+      return(NULL)
+    }
+
+    list(struc = glydb_data$glycan_structure[position], failed = FALSE)
+  })
 }
 
 #' Convert one GlyGen detail record to a glycan structure

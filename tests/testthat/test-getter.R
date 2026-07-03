@@ -38,6 +38,16 @@ test_that("glydb_structures filters by glycan_type", {
   expect_true(length(res_all) >= length(res))
 })
 
+test_that("getters filter by GlyGen classification classes", {
+  comps <- glydb_compositions(glycan_type = "HMO")
+  expect_s3_class(comps, "glyrepr_composition")
+  expect_true(length(comps) > 0)
+
+  structs <- glydb_structures(glycan_type = "GSL")
+  expect_s3_class(structs, "glyrepr_structure")
+  expect_true(length(structs) > 0)
+})
+
 test_that("glydb_compositions filters by mono_range", {
   # Get all compositions first
   all_comps <- glydb_compositions()

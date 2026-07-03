@@ -8,7 +8,8 @@
 #' - `glycan_structure`: Glycan structure (glyrepr::glycan_structure()).
 #' - `glycan_composition`: Glycan composition (glyrepr::glycan_composition()).
 #' - `species`: Specie names, separated by semicolons. Unknown species are NAs.
-#' - `glycan_type`: Glycan type, one of "N", "O-GalNAc", "O-GlcNAc", "O-Man", "O-Fuc", "O-Glc".
+#' - `glycan_type`: Glycan type, such as "HMO", "N", "GSL", "GAG", "O",
+#'   "O-GalNAc", "O-GlcNAc", "O-Man", "O-Fuc", "O-Glc", "GPI", or "C".
 #' - `confidence`: Confidence score used to rank glycans.
 #' @source <https://data.glygen.org>
 "glydb_data"

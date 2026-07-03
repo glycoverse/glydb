@@ -7,6 +7,29 @@ utils::globalVariables(c(
   "basic_strucs"
 ))
 
+#' Get supported glycan type labels
+#'
+#' Returns the glycan type labels accepted by glydb getter filters.
+#'
+#' @returns A character vector of glycan type labels.
+#' @noRd
+glycan_type_choices <- function() {
+  c(
+    "HMO",
+    "N",
+    "GSL",
+    "GAG",
+    "O",
+    "O-GalNAc",
+    "O-GlcNAc",
+    "O-Man",
+    "O-Fuc",
+    "O-Glc",
+    "GPI",
+    "C"
+  )
+}
+
 #' Get Supported Species From Glydb Data
 #'
 #' Get a character vector of supported species from [glydb_data].
@@ -54,7 +77,8 @@ glydb_species <- function() {
 #' @param species A string of specie names. See [glydb_species()] for available specie names.
 #'   Default is NULL, which means glycans from all species are included.
 #' @param glycan_type A string of glycan types.
-#'   Can be "N", "O-GalNAc", "O-GlcNAc", "O-Man", "O-Fuc", "O-Glc".
+#'   Can be "HMO", "N", "GSL", "GAG", "O", "O-GalNAc", "O-GlcNAc",
+#'   "O-Man", "O-Fuc", "O-Glc", "GPI", or "C".
 #'   Default is NULL, which means glycans of all types are included.
 #' @param mono_range A named list for filtering compositions by monosaccharide counts.
 #'   Each element should be an integer vector of length 2 specifying the minimum and maximum
@@ -81,7 +105,7 @@ glydb_compositions <- function(
   checkmate::assert_choice(species, glydb_species(), null.ok = TRUE)
   checkmate::assert_choice(
     glycan_type,
-    c("N", "O-GalNAc", "O-GlcNAc", "O-Man", "O-Fuc", "O-Glc"),
+    glycan_type_choices(),
     null.ok = TRUE
   )
   validate_mono_range(mono_range, mono_type)
@@ -123,7 +147,8 @@ glydb_compositions <- function(
 #' @param species A string of specie names. See [glydb_species()] for available specie names.
 #'   Default is NULL, which means glycans from all species are included.
 #' @param glycan_type A string of glycan types.
-#'   Can be "N", "O-GalNAc", "O-GlcNAc", "O-Man", "O-Fuc", "O-Glc".
+#'   Can be "HMO", "N", "GSL", "GAG", "O", "O-GalNAc", "O-GlcNAc",
+#'   "O-Man", "O-Fuc", "O-Glc", "GPI", or "C".
 #'   Default is NULL, which means glycans of all types are included.
 #' @param mono_range A named list for filtering structures by monosaccharide counts.
 #'   Each element should be an integer vector of length 2 specifying the minimum and maximum
@@ -153,7 +178,7 @@ glydb_structures <- function(
   checkmate::assert_choice(species, glydb_species(), null.ok = TRUE)
   checkmate::assert_choice(
     glycan_type,
-    c("N", "O-GalNAc", "O-GlcNAc", "O-Man", "O-Fuc", "O-Glc"),
+    glycan_type_choices(),
     null.ok = TRUE
   )
   mono_type <- ifelse(structure_level == "basic", "generic", "concrete")

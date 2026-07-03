@@ -30,6 +30,23 @@ glycan_type_choices <- function() {
   )
 }
 
+#' Match glycan type labels
+#'
+#' Matches one requested glycan type against semicolon-separated stored labels.
+#' The broad "O" type matches "O" and all specific O-linked subtypes.
+#'
+#' @param glycan_types A character vector of glycan type labels for one record.
+#' @param glycan_type A requested glycan type label.
+#' @returns A logical scalar.
+#' @noRd
+match_glycan_type <- function(glycan_types, glycan_type) {
+  if (identical(glycan_type, "O")) {
+    return(any(glycan_types == "O" | stringr::str_starts(glycan_types, "O-")))
+  }
+
+  glycan_type %in% glycan_types
+}
+
 #' Get Supported Species From Glydb Data
 #'
 #' Get a character vector of supported species from [glydb_data].
@@ -79,6 +96,8 @@ glydb_species <- function() {
 #' @param glycan_type A string of glycan types.
 #'   Can be "HMO", "N", "GSL", "GAG", "O", "O-GalNAc", "O-GlcNAc",
 #'   "O-Man", "O-Fuc", "O-Glc", "GPI", or "C".
+#'   When "O", all O-linked glycans are included.
+#'   Specific O-glycan types only include that subtype.
 #'   Default is NULL, which means glycans of all types are included.
 #' @param mono_range A named list for filtering compositions by monosaccharide counts.
 #'   Each element should be an integer vector of length 2 specifying the minimum and maximum
@@ -120,7 +139,7 @@ glydb_compositions <- function(
 
   if (!is.null(glycan_type)) {
     types_list <- stringr::str_split(data$glycan_type, ";")
-    right_type <- purrr::map_lgl(types_list, ~ glycan_type %in% .x)
+    right_type <- purrr::map_lgl(types_list, match_glycan_type, glycan_type)
     right_type[is.na(right_type)] <- FALSE
     data <- data[right_type, ]
   }
@@ -149,6 +168,8 @@ glydb_compositions <- function(
 #' @param glycan_type A string of glycan types.
 #'   Can be "HMO", "N", "GSL", "GAG", "O", "O-GalNAc", "O-GlcNAc",
 #'   "O-Man", "O-Fuc", "O-Glc", "GPI", or "C".
+#'   When "O", all O-linked glycans are included.
+#'   Specific O-glycan types only include that subtype.
 #'   Default is NULL, which means glycans of all types are included.
 #' @param mono_range A named list for filtering structures by monosaccharide counts.
 #'   Each element should be an integer vector of length 2 specifying the minimum and maximum
@@ -199,7 +220,7 @@ glydb_structures <- function(
 
   if (!is.null(glycan_type)) {
     types_list <- stringr::str_split(data$glycan_type, ";")
-    right_type <- purrr::map_lgl(types_list, ~ glycan_type %in% .x)
+    right_type <- purrr::map_lgl(types_list, match_glycan_type, glycan_type)
     right_type[is.na(right_type)] <- FALSE
     data <- data[right_type, ]
   }

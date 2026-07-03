@@ -48,6 +48,22 @@ test_that("getters filter by GlyGen classification classes", {
   expect_true(length(structs) > 0)
 })
 
+test_that("O glycan type includes all O-linked subtypes", {
+  broad_comps <- glydb_compositions(glycan_type = "O")
+  glcnac_comps <- glydb_compositions(glycan_type = "O-GlcNAc")
+  galnac_comps <- glydb_compositions(glycan_type = "O-GalNAc")
+
+  expect_gt(length(broad_comps), length(glcnac_comps))
+  expect_gt(length(broad_comps), length(galnac_comps))
+
+  broad_structs <- glydb_structures(glycan_type = "O")
+  glcnac_structs <- glydb_structures(glycan_type = "O-GlcNAc")
+  galnac_structs <- glydb_structures(glycan_type = "O-GalNAc")
+
+  expect_gt(length(broad_structs), length(glcnac_structs))
+  expect_gt(length(broad_structs), length(galnac_structs))
+})
+
 test_that("glydb_compositions filters by mono_range", {
   # Get all compositions first
   all_comps <- glydb_compositions()

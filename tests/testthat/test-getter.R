@@ -46,6 +46,9 @@ test_that("getters filter by GlyGen classification classes", {
   structs <- glydb_structures(glycan_type = "GSL")
   expect_s3_class(structs, "glyrepr_structure")
   expect_true(length(structs) > 0)
+
+  expect_error(glydb_compositions(glycan_type = "C"), "set")
+  expect_error(glydb_structures(glycan_type = "C"), "set")
 })
 
 test_that("O glycan type includes all O-linked subtypes", {

@@ -25,8 +25,7 @@ glycan_type_choices <- function() {
     "O-Man",
     "O-Fuc",
     "O-Glc",
-    "GPI",
-    "C"
+    "GPI"
   )
 }
 
@@ -95,7 +94,7 @@ glydb_species <- function() {
 #'   Default is NULL, which means glycans from all species are included.
 #' @param glycan_type A string of glycan types.
 #'   Can be "HMO", "N", "GSL", "GAG", "O", "O-GalNAc", "O-GlcNAc",
-#'   "O-Man", "O-Fuc", "O-Glc", "GPI", or "C".
+#'   "O-Man", "O-Fuc", "O-Glc", or "GPI".
 #'   When "O", all O-linked glycans are included.
 #'   Specific O-glycan types only include that subtype.
 #'   Default is NULL, which means glycans of all types are included.
@@ -167,7 +166,7 @@ glydb_compositions <- function(
 #'   Default is NULL, which means glycans from all species are included.
 #' @param glycan_type A string of glycan types.
 #'   Can be "HMO", "N", "GSL", "GAG", "O", "O-GalNAc", "O-GlcNAc",
-#'   "O-Man", "O-Fuc", "O-Glc", "GPI", or "C".
+#'   "O-Man", "O-Fuc", "O-Glc", or "GPI".
 #'   When "O", all O-linked glycans are included.
 #'   Specific O-glycan types only include that subtype.
 #'   Default is NULL, which means glycans of all types are included.

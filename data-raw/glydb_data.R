@@ -34,8 +34,7 @@ glycan_type_abbr <- c(
   "Glycosphingolipid" = "GSL",
   "GAG" = "GAG",
   "O-linked" = "O",
-  "GPI anchor" = "GPI",
-  "C-linked" = "C"
+  "GPI anchor" = "GPI"
 )
 
 glycan_type_levels <- c(
@@ -49,8 +48,7 @@ glycan_type_levels <- c(
   "O-Man",
   "O-Fuc",
   "O-Glc",
-  "GPI",
-  "C"
+  "GPI"
 )
 
 #' Classify O-glycan structures with reducing-end motif rules
@@ -77,6 +75,7 @@ get_o_glycan_type <- function(glycan_structure) {
 }
 
 classification_with_structures <- classification |>
+  filter(glycan_type != "C-linked") |>
   select(glytoucan_ac, glycan_type) |>
   mutate(
     glycan_type = dplyr::recode(

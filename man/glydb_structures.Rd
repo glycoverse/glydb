@@ -19,7 +19,10 @@ See \code{\link[glyrepr:get_structure_level]{glyrepr::get_structure_level()}} fo
 Default is NULL, which means glycans from all species are included.}
 
 \item{glycan_type}{A string of glycan types.
-Can be "N", "O-GalNAc", "O-GlcNAc", "O-Man", "O-Fuc", "O-Glc".
+Can be "HMO", "N", "GSL", "GAG", "O", "O-GalNAc", "O-GlcNAc",
+"O-Man", "O-Fuc", "O-Glc", or "GPI".
+When "O", all O-linked glycans are included.
+Specific O-glycan types only include that subtype.
 Default is NULL, which means glycans of all types are included.}
 
 \item{mono_range}{A named list for filtering structures by monosaccharide counts.

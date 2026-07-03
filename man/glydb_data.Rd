@@ -11,7 +11,8 @@ A tibble with 19,436 rows and 6 variables:
 \item \code{glycan_structure}: Glycan structure (glyrepr::glycan_structure()).
 \item \code{glycan_composition}: Glycan composition (glyrepr::glycan_composition()).
 \item \code{species}: Specie names, separated by semicolons. Unknown species are NAs.
-\item \code{glycan_type}: Glycan type, one of "N", "O-GalNAc", "O-GlcNAc", "O-Man", "O-Fuc", "O-Glc".
+\item \code{glycan_type}: Glycan type, such as "HMO", "N", "GSL", "GAG", "O",
+"O-GalNAc", "O-GlcNAc", "O-Man", "O-Fuc", "O-Glc", or "GPI".
 \item \code{confidence}: Confidence score used to rank glycans.
 }
 }

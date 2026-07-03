@@ -61,7 +61,10 @@ Default is NULL, which means glycans from all species are included.</p></dd>
 
 <dt id="arg-glycan-type">glycan_type<a class="anchor" aria-label="anchor" href="#arg-glycan-type"></a></dt>
 <dd><p>A string of glycan types.
-Can be "N", "O-GalNAc", "O-GlcNAc", "O-Man", "O-Fuc", "O-Glc".
+Can be "HMO", "N", "GSL", "GAG", "O", "O-GalNAc", "O-GlcNAc",
+"O-Man", "O-Fuc", "O-Glc", or "GPI".
+When "O", all O-linked glycans are included.
+Specific O-glycan types only include that subtype.
 Default is NULL, which means glycans of all types are included.</p></dd>
 
 
@@ -132,18 +135,18 @@ Therefore, if used with <code>glyanno</code>, the returned value should not be m
 <span class="r-out co"><span class="r-pr">#&gt;</span> [10] <span style="color: #0087D7;">GlcNAc</span>(2)<span style="color: #FFD700;">GalNAc</span>(1)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ... (734 more not shown)</span>
 <span class="r-in"><span><span class="fu">glydb_compositions</span><span class="op">(</span>glycan_type <span class="op">=</span> <span class="st">"N"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;glycan_composition[611]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;glycan_composition[644]&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] <span style="color: #00AF5F;">Man</span>(3)<span style="color: #FFD700;">Gal</span>(3)<span style="color: #0087D7;">GlcNAc</span>(5)<span style="color: #AF5FAF;">Neu5Ac</span>(1)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2] <span style="color: #00AF5F;">Man</span>(4)<span style="color: #0087D7;">GlcNAc</span>(3)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3] <span style="color: #00AF5F;">Man</span>(3)<span style="color: #FFD700;">Gal</span>(5)<span style="color: #0087D7;">GlcNAc</span>(5)<span style="color: #FF0000;">Fuc</span>(1)<span style="color: #AF5FAF;">Neu5Ac</span>(1)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4] <span style="color: #00AF5F;">Man</span>(3)<span style="color: #FFD700;">Gal</span>(3)<span style="color: #0087D7;">GlcNAc</span>(5)<span style="color: #FF0000;">Fuc</span>(1)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5] <span style="color: #00AF5F;">Man</span>(3)<span style="color: #FFD700;">Gal</span>(1)<span style="color: #0087D7;">GlcNAc</span>(3)<span style="color: #FF0000;">Fuc</span>(1)<span style="color: #AF5FAF;">Neu5Ac</span>(1)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [6] <span style="color: #00AF5F;">Man</span>(2)<span style="color: #0087D7;">GlcNAc</span>(2)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [7] <span style="color: #00AF5F;">Man</span>(3)<span style="color: #FFD700;">Gal</span>(2)<span style="color: #0087D7;">GlcNAc</span>(5)<span style="color: #FFD700;">GalNAc</span>(1)<span style="color: #FF0000;">Fuc</span>(1)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [8] <span style="color: #00AF5F;">Man</span>(3)<span style="color: #0087D7;">GlcNAc</span>(6)<span style="color: #FF0000;">Fuc</span>(1)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [9] <span style="color: #00AF5F;">Man</span>(3)<span style="color: #FFD700;">Gal</span>(3)<span style="color: #0087D7;">GlcNAc</span>(4)<span style="color: #FF0000;">Fuc</span>(1)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10] <span style="color: #00AF5F;">Man</span>(3)<span style="color: #0087D7;">GlcNAc</span>(4)<span style="color: #FF0000;">Fuc</span>(2)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ... (601 more not shown)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2] <span style="color: #00AF5F;">Man</span>(3)<span style="color: #0087D7;">GlcNAc</span>(1)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3] <span style="color: #00AF5F;">Man</span>(4)<span style="color: #0087D7;">GlcNAc</span>(3)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4] <span style="color: #00AF5F;">Man</span>(3)<span style="color: #FFD700;">Gal</span>(5)<span style="color: #0087D7;">GlcNAc</span>(5)<span style="color: #FF0000;">Fuc</span>(1)<span style="color: #AF5FAF;">Neu5Ac</span>(1)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5] <span style="color: #00AF5F;">Man</span>(3)<span style="color: #FFD700;">Gal</span>(3)<span style="color: #0087D7;">GlcNAc</span>(5)<span style="color: #FF0000;">Fuc</span>(1)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6] <span style="color: #00AF5F;">Man</span>(3)<span style="color: #FFD700;">Gal</span>(1)<span style="color: #0087D7;">GlcNAc</span>(3)<span style="color: #FF0000;">Fuc</span>(1)<span style="color: #AF5FAF;">Neu5Ac</span>(1)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [7] <span style="color: #00AF5F;">Man</span>(2)<span style="color: #0087D7;">GlcNAc</span>(2)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [8] <span style="color: #00AF5F;">Man</span>(3)<span style="color: #FFD700;">Gal</span>(2)<span style="color: #0087D7;">GlcNAc</span>(5)<span style="color: #FFD700;">GalNAc</span>(1)<span style="color: #FF0000;">Fuc</span>(1)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [9] <span style="color: #00AF5F;">Man</span>(3)<span style="color: #0087D7;">GlcNAc</span>(6)<span style="color: #FF0000;">Fuc</span>(1)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10] <span style="color: #00AF5F;">Man</span>(3)<span style="color: #FFD700;">Gal</span>(3)<span style="color: #0087D7;">GlcNAc</span>(4)<span style="color: #FF0000;">Fuc</span>(1)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ... (634 more not shown)</span>
 <span class="r-in"><span><span class="fu">glydb_compositions</span><span class="op">(</span>glycan_type <span class="op">=</span> <span class="st">"N"</span>, mono_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>Hex <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5L</span>, <span class="fl">10L</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;glycan_composition[0]&gt;</span>
 <span class="r-in"><span><span class="fu">glydb_compositions</span><span class="op">(</span>mono_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>Hex <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3L</span>, <span class="fl">9L</span><span class="op">)</span>, HexNAc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2L</span>, <span class="fl">6L</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>

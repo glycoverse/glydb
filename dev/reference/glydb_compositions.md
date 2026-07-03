@@ -34,9 +34,11 @@ glydb_compositions(
 
 - glycan_type:
 
-  A string of glycan types. Can be "N", "O-GalNAc", "O-GlcNAc", "O-Man",
-  "O-Fuc", "O-Glc". Default is NULL, which means glycans of all types
-  are included.
+  A string of glycan types. Can be "HMO", "N", "GSL", "GAG", "O",
+  "O-GalNAc", "O-GlcNAc", "O-Man", "O-Fuc", "O-Glc", or "GPI". When "O",
+  all O-linked glycans are included. Specific O-glycan types only
+  include that subtype. Default is NULL, which means glycans of all
+  types are included.
 
 - mono_range:
 
@@ -108,18 +110,18 @@ glydb_compositions(species = "Homo sapiens")
 #> [10] GlcNAc(2)GalNAc(1)
 #> ... (734 more not shown)
 glydb_compositions(glycan_type = "N")
-#> <glycan_composition[611]>
+#> <glycan_composition[644]>
 #> [1] Man(3)Gal(3)GlcNAc(5)Neu5Ac(1)
-#> [2] Man(4)GlcNAc(3)
-#> [3] Man(3)Gal(5)GlcNAc(5)Fuc(1)Neu5Ac(1)
-#> [4] Man(3)Gal(3)GlcNAc(5)Fuc(1)
-#> [5] Man(3)Gal(1)GlcNAc(3)Fuc(1)Neu5Ac(1)
-#> [6] Man(2)GlcNAc(2)
-#> [7] Man(3)Gal(2)GlcNAc(5)GalNAc(1)Fuc(1)
-#> [8] Man(3)GlcNAc(6)Fuc(1)
-#> [9] Man(3)Gal(3)GlcNAc(4)Fuc(1)
-#> [10] Man(3)GlcNAc(4)Fuc(2)
-#> ... (601 more not shown)
+#> [2] Man(3)GlcNAc(1)
+#> [3] Man(4)GlcNAc(3)
+#> [4] Man(3)Gal(5)GlcNAc(5)Fuc(1)Neu5Ac(1)
+#> [5] Man(3)Gal(3)GlcNAc(5)Fuc(1)
+#> [6] Man(3)Gal(1)GlcNAc(3)Fuc(1)Neu5Ac(1)
+#> [7] Man(2)GlcNAc(2)
+#> [8] Man(3)Gal(2)GlcNAc(5)GalNAc(1)Fuc(1)
+#> [9] Man(3)GlcNAc(6)Fuc(1)
+#> [10] Man(3)Gal(3)GlcNAc(4)Fuc(1)
+#> ... (634 more not shown)
 glydb_compositions(glycan_type = "N", mono_range = list(Hex = c(5L, 10L)))
 #> <glycan_composition[0]>
 glydb_compositions(mono_range = list(Hex = c(3L, 9L), HexNAc = c(2L, 6L)))

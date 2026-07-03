@@ -23,8 +23,8 @@ A tibble with 19,436 rows and 6 variables:
 - `species`: Specie names, separated by semicolons. Unknown species are
   NAs.
 
-- `glycan_type`: Glycan type, one of "N", "O-GalNAc", "O-GlcNAc",
-  "O-Man", "O-Fuc", "O-Glc".
+- `glycan_type`: Glycan type, such as "HMO", "N", "GSL", "GAG", "O",
+  "O-GalNAc", "O-GlcNAc", "O-Man", "O-Fuc", "O-Glc", or "GPI".
 
 - `confidence`: Confidence score used to rank glycans.
 

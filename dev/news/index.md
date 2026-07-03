@@ -10,6 +10,11 @@
   now looks up accessions from `glydb_data` first and only falls back to
   the online GlyGen API for missing accessions. (#10)
 
+### Minor improvements and bug fixes
+
+- Update `glycan_type` assignments to use GlyGen classifications, with
+  O-linked glycans split by reducing-end monosaccharide. (#12)
+
 ## glydb 0.5.0
 
 ### New features

@@ -20,7 +20,7 @@ RoxygenNote: 7.3.3
 URL: https://glycoverse.github.io/glydb/
 Depends: 
     R (>= 4.1),
-    glyrepr (>= 0.10.0)
+    glyrepr (>= 0.13.0)
 LazyData: true
 LazyDataCompression: bzip2
 Imports:

@@ -2,18 +2,22 @@
 
 ## glydb (development version)
 
+## glydb 0.6.0
+
 ### New features
 
-- Add more glycans. Now the package contains 19,436 glycan structures,
-  including non-intact glycans from GlyGen. (#9)
-- [`glytoucan_to_struc()`](https://glycoverse.github.io/glydb/dev/reference/glytoucan_to_struc.md)
-  now looks up accessions from `glydb_data` first and only falls back to
-  the online GlyGen API for missing accessions. (#10)
+- `glydb_data` now contains 19,436 GlyGen glycan structures, including
+  non-intact glycans (#9).
 
 ### Minor improvements and bug fixes
 
-- Update `glycan_type` assignments to use GlyGen classifications, with
-  O-linked glycans split by reducing-end monosaccharide. (#12)
+- Bundled `glydb_data` and internal structure indexes are regenerated
+  for compatibility with `glyrepr` 0.13.0 (#13).
+- [`glytoucan_to_struc()`](https://glycoverse.github.io/glydb/dev/reference/glytoucan_to_struc.md)
+  now looks up accessions from `glydb_data` first and only falls back to
+  the online GlyGen API for missing accessions. (#10)
+- `glycan_type` values now use GlyGen classifications, including HMO,
+  GSL, GAG, GPI, and reducing-end O-linked subtypes (#12).
 
 ## glydb 0.5.0
 

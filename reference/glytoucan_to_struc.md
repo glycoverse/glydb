@@ -1,6 +1,8 @@
 # Convert GlyTouCan Accessions to Glycan Structures
 
-Fetch GlyTouCan accessions from the GlyGen API and parse the returned
+Look up GlyTouCan accessions from
+[glydb_data](https://glycoverse.github.io/glydb/reference/glydb_data.md),
+then fetch missing accessions from the GlyGen API and parse the returned
 IUPAC strings as
 [`glyrepr::glycan_structure()`](https://glycoverse.github.io/glyrepr/reference/glycan_structure.html)
 values.

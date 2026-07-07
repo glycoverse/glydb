@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">glydb</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.6.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,6 +30,22 @@
 
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.6.0" id="glydb-060">glydb 0.6.0<a class="anchor" aria-label="anchor" href="#glydb-060"></a></h2>
+<div class="section level3">
+<h3 id="new-features-0-6-0">New features<a class="anchor" aria-label="anchor" href="#new-features-0-6-0"></a></h3>
+<ul><li>
+<code>glydb_data</code> now contains 19,436 GlyGen glycan structures, including non-intact glycans (#9).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="minor-improvements-and-bug-fixes-0-6-0">Minor improvements and bug fixes<a class="anchor" aria-label="anchor" href="#minor-improvements-and-bug-fixes-0-6-0"></a></h3>
+<ul><li>Bundled <code>glydb_data</code> and internal structure indexes are regenerated for compatibility with <code>glyrepr</code> 0.13.0 (#13).</li>
+<li>
+<code><a href="../reference/glytoucan_to_struc.html">glytoucan_to_struc()</a></code> now looks up accessions from <code>glydb_data</code> first and only falls back to the online GlyGen API for missing accessions. (#10)</li>
+<li>
+<code>glycan_type</code> values now use GlyGen classifications, including HMO, GSL, GAG, GPI, and reducing-end O-linked subtypes (#12).</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.0" id="glydb-050">glydb 0.5.0<a class="anchor" aria-label="anchor" href="#glydb-050"></a></h2>
 <div class="section level3">

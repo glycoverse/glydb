@@ -8,6 +8,7 @@ citations <- read_csv("data-raw/glycan_citations_glytoucan_v2_11_1.csv")
 classification <- read_csv("data-raw/glycan_classification_v2_11_1.csv")
 
 iupac_prepared <- iupac |>
+  filter(!str_detect(.data$sequence_iupac_condensed, "Hex")) |>
   mutate(
     glycan_structure = parse_iupac_condensed(
       sequence_iupac_condensed,

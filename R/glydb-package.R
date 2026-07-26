@@ -2,6 +2,6 @@
 "_PACKAGE"
 
 ## usethis namespace: start
-#' @import glyrepr
+#' @importFrom glyrepr glycan_composition
 ## usethis namespace: end
 NULL

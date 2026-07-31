@@ -2,7 +2,7 @@
 
 ## New features
 
-* `glydb_compositions()` and `glydb_structures()` now preserve their `confidence` attributes through vector operations. When identical glycans with different confidence values are combined, the maximum value is used.
+* `glydb_compositions()` and `glydb_structures()` now preserve their `confidence` attributes through vector operations. When identical glycans with different confidence values are combined, the maximum value is used. (#14)
 
 # glydb 0.6.0
 

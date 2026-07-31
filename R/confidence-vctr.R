@@ -45,7 +45,7 @@ merge_confidence_lookups <- function(...) {
 
 subset_confidence_lookup <- function(lookup, keys) {
   if (length(keys) == 0) {
-    return(lookup)
+    return(new_confidence_lookup(character(), double()))
   }
 
   keep <- lookup$key %in% keys
@@ -139,6 +139,11 @@ restore_glydb_vector <- function(x, to, constructor) {
   constructor(out, confidence_from_lookup(lookup, keys), lookup)
 }
 
+ptype_glydb_vector <- function(x, constructor, ...) {
+  out <- vctrs::vec_ptype(strip_glydb_class(x), ...)
+  constructor(out, double(), confidence_lookup(x))
+}
+
 ptype2_glydb_vector <- function(x, y, constructor, ...) {
   out <- vctrs::vec_ptype2(
     strip_glydb_class(x),
@@ -163,6 +168,7 @@ cast_to_glydb_vector <- function(x, to, constructor, ...) {
     confidence_lookup(x)
   )
   keys <- glydb_confidence_keys(out)
+  lookup <- subset_confidence_lookup(lookup, keys)
   constructor(out, confidence_from_lookup(lookup, keys), lookup)
 }
 
@@ -181,6 +187,7 @@ assign_glydb_vector <- function(x, i, value, constructor) {
     confidence_lookup(value)
   )
   keys <- glydb_confidence_keys(out)
+  lookup <- subset_confidence_lookup(lookup, keys)
   constructor(out, confidence_from_lookup(lookup, keys), lookup)
 }
 
@@ -196,12 +203,18 @@ assign_glydb_vector <- function(x, i, value, constructor) {
 #' @export
 #' @noRd
 `[<-.glydb_structure` <- function(x, i, value) {
+  if (missing(i)) {
+    i <- seq_along(x)
+  }
   assign_glydb_vector(x, i, value, new_glydb_structure)
 }
 
 #' @export
 #' @noRd
 `[<-.glydb_composition` <- function(x, i, value) {
+  if (missing(i)) {
+    i <- seq_along(x)
+  }
   assign_glydb_vector(x, i, value, new_glydb_composition)
 }
 
@@ -224,6 +237,18 @@ vec_restore.glydb_structure <- function(x, to, ...) {
 #' @noRd
 vec_restore.glydb_composition <- function(x, to, ...) {
   restore_glydb_vector(x, to, new_glydb_composition)
+}
+
+#' @exportS3Method vctrs::vec_ptype
+#' @noRd
+vec_ptype.glydb_structure <- function(x, ...) {
+  ptype_glydb_vector(x, new_glydb_structure, ...)
+}
+
+#' @exportS3Method vctrs::vec_ptype
+#' @noRd
+vec_ptype.glydb_composition <- function(x, ...) {
+  ptype_glydb_vector(x, new_glydb_composition, ...)
 }
 
 #' @exportS3Method vctrs::vec_ptype2

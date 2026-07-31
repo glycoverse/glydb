@@ -121,6 +121,81 @@ test_that("replacement and empty slices preserve confidence classes", {
   expect_length(attr(empty_compositions, "confidence"), 0)
 })
 
+test_that("empty slices do not contribute stale confidence", {
+  structure <- strip_glydb_class(glydb_structures()[1])
+  composition <- strip_glydb_class(glydb_compositions()[1])
+
+  high_structure <- new_glydb_structure(structure, 10)
+  low_structure <- new_glydb_structure(structure, 1)
+  high_composition <- new_glydb_composition(composition, 10)
+  low_composition <- new_glydb_composition(composition, 1)
+
+  expect_identical(
+    attr(c(high_structure[0], low_structure), "confidence"),
+    1
+  )
+  expect_identical(
+    attr(c(high_composition[0], low_composition), "confidence"),
+    1
+  )
+})
+
+test_that("replacement removes confidence for absent glycans", {
+  structures <- strip_glydb_class(glydb_structures()[1:2])
+  compositions <- strip_glydb_class(glydb_compositions()[1:2])
+
+  high_structure <- new_glydb_structure(structures[1], 10)
+  low_structure <- new_glydb_structure(structures[1], 1)
+  replacement_structure <- new_glydb_structure(structures[2], 2)
+  high_composition <- new_glydb_composition(compositions[1], 10)
+  low_composition <- new_glydb_composition(compositions[1], 1)
+  replacement_composition <- new_glydb_composition(compositions[2], 2)
+
+  high_structure[1] <- replacement_structure
+  high_composition[1] <- replacement_composition
+
+  expect_identical(
+    attr(c(high_structure, low_structure), "confidence"),
+    c(2, 1)
+  )
+  expect_identical(
+    attr(c(high_composition, low_composition), "confidence"),
+    c(2, 1)
+  )
+  expect_identical(
+    attr(high_structure, .confidence_lookup_attr)$key,
+    as.character(replacement_structure)
+  )
+  expect_identical(
+    attr(high_composition, .confidence_lookup_attr)$key,
+    as.character(replacement_composition)
+  )
+})
+
+test_that("full replacement recycles values and confidence", {
+  structures <- strip_glydb_class(glydb_structures()[1:2])
+  compositions <- strip_glydb_class(glydb_compositions()[1:2])
+
+  structure <- new_glydb_structure(structures, c(1, 2))
+  composition <- new_glydb_composition(compositions, c(1, 2))
+  replacement_structure <- new_glydb_structure(structures[2], 5)
+  replacement_composition <- new_glydb_composition(compositions[2], 5)
+
+  structure[] <- replacement_structure
+  composition[] <- replacement_composition
+
+  expect_identical(
+    as.character(structure),
+    rep(as.character(replacement_structure), 2)
+  )
+  expect_identical(
+    as.character(composition),
+    rep(as.character(replacement_composition), 2)
+  )
+  expect_identical(attr(structure, "confidence"), c(5, 5))
+  expect_identical(attr(composition, "confidence"), c(5, 5))
+})
+
 test_that("ordering and missing replacement keep confidence aligned", {
   structures <- glydb_structures()[1:4]
   compositions <- glydb_compositions()[1:4]

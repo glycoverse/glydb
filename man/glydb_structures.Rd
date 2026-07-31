@@ -45,8 +45,10 @@ citation counts for each glycan in \code{glydb_data}.
 When multiple glycans are aggregated into lower-resolution structures or compositions,
 the maximum confidence score is retained.
 
-Note that the \code{confidence} attribute will be lost after any vector operation like subsetting.
-Therefore, if used with \code{glyanno}, the returned value should not be modified manually.
+The \code{confidence} attribute is preserved by vector operations that subset,
+reorder, repeat, combine, or replace glycans. When vectors containing the
+same glycan with different confidence values are combined, the maximum
+confidence is used for every occurrence of that glycan.
 }
 
 \examples{

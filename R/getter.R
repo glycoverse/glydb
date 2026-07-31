@@ -85,8 +85,10 @@ glydb_species <- function() {
 #' When multiple glycans are aggregated into lower-resolution structures or compositions,
 #' the maximum confidence score is retained.
 #'
-#' Note that the `confidence` attribute will be lost after any vector operation like subsetting.
-#' Therefore, if used with `glyanno`, the returned value should not be modified manually.
+#' The `confidence` attribute is preserved by vector operations that subset,
+#' reorder, repeat, combine, or replace glycans. When vectors containing the
+#' same glycan with different confidence values are combined, the maximum
+#' confidence is used for every occurrence of that glycan.
 #'
 #' @param mono_type Either "generic" or "concrete". Default is "concrete".
 #'   See [glyrepr::get_mono_type()] for details.
@@ -144,16 +146,15 @@ glydb_compositions <- function(
   }
 
   result <- data$glycan_composition
+  confidence <- data$confidence
 
   if (!is.null(mono_range)) {
     mask <- filter_by_mono_range(result, mono_range, mono_type)
     result <- result[mask]
-    attr(result, "confidence") <- data$confidence[mask]
-  } else {
-    attr(result, "confidence") <- data$confidence
+    confidence <- confidence[mask]
   }
 
-  result
+  new_glydb_composition(result, confidence)
 }
 
 #' Get Structures From Glydb Data
@@ -225,14 +226,13 @@ glydb_structures <- function(
   }
 
   result <- data$glycan_structure
+  confidence <- data$confidence
 
   if (!is.null(mono_range)) {
     mask <- filter_by_mono_range(result, mono_range, mono_type)
     result <- result[mask]
-    attr(result, "confidence") <- data$confidence[mask]
-  } else {
-    attr(result, "confidence") <- data$confidence
+    confidence <- confidence[mask]
   }
 
-  result
+  new_glydb_structure(result, confidence)
 }

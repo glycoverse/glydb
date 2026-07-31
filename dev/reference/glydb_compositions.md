@@ -63,15 +63,17 @@ each glycan in `glydb_data`. When multiple glycans are aggregated into
 lower-resolution structures or compositions, the maximum confidence
 score is retained.
 
-Note that the `confidence` attribute will be lost after any vector
-operation like subsetting. Therefore, if used with `glyanno`, the
-returned value should not be modified manually.
+The `confidence` attribute is preserved by vector operations that
+subset, reorder, repeat, combine, or replace glycans. When vectors
+containing the same glycan with different confidence values are
+combined, the maximum confidence is used for every occurrence of that
+glycan.
 
 ## Examples
 
 ``` r
 glydb_compositions()
-#> <glycan_composition[1287]>
+#> <glydb_composition[1287]>
 #> [1] Glc(1)Gal(1)Neu5Gc(2)
 #> [2] Man(3)Gal(3)GlcNAc(5)Neu5Ac(1)
 #> [3] Glc(3)
@@ -84,7 +86,7 @@ glydb_compositions()
 #> [10] Gal(1)GlcNAc(1)GalNAc(1)
 #> ... (1277 more not shown)
 glydb_compositions(mono_type = "generic")
-#> <glycan_composition[791]>
+#> <glydb_composition[791]>
 #> [1] Hex(2)NeuGc(2)
 #> [2] Hex(6)HexNAc(5)NeuAc(1)
 #> [3] Hex(3)
@@ -97,7 +99,7 @@ glydb_compositions(mono_type = "generic")
 #> [10] Hex(1)HexNAc(2)
 #> ... (781 more not shown)
 glydb_compositions(species = "Homo sapiens")
-#> <glycan_composition[744]>
+#> <glydb_composition[744]>
 #> [1] Glc(1)Gal(1)Neu5Gc(2)
 #> [2] Man(3)Gal(3)GlcNAc(5)Neu5Ac(1)
 #> [3] Glc(4)
@@ -110,7 +112,7 @@ glydb_compositions(species = "Homo sapiens")
 #> [10] GlcNAc(2)GalNAc(1)
 #> ... (734 more not shown)
 glydb_compositions(glycan_type = "N")
-#> <glycan_composition[644]>
+#> <glydb_composition[644]>
 #> [1] Man(3)Gal(3)GlcNAc(5)Neu5Ac(1)
 #> [2] Man(3)GlcNAc(1)
 #> [3] Man(4)GlcNAc(3)
@@ -123,9 +125,9 @@ glydb_compositions(glycan_type = "N")
 #> [10] Man(3)Gal(3)GlcNAc(4)Fuc(1)
 #> ... (634 more not shown)
 glydb_compositions(glycan_type = "N", mono_range = list(Hex = c(5L, 10L)))
-#> <glycan_composition[0]>
+#> <glydb_composition[0]>
 glydb_compositions(mono_range = list(Hex = c(3L, 9L), HexNAc = c(2L, 6L)))
-#> <glycan_composition[108]>
+#> <glydb_composition[108]>
 #> [1] Man(4)GlcNAc(3)
 #> [2] Glc(1)Gal(2)GlcNAc(1)GalNAc(1)
 #> [3] Man(5)Gal(1)GlcNAc(4)

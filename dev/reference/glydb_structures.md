@@ -63,15 +63,17 @@ each glycan in `glydb_data`. When multiple glycans are aggregated into
 lower-resolution structures or compositions, the maximum confidence
 score is retained.
 
-Note that the `confidence` attribute will be lost after any vector
-operation like subsetting. Therefore, if used with `glyanno`, the
-returned value should not be modified manually.
+The `confidence` attribute is preserved by vector operations that
+subset, reorder, repeat, combine, or replace glycans. When vectors
+containing the same glycan with different confidence values are
+combined, the maximum confidence is used for every occurrence of that
+glycan.
 
 ## Examples
 
 ``` r
 glydb_structures()
-#> <glycan_structure[7125]>
+#> <glydb_structure[7125]>
 #> [1] Glc(b1-3)Glc(b1-3)Glc(b1-
 #> [2] Glc(b1-4)Glc(b1-4)Glc(b1-4)Glc(b1-
 #> [3] Man(a1-3)[Man(a1-6)]Man(b1-4)GlcNAc(b1-
@@ -85,7 +87,7 @@ glydb_structures()
 #> ... (7115 more not shown)
 #> # Unique structures: 7125
 glydb_structures(structure_level = "topological")
-#> <glycan_structure[3811]>
+#> <glydb_structure[3811]>
 #> [1] Neu5Gc(??-?)Neu5Gc(??-?)Gal(??-?)Glc(??-
 #> [2] Neu5Ac(??-?)Gal(??-?)GlcNAc(??-?)Man(??-?)[Gal(??-?)GlcNAc(??-?)[Gal(??-?)GlcNAc(??-?)]Man(??-?)]Man(??-?)GlcNAc(??-?)GlcNAc(??-
 #> [3] Glc(??-?)Glc(??-?)Glc(??-
@@ -99,7 +101,7 @@ glydb_structures(structure_level = "topological")
 #> ... (3801 more not shown)
 #> # Unique structures: 3811
 glydb_structures(structure_level = "basic")
-#> <glycan_structure[3309]>
+#> <glydb_structure[3309]>
 #> [1] NeuGc(??-?)NeuGc(??-?)Hex(??-?)Hex(??-
 #> [2] NeuAc(??-?)Hex(??-?)HexNAc(??-?)Hex(??-?)[Hex(??-?)HexNAc(??-?)[Hex(??-?)HexNAc(??-?)]Hex(??-?)]Hex(??-?)HexNAc(??-?)HexNAc(??-
 #> [3] Hex(??-?)Hex(??-?)Hex(??-
@@ -113,7 +115,7 @@ glydb_structures(structure_level = "basic")
 #> ... (3299 more not shown)
 #> # Unique structures: 3309
 glydb_structures(species = "Homo sapiens")
-#> <glycan_structure[1367]>
+#> <glydb_structure[1367]>
 #> [1] Gal(b1-3)GalNAc(a1-
 #> [2] Gal(b1-3)[GlcNAc(b1-6)]GalNAc(a1-
 #> [3] GlcNAc(b1-3)GalNAc(a1-
@@ -127,7 +129,7 @@ glydb_structures(species = "Homo sapiens")
 #> ... (1357 more not shown)
 #> # Unique structures: 1367
 glydb_structures(glycan_type = "N")
-#> <glycan_structure[2780]>
+#> <glydb_structure[2780]>
 #> [1] Man(a1-3)[Man(a1-6)]Man(b1-4)GlcNAc(b1-
 #> [2] GlcNAc(b1-2)[GlcNAc(b1-4)]Man(a1-3)[GlcNAc(b1-2)[GlcNAc(b1-6)]Man(a1-6)]Man(b1-4)GlcNAc(b1-4)[Fuc(a1-6)]GlcNAc(b1-
 #> [3] Man(a1-3)Man(a1-6)[Man(a1-3)]Man(b1-4)GlcNAc(a1-
@@ -141,10 +143,10 @@ glydb_structures(glycan_type = "N")
 #> ... (2770 more not shown)
 #> # Unique structures: 2780
 glydb_structures(glycan_type = "N", mono_range = list(Hex = c(5L, 10L)))
-#> <glycan_structure[0]>
+#> <glydb_structure[0]>
 #> # Unique structures: 0
 glydb_structures(mono_range = list(Hex = c(3L, 9L), HexNAc = c(2L, 6L)))
-#> <glycan_structure[1031]>
+#> <glydb_structure[1031]>
 #> [1] GlcNAc(a1-3)GalNAc(b1-3)Gal(a1-4)Gal(b1-4)Glc(b1-
 #> [2] Man(a1-2)Man(a1-2)Man(a1-6)[Man(a1-2)Man(a1-3)]Man(b1-4)GlcNAc(b1-4)GlcNAc(b1-
 #> [3] Man(a1-2)Man(a1-3)[GlcNAc(b1-4)][Man(a1-3)[Man(a1-6)]Man(a1-6)]Man(b1-4)GlcNAc(b1-4)GlcNAc(a1-

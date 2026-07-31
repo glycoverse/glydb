@@ -89,14 +89,16 @@ a numeric vector of the same length as the result containing log-transformed
 citation counts for each glycan in <code>glydb_data</code>.
 When multiple glycans are aggregated into lower-resolution structures or compositions,
 the maximum confidence score is retained.</p>
-<p>Note that the <code>confidence</code> attribute will be lost after any vector operation like subsetting.
-Therefore, if used with <code>glyanno</code>, the returned value should not be modified manually.</p>
+<p>The <code>confidence</code> attribute is preserved by vector operations that subset,
+reorder, repeat, combine, or replace glycans. When vectors containing the
+same glycan with different confidence values are combined, the maximum
+confidence is used for every occurrence of that glycan.</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">glydb_compositions</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;glycan_composition[1287]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;glydb_composition[1287]&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] <span style="color: #0087D7;">Glc</span>(1)<span style="color: #FFD700;">Gal</span>(1)<span style="color: #AFD7FF;">Neu5Gc</span>(2)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2] <span style="color: #00AF5F;">Man</span>(3)<span style="color: #FFD700;">Gal</span>(3)<span style="color: #0087D7;">GlcNAc</span>(5)<span style="color: #AF5FAF;">Neu5Ac</span>(1)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [3] <span style="color: #0087D7;">Glc</span>(3)</span>
@@ -109,7 +111,7 @@ Therefore, if used with <code>glyanno</code>, the returned value should not be m
 <span class="r-out co"><span class="r-pr">#&gt;</span> [10] <span style="color: #FFD700;">Gal</span>(1)<span style="color: #0087D7;">GlcNAc</span>(1)<span style="color: #FFD700;">GalNAc</span>(1)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ... (1277 more not shown)</span>
 <span class="r-in"><span><span class="fu">glydb_compositions</span><span class="op">(</span>mono_type <span class="op">=</span> <span class="st">"generic"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;glycan_composition[791]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;glydb_composition[791]&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] <span style="color: #000000;">Hex</span>(2)<span style="color: #000000;">NeuGc</span>(2)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2] <span style="color: #000000;">Hex</span>(6)<span style="color: #000000;">HexNAc</span>(5)<span style="color: #000000;">NeuAc</span>(1)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [3] <span style="color: #000000;">Hex</span>(3)</span>
@@ -122,7 +124,7 @@ Therefore, if used with <code>glyanno</code>, the returned value should not be m
 <span class="r-out co"><span class="r-pr">#&gt;</span> [10] <span style="color: #000000;">Hex</span>(1)<span style="color: #000000;">HexNAc</span>(2)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ... (781 more not shown)</span>
 <span class="r-in"><span><span class="fu">glydb_compositions</span><span class="op">(</span>species <span class="op">=</span> <span class="st">"Homo sapiens"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;glycan_composition[744]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;glydb_composition[744]&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] <span style="color: #0087D7;">Glc</span>(1)<span style="color: #FFD700;">Gal</span>(1)<span style="color: #AFD7FF;">Neu5Gc</span>(2)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2] <span style="color: #00AF5F;">Man</span>(3)<span style="color: #FFD700;">Gal</span>(3)<span style="color: #0087D7;">GlcNAc</span>(5)<span style="color: #AF5FAF;">Neu5Ac</span>(1)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [3] <span style="color: #0087D7;">Glc</span>(4)</span>
@@ -135,7 +137,7 @@ Therefore, if used with <code>glyanno</code>, the returned value should not be m
 <span class="r-out co"><span class="r-pr">#&gt;</span> [10] <span style="color: #0087D7;">GlcNAc</span>(2)<span style="color: #FFD700;">GalNAc</span>(1)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ... (734 more not shown)</span>
 <span class="r-in"><span><span class="fu">glydb_compositions</span><span class="op">(</span>glycan_type <span class="op">=</span> <span class="st">"N"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;glycan_composition[644]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;glydb_composition[644]&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] <span style="color: #00AF5F;">Man</span>(3)<span style="color: #FFD700;">Gal</span>(3)<span style="color: #0087D7;">GlcNAc</span>(5)<span style="color: #AF5FAF;">Neu5Ac</span>(1)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2] <span style="color: #00AF5F;">Man</span>(3)<span style="color: #0087D7;">GlcNAc</span>(1)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [3] <span style="color: #00AF5F;">Man</span>(4)<span style="color: #0087D7;">GlcNAc</span>(3)</span>
@@ -148,9 +150,9 @@ Therefore, if used with <code>glyanno</code>, the returned value should not be m
 <span class="r-out co"><span class="r-pr">#&gt;</span> [10] <span style="color: #00AF5F;">Man</span>(3)<span style="color: #FFD700;">Gal</span>(3)<span style="color: #0087D7;">GlcNAc</span>(4)<span style="color: #FF0000;">Fuc</span>(1)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ... (634 more not shown)</span>
 <span class="r-in"><span><span class="fu">glydb_compositions</span><span class="op">(</span>glycan_type <span class="op">=</span> <span class="st">"N"</span>, mono_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>Hex <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5L</span>, <span class="fl">10L</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;glycan_composition[0]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;glydb_composition[0]&gt;</span>
 <span class="r-in"><span><span class="fu">glydb_compositions</span><span class="op">(</span>mono_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>Hex <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3L</span>, <span class="fl">9L</span><span class="op">)</span>, HexNAc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2L</span>, <span class="fl">6L</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;glycan_composition[108]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;glydb_composition[108]&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] <span style="color: #00AF5F;">Man</span>(4)<span style="color: #0087D7;">GlcNAc</span>(3)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2] <span style="color: #0087D7;">Glc</span>(1)<span style="color: #FFD700;">Gal</span>(2)<span style="color: #0087D7;">GlcNAc</span>(1)<span style="color: #FFD700;">GalNAc</span>(1)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [3] <span style="color: #00AF5F;">Man</span>(5)<span style="color: #FFD700;">Gal</span>(1)<span style="color: #0087D7;">GlcNAc</span>(4)</span>

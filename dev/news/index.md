@@ -2,6 +2,15 @@
 
 ## glydb (development version)
 
+### New features
+
+- [`glydb_compositions()`](https://glycoverse.github.io/glydb/dev/reference/glydb_compositions.md)
+  and
+  [`glydb_structures()`](https://glycoverse.github.io/glydb/dev/reference/glydb_structures.md)
+  now preserve their `confidence` attributes through vector operations.
+  When identical glycans with different confidence values are combined,
+  the maximum value is used. (#14)
+
 ## glydb 0.6.0
 
 ### New features

@@ -21,49 +21,72 @@ combine_terms <- function(x) {
   paste(res, collapse = ";")
 }
 
-concrete_comps <- glydb_data |>
-  summarise(
-    species = combine_terms(species),
-    glycan_type = combine_terms(glycan_type),
-    confidence = max(confidence),
-    .by = glycan_composition
-  )
+#' Summarise metadata for unique glycans
+#'
+#' Uses glydb vector semantics to retain the maximum confidence when multiple
+#' records contain the same glycan.
+#'
+#' @param glycan A glydb-compatible glycan vector.
+#' @param species A character vector of species labels.
+#' @param glycan_type A character vector of glycan type labels.
+#' @param confidence A numeric vector of confidence values.
+#' @returns A tibble with unique glycans and their aggregated metadata.
+#' @noRd
+summarise_glycans <- function(glycan, species, glycan_type, confidence) {
+  glycan <- if (inherits(glycan, "glyrepr_structure")) {
+    new_glydb_structure(glycan, confidence)
+  } else {
+    new_glydb_composition(glycan, confidence)
+  }
 
-generic_comps <- glydb_data |>
-  mutate(glycan_composition = convert_to_generic(glycan_composition)) |>
-  summarise(
-    species = combine_terms(species),
-    glycan_type = combine_terms(glycan_type),
-    confidence = max(confidence),
-    .by = glycan_composition
-  )
+  result <- tibble(glycan, species, glycan_type) |>
+    summarise(
+      species = combine_terms(species),
+      glycan_type = combine_terms(glycan_type),
+      .by = glycan
+    )
+  confidence <- attr(result$glycan, "confidence")
+  result$glycan <- strip_glydb_class(result$glycan)
+  result$confidence <- confidence
+  result
+}
+
+concrete_comps <- summarise_glycans(
+  glydb_data$glycan_composition,
+  glydb_data$species,
+  glydb_data$glycan_type,
+  glydb_data$confidence
+) |>
+  rename(glycan_composition = glycan)
+
+generic_comps <- summarise_glycans(
+  convert_to_generic(glydb_data$glycan_composition),
+  glydb_data$species,
+  glydb_data$glycan_type,
+  glydb_data$confidence
+) |>
+  rename(glycan_composition = glycan)
 
 fully_determined <- read_csv("data-raw/glycan_fully_determined_v2_11_1.csv")
 intact_strucs <- glydb_data |>
   semi_join(fully_determined, by = join_by(glytoucan_ac)) |>
   select(glycan_structure, species, glycan_type, confidence)
 
-topological_strucs <- glydb_data |>
-  mutate(
-    glycan_structure = reduce_structure_level(glycan_structure, "topological")
-  ) |>
-  summarise(
-    species = combine_terms(species),
-    glycan_type = combine_terms(glycan_type),
-    confidence = max(confidence),
-    .by = glycan_structure
-  )
+topological_strucs <- summarise_glycans(
+  reduce_structure_level(glydb_data$glycan_structure, "topological"),
+  glydb_data$species,
+  glydb_data$glycan_type,
+  glydb_data$confidence
+) |>
+  rename(glycan_structure = glycan)
 
-basic_strucs <- glydb_data |>
-  mutate(
-    glycan_structure = reduce_structure_level(glycan_structure, "basic")
-  ) |>
-  summarise(
-    species = combine_terms(species),
-    glycan_type = combine_terms(glycan_type),
-    confidence = max(confidence),
-    .by = glycan_structure
-  )
+basic_strucs <- summarise_glycans(
+  reduce_structure_level(glydb_data$glycan_structure, "basic"),
+  glydb_data$species,
+  glydb_data$glycan_type,
+  glydb_data$confidence
+) |>
+  rename(glycan_structure = glycan)
 
 usethis::use_data(
   concrete_comps,

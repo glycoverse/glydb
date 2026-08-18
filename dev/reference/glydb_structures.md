@@ -13,7 +13,8 @@ glydb_structures(
   structure_level = "intact",
   species = NULL,
   glycan_type = NULL,
-  mono_range = NULL
+  mono_range = NULL,
+  mono_type = "concrete"
 )
 ```
 
@@ -21,7 +22,7 @@ glydb_structures(
 
 - structure_level:
 
-  Either "intact", "topological", or "basic". Default is "intact". See
+  Either "intact" or "topological". Default is "intact". See
   [`glyrepr::get_structure_level()`](https://glycoverse.github.io/glyrepr/reference/get_structure_level.html)
   for details.
 
@@ -47,6 +48,12 @@ glydb_structures(
   and maximum count for that monosaccharide. Monosaccharides not
   specified will be excluded (count = 0). Use `NULL` for no filtering.
   See examples for usage.
+
+- mono_type:
+
+  Either "generic" or "concrete". Default is "concrete". See
+  [`glyrepr::get_mono_type()`](https://glycoverse.github.io/glyrepr/reference/get_mono_type.html)
+  for details.
 
 ## Value
 
@@ -100,7 +107,21 @@ glydb_structures(structure_level = "topological")
 #> [10] GlcNAc(??-?)[Gal(??-?)]GalNAc(??-
 #> ... (3801 more not shown)
 #> # Unique structures: 3811
-glydb_structures(structure_level = "basic")
+glydb_structures(mono_type = "generic")
+#> <glydb_structure[6461]>
+#> [1] Hex(b1-3)Hex(b1-3)Hex(b1-
+#> [2] Hex(b1-4)Hex(b1-4)Hex(b1-4)Hex(b1-
+#> [3] Hex(a1-3)[Hex(a1-6)]Hex(b1-4)HexNAc(b1-
+#> [4] dHex(a1-2)[HexNAc(a1-3)]Hex(b1-4)HexNAc(b1-3)[NeuGc(a2-6)]HexNAc(a1-
+#> [5] Hex(b1-3)HexNAc(a1-
+#> [6] Hex(b1-3)[HexNAc(b1-6)]HexNAc(a1-
+#> [7] HexNAc(b1-3)HexNAc(a1-
+#> [8] HexNAc(b1-3)[HexNAc(b1-6)]HexNAc(a1-
+#> [9] HexNAc(a1-3)HexNAc(a1-
+#> [10] HexNAc(b1-6)HexNAc(a1-
+#> ... (6451 more not shown)
+#> # Unique structures: 6461
+glydb_structures(structure_level = "topological", mono_type = "generic")
 #> <glydb_structure[3309]>
 #> [1] NeuGc(??-?)NeuGc(??-?)Hex(??-?)Hex(??-
 #> [2] NeuAc(??-?)Hex(??-?)HexNAc(??-?)Hex(??-?)[Hex(??-?)HexNAc(??-?)[Hex(??-?)HexNAc(??-?)]Hex(??-?)]Hex(??-?)HexNAc(??-?)HexNAc(??-

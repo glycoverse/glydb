@@ -2,8 +2,18 @@
 
 ## glydb (development version)
 
+### Breaking changes
+
+- [`glydb_structures()`](https://glycoverse.github.io/glydb/dev/reference/glydb_structures.md)
+  now accepts only `"intact"` and `"topological"` structure levels; use
+  `mono_type = "generic"` with `structure_level = "topological"` instead
+  of the removed `"basic"` level.
+
 ### New features
 
+- [`glydb_structures()`](https://glycoverse.github.io/glydb/dev/reference/glydb_structures.md)
+  gains an independent `mono_type` argument for retrieving concrete or
+  generic monosaccharide structures.
 - [`glydb_compositions()`](https://glycoverse.github.io/glydb/dev/reference/glydb_compositions.md)
   and
   [`glydb_structures()`](https://glycoverse.github.io/glydb/dev/reference/glydb_structures.md)

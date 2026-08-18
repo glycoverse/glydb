@@ -2,17 +2,17 @@ library(tidyverse)
 library(glyparse)
 library(glyrepr)
 
-iupac <- read_csv("data-raw/glycan_sequences_iupac_condensed_v2_11_1.csv")
+wurcs <- read_csv("data-raw/glycan_sequences_wurcs_v2_11_1.csv")
 species <- read_csv("data-raw/glycan_species_v2_11_1.csv")
 citations <- read_csv("data-raw/glycan_citations_glytoucan_v2_11_1.csv")
 classification <- read_csv("data-raw/glycan_classification_v2_11_1.csv")
 
-iupac_prepared <- iupac |>
-  filter(!str_detect(.data$sequence_iupac_condensed, "Hex")) |>
+wurcs_prepared <- wurcs |>
   mutate(
-    glycan_structure = parse_iupac_condensed(
-      sequence_iupac_condensed,
-      on_failure = "na"
+    glycan_structure = parse_wurcs(
+      sequence_wurcs,
+      on_failure = "na",
+      progress = TRUE
     )
   ) |>
   filter(!is.na(glycan_structure)) |>
@@ -88,7 +88,7 @@ classification_with_structures <- classification |>
   filter(!is.na(.data$glycan_type)) |>
   distinct(.data$glytoucan_ac, .data$glycan_type) |>
   inner_join(
-    select(iupac_prepared, glytoucan_ac, glycan_structure),
+    select(wurcs_prepared, glytoucan_ac, glycan_structure),
     by = "glytoucan_ac"
   )
 
@@ -114,7 +114,7 @@ classification_prepared <- bind_rows(
     .by = glytoucan_ac
   )
 
-glydb_data <- iupac_prepared |>
+glydb_data <- wurcs_prepared |>
   left_join(species_prepared, by = "glytoucan_ac") |>
   left_join(confidence, by = "glytoucan_ac") |>
   mutate(confidence = if_else(is.na(confidence), -1, confidence)) |>

@@ -26,10 +26,11 @@ Imports:
     glyrepr (>= 0.14.0.9000),
     checkmate,
     cli,
-    glyparse,
+    glyparse (>= 0.7.1.9000),
     httr2,
     purrr,
     stringr,
     vctrs
 Remotes:  
-    glycoverse/glyrepr
+    glycoverse/glyrepr,
+    glycoverse/glyparse

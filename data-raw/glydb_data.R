@@ -8,7 +8,13 @@ citations <- read_csv("data-raw/glycan_citations_glytoucan_v2_11_1.csv")
 classification <- read_csv("data-raw/glycan_classification_v2_11_1.csv")
 
 wurcs_prepared <- wurcs |>
-  mutate(glycan_structure = parse_wurcs(sequence_wurcs, on_failure = "na", progress = TRUE)) |>
+  mutate(
+    glycan_structure = parse_wurcs(
+      sequence_wurcs,
+      on_failure = "na",
+      progress = TRUE
+    )
+  ) |>
   filter(!is.na(glycan_structure)) |>
   mutate(glycan_composition = as_glycan_composition(glycan_structure)) |>
   select(glytoucan_ac, glycan_structure, glycan_composition)

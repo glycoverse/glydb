@@ -23,7 +23,7 @@ Depends:
 LazyData: true
 LazyDataCompression: bzip2
 Imports:
-    glyrepr (>= 0.13.0),
+    glyrepr (>= 0.14.0.9000),
     checkmate,
     cli,
     glyparse,
@@ -31,3 +31,5 @@ Imports:
     purrr,
     stringr,
     vctrs
+Remotes:  
+    glycoverse/glyrepr

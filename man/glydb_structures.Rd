@@ -8,11 +8,12 @@ glydb_structures(
   structure_level = "intact",
   species = NULL,
   glycan_type = NULL,
-  mono_range = NULL
+  mono_range = NULL,
+  mono_type = "concrete"
 )
 }
 \arguments{
-\item{structure_level}{Either "intact", "topological", or "basic". Default is "intact".
+\item{structure_level}{Either "intact" or "topological". Default is "intact".
 See \code{\link[glyrepr:get_structure_level]{glyrepr::get_structure_level()}} for details.}
 
 \item{species}{A string of specie names. See \code{\link[=glydb_species]{glydb_species()}} for available specie names.
@@ -29,6 +30,9 @@ Default is NULL, which means glycans of all types are included.}
 Each element should be an integer vector of length 2 specifying the minimum and maximum
 count for that monosaccharide. Monosaccharides not specified will be excluded (count = 0).
 Use \code{NULL} for no filtering. See examples for usage.}
+
+\item{mono_type}{Either "generic" or "concrete". Default is "concrete".
+See \code{\link[glyrepr:get_mono_type]{glyrepr::get_mono_type()}} for details.}
 }
 \value{
 A \code{\link[glyrepr:glycan_structure]{glyrepr::glycan_structure()}} vector, with a \code{confidence} attribute as a
@@ -54,7 +58,8 @@ confidence is used for every occurrence of that glycan.
 \examples{
 glydb_structures()
 glydb_structures(structure_level = "topological")
-glydb_structures(structure_level = "basic")
+glydb_structures(mono_type = "generic")
+glydb_structures(structure_level = "topological", mono_type = "generic")
 glydb_structures(species = "Homo sapiens")
 glydb_structures(glycan_type = "N")
 glydb_structures(glycan_type = "N", mono_range = list(Hex = c(5L, 10L)))

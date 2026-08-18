@@ -2,9 +2,10 @@ utils::globalVariables(c(
   "glydb_data",
   "concrete_comps",
   "generic_comps",
-  "intact_strucs",
-  "topological_strucs",
-  "basic_strucs"
+  "intact_concrete_strucs",
+  "topological_concrete_strucs",
+  "intact_generic_strucs",
+  "topological_generic_strucs"
 ))
 
 #' Get supported glycan type labels
@@ -161,7 +162,7 @@ glydb_compositions <- function(
 #'
 #' Get unique glycan structures from [glydb_data] as a [glyrepr::glycan_structure()] vector.
 #'
-#' @param structure_level Either "intact", "topological", or "basic". Default is "intact".
+#' @param structure_level Either "intact" or "topological". Default is "intact".
 #'   See [glyrepr::get_structure_level()] for details.
 #' @param species A string of specie names. See [glydb_species()] for available specie names.
 #'   Default is NULL, which means glycans from all species are included.
@@ -175,6 +176,8 @@ glydb_compositions <- function(
 #'   Each element should be an integer vector of length 2 specifying the minimum and maximum
 #'   count for that monosaccharide. Monosaccharides not specified will be excluded (count = 0).
 #'   Use `NULL` for no filtering. See examples for usage.
+#' @param mono_type Either "generic" or "concrete". Default is "concrete".
+#'   See [glyrepr::get_mono_type()] for details.
 #'
 #' @inheritSection glydb_compositions Confidence
 #'
@@ -183,7 +186,8 @@ glydb_compositions <- function(
 #' @examples
 #' glydb_structures()
 #' glydb_structures(structure_level = "topological")
-#' glydb_structures(structure_level = "basic")
+#' glydb_structures(mono_type = "generic")
+#' glydb_structures(structure_level = "topological", mono_type = "generic")
 #' glydb_structures(species = "Homo sapiens")
 #' glydb_structures(glycan_type = "N")
 #' glydb_structures(glycan_type = "N", mono_range = list(Hex = c(5L, 10L)))
@@ -193,22 +197,30 @@ glydb_structures <- function(
   structure_level = "intact",
   species = NULL,
   glycan_type = NULL,
-  mono_range = NULL
+  mono_range = NULL,
+  mono_type = "concrete"
 ) {
-  checkmate::assert_choice(structure_level, c("intact", "topological", "basic"))
+  checkmate::assert_choice(structure_level, c("intact", "topological"))
+  checkmate::assert_choice(mono_type, c("generic", "concrete"))
   checkmate::assert_choice(species, glydb_species(), null.ok = TRUE)
   checkmate::assert_choice(
     glycan_type,
     glycan_type_choices(),
     null.ok = TRUE
   )
-  mono_type <- ifelse(structure_level == "basic", "generic", "concrete")
   validate_mono_range(mono_range, mono_type)
   data <- switch(
-    structure_level,
-    intact = intact_strucs,
-    topological = topological_strucs,
-    basic = basic_strucs
+    mono_type,
+    concrete = switch(
+      structure_level,
+      intact = intact_concrete_strucs,
+      topological = topological_concrete_strucs
+    ),
+    generic = switch(
+      structure_level,
+      intact = intact_generic_strucs,
+      topological = topological_generic_strucs
+    )
   )
 
   if (!is.null(species)) {

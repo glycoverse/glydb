@@ -1,7 +1,12 @@
 # glydb (development version)
 
+## Breaking changes
+
+* `glydb_structures()` now accepts only `"intact"` and `"topological"` structure levels; use `mono_type = "generic"` with `structure_level = "topological"` instead of the removed `"basic"` level.
+
 ## New features
 
+* `glydb_structures()` gains an independent `mono_type` argument for retrieving concrete or generic monosaccharide structures.
 * `glydb_compositions()` and `glydb_structures()` now preserve their `confidence` attributes through vector operations. When identical glycans with different confidence values are combined, the maximum value is used. (#14)
 
 # glydb 0.6.0

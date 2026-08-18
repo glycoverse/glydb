@@ -67,21 +67,37 @@ generic_comps <- summarise_glycans(
 ) |>
   rename(glycan_composition = glycan)
 
-fully_determined <- read_csv("data-raw/glycan_fully_determined_v2_11_1.csv")
-intact_strucs <- glydb_data |>
-  semi_join(fully_determined, by = join_by(glytoucan_ac)) |>
-  select(glycan_structure, species, glycan_type, confidence)
+structure_levels <- get_structure_level(glydb_data$glycan_structure)
+intact <- structure_levels == "intact"
 
-topological_strucs <- summarise_glycans(
-  reduce_structure_level(glydb_data$glycan_structure, "topological"),
+intact_concrete_strucs <- summarise_glycans(
+  glydb_data$glycan_structure[intact],
+  glydb_data$species[intact],
+  glydb_data$glycan_type[intact],
+  glydb_data$confidence[intact]
+) |>
+  rename(glycan_structure = glycan)
+
+topological_concrete_strucs <- summarise_glycans(
+  remove_linkages(glydb_data$glycan_structure),
   glydb_data$species,
   glydb_data$glycan_type,
   glydb_data$confidence
 ) |>
   rename(glycan_structure = glycan)
 
-basic_strucs <- summarise_glycans(
-  reduce_structure_level(glydb_data$glycan_structure, "basic"),
+generic_structures <- convert_to_generic(glydb_data$glycan_structure)
+
+intact_generic_strucs <- summarise_glycans(
+  generic_structures[intact],
+  glydb_data$species[intact],
+  glydb_data$glycan_type[intact],
+  glydb_data$confidence[intact]
+) |>
+  rename(glycan_structure = glycan)
+
+topological_generic_strucs <- summarise_glycans(
+  remove_linkages(generic_structures),
   glydb_data$species,
   glydb_data$glycan_type,
   glydb_data$confidence
@@ -91,9 +107,10 @@ basic_strucs <- summarise_glycans(
 usethis::use_data(
   concrete_comps,
   generic_comps,
-  intact_strucs,
-  topological_strucs,
-  basic_strucs,
+  intact_concrete_strucs,
+  topological_concrete_strucs,
+  intact_generic_strucs,
+  topological_generic_strucs,
   internal = TRUE,
   overwrite = TRUE
 )

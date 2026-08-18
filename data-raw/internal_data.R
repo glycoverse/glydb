@@ -51,11 +51,14 @@ summarise_glycans <- function(glycan, species, glycan_type, confidence) {
   result
 }
 
+concrete_mask <- get_mono_type(glydb_data$glycan_composition) == "concrete"
+intact_mask <- get_structure_level(glydb_data$glycan_structure) == "intact"
+
 concrete_comps <- summarise_glycans(
-  glydb_data$glycan_composition,
-  glydb_data$species,
-  glydb_data$glycan_type,
-  glydb_data$confidence
+  glydb_data$glycan_composition[concrete_mask],
+  glydb_data$species[concrete_mask],
+  glydb_data$glycan_type[concrete_mask],
+  glydb_data$confidence[concrete_mask]
 ) |>
   rename(glycan_composition = glycan)
 
@@ -67,37 +70,32 @@ generic_comps <- summarise_glycans(
 ) |>
   rename(glycan_composition = glycan)
 
-structure_levels <- get_structure_level(glydb_data$glycan_structure)
-intact <- structure_levels == "intact"
-
 intact_concrete_strucs <- summarise_glycans(
-  glydb_data$glycan_structure[intact],
-  glydb_data$species[intact],
-  glydb_data$glycan_type[intact],
-  glydb_data$confidence[intact]
+  glydb_data$glycan_structure[intact_mask & concrete_mask],
+  glydb_data$species[intact_mask & concrete_mask],
+  glydb_data$glycan_type[intact_mask & concrete_mask],
+  glydb_data$confidence[intact_mask & concrete_mask]
 ) |>
   rename(glycan_structure = glycan)
 
 topological_concrete_strucs <- summarise_glycans(
-  remove_linkages(glydb_data$glycan_structure),
-  glydb_data$species,
-  glydb_data$glycan_type,
-  glydb_data$confidence
+  remove_linkages(glydb_data$glycan_structure[concrete_mask]),
+  glydb_data$species[concrete_mask],
+  glydb_data$glycan_type[concrete_mask],
+  glydb_data$confidence[concrete_mask]
 ) |>
   rename(glycan_structure = glycan)
 
-generic_structures <- convert_to_generic(glydb_data$glycan_structure)
-
 intact_generic_strucs <- summarise_glycans(
-  generic_structures[intact],
-  glydb_data$species[intact],
-  glydb_data$glycan_type[intact],
-  glydb_data$confidence[intact]
+  convert_to_generic(glydb_data$glycan_structure)[intact_mask],
+  glydb_data$species[intact_mask],
+  glydb_data$glycan_type[intact_mask],
+  glydb_data$confidence[intact_mask]
 ) |>
   rename(glycan_structure = glycan)
 
 topological_generic_strucs <- summarise_glycans(
-  remove_linkages(generic_structures),
+  remove_linkages(convert_to_generic(glydb_data$glycan_structure)),
   glydb_data$species,
   glydb_data$glycan_type,
   glydb_data$confidence

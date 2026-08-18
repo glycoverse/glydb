@@ -33,4 +33,4 @@ Imports:
     vctrs
 Remotes:  
     glycoverse/glyrepr,
-    glycoverse/glymotif
+    glycoverse/glyparse

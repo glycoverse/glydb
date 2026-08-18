@@ -80,63 +80,63 @@ glycan.
 
 ``` r
 glydb_structures()
-#> <glydb_structure[7125]>
+#> <glydb_structure[8573]>
 #> [1] Glc(b1-3)Glc(b1-3)Glc(b1-
 #> [2] Glc(b1-4)Glc(b1-4)Glc(b1-4)Glc(b1-
-#> [3] Man(a1-3)[Man(a1-6)]Man(b1-4)GlcNAc(b1-
-#> [4] Fuc(a1-2)[GalNAc(a1-3)]Gal(b1-4)GlcNAc(b1-3)[Neu5Gc(a2-6)]GalNAc(a1-
-#> [5] Gal(b1-3)GalNAc(a1-
-#> [6] Gal(b1-3)[GlcNAc(b1-6)]GalNAc(a1-
-#> [7] GlcNAc(b1-3)GalNAc(a1-
-#> [8] GlcNAc(b1-3)[GlcNAc(b1-6)]GalNAc(a1-
-#> [9] GalNAc(a1-3)GalNAc(a1-
-#> [10] GlcNAc(b1-6)GalNAc(a1-
-#> ... (7115 more not shown)
-#> # Unique structures: 7125
+#> [3] Fuc(a1-2)Gal(b1-4)GlcNAc(b1-6)[Fuc(a1-2)Gal(b1-3)]GalNAc(b1-
+#> [4] Man(a1-3)[Man(a1-6)]Man(b1-4)GlcNAc(b1-
+#> [5] Galf(a1-2)Galf(a1-4)Gal(b1-
+#> [6] Fuc(a1-2)[GalNAc(a1-3)]Gal(b1-4)GlcNAc(b1-3)[Neu5Gc(a2-6)]GalNAc(a1-
+#> [7] Gal(b1-3)GalNAc(a1-
+#> [8] Gal(b1-3)[GlcNAc(b1-6)]GalNAc(a1-
+#> [9] GlcNAc(b1-3)GalNAc(a1-
+#> [10] GlcNAc(b1-3)[GlcNAc(b1-6)]GalNAc(a1-
+#> ... (8563 more not shown)
+#> # Unique structures: 8573
 glydb_structures(structure_level = "topological")
-#> <glydb_structure[3811]>
+#> <glydb_structure[8263]>
 #> [1] Neu5Gc(??-?)Neu5Gc(??-?)Gal(??-?)Glc(??-
 #> [2] Neu5Ac(??-?)Gal(??-?)GlcNAc(??-?)Man(??-?)[Gal(??-?)GlcNAc(??-?)[Gal(??-?)GlcNAc(??-?)]Man(??-?)]Man(??-?)GlcNAc(??-?)GlcNAc(??-
-#> [3] Glc(??-?)Glc(??-?)Glc(??-
-#> [4] Glc(??-?)Glc(??-?)Glc(??-?)Glc(??-
-#> [5] Man(??-?)[Man(??-?)]Man(??-?)GlcNAc(??-
-#> [6] Man(??-?)Man(??-?)[GlcNAc(??-?)Man(??-?)]Man(??-?)GlcNAc(??-?)GlcNAc(??-
-#> [7] Neu5Ac(??-?)Gal(??-?)GlcNAc(??-?)Man(??-?)[Gal(??-?)Gal(??-?)GlcNAc(??-?)[Gal(??-?)Gal(??-?)GlcNAc(??-?)]Man(??-?)]Man(??-?)GlcNAc(??-?)[Fuc(??-?)]GlcNAc(??-
-#> [8] GalNAc(??-?)[Fuc(??-?)]Gal(??-?)GlcNAc(??-?)[Neu5Gc(??-?)]GalNAc(??-
-#> [9] Gal(??-?)GalNAc(??-
-#> [10] GlcNAc(??-?)[Gal(??-?)]GalNAc(??-
-#> ... (3801 more not shown)
-#> # Unique structures: 3811
+#> [3] Fuc(??-?)Gal(??-?)GlcNAc(??-?)Gal(??-?)GlcNAc(??-
+#> [4] GalNAc(??-?)Gal(??-?)Gal(??-?)Glc(??-
+#> [5] {Gal(??-?)[Fuc(??-?)]GlcNAc(??-?)|10,11,12,13,14,15}{Gal(??-?)GlcNAc(??-?)|10,11,12,13,14,15}{Neu5Ac(??-?)Gal(??-?)[Fuc(??-?)]GlcNAc(??-?)|10,11,12,13,14,15}Man(??-?)[Man(??-?)]Man(??-?)GlcNAc(??-?)[Fuc(??-?)]GlcNAc(??-
+#> [6] Gal(??-?)Gal(??-?)Gal(??-?)Glc(??-
+#> [7] GalNAc(??-?)GlcNAc(??-?)Man(??-?)Glc(??-
+#> [8] GlcNAc(??-?)Man(??-?)Man(??-?)Glc(??-
+#> [9] Gal(??-?)Gal(??-
+#> [10] GalNAc4S(??-?)GlcNAc(??-?)Man(??-?)[Man(??-?)]Man(??-?)GlcNAc(??-?)GlcNAc(??-
+#> ... (8253 more not shown)
+#> # Unique structures: 8263
 glydb_structures(mono_type = "generic")
-#> <glydb_structure[6461]>
+#> <glydb_structure[7665]>
 #> [1] Hex(b1-3)Hex(b1-3)Hex(b1-
 #> [2] Hex(b1-4)Hex(b1-4)Hex(b1-4)Hex(b1-
-#> [3] Hex(a1-3)[Hex(a1-6)]Hex(b1-4)HexNAc(b1-
-#> [4] dHex(a1-2)[HexNAc(a1-3)]Hex(b1-4)HexNAc(b1-3)[NeuGc(a2-6)]HexNAc(a1-
-#> [5] Hex(b1-3)HexNAc(a1-
-#> [6] Hex(b1-3)[HexNAc(b1-6)]HexNAc(a1-
-#> [7] HexNAc(b1-3)HexNAc(a1-
-#> [8] HexNAc(b1-3)[HexNAc(b1-6)]HexNAc(a1-
-#> [9] HexNAc(a1-3)HexNAc(a1-
-#> [10] HexNAc(b1-6)HexNAc(a1-
-#> ... (6451 more not shown)
-#> # Unique structures: 6461
+#> [3] dHex(a1-2)Hex(b1-4)HexNAc(b1-6)[dHex(a1-2)Hex(b1-3)]HexNAc(b1-
+#> [4] Hex(a1-3)[Hex(a1-6)]Hex(b1-4)HexNAc(b1-
+#> [5] Hex(a1-2)Hex(a1-4)Hex(b1-
+#> [6] dHex(a1-2)[HexNAc(a1-3)]Hex(b1-4)HexNAc(b1-3)[NeuGc(a2-6)]HexNAc(a1-
+#> [7] Hex(b1-3)HexNAc(a1-
+#> [8] Hex(b1-3)[HexNAc(b1-6)]HexNAc(a1-
+#> [9] HexNAc(b1-3)HexNAc(a1-
+#> [10] HexNAc(b1-3)[HexNAc(b1-6)]HexNAc(a1-
+#> ... (7655 more not shown)
+#> # Unique structures: 7665
 glydb_structures(structure_level = "topological", mono_type = "generic")
-#> <glydb_structure[3309]>
+#> <glydb_structure[7667]>
 #> [1] NeuGc(??-?)NeuGc(??-?)Hex(??-?)Hex(??-
 #> [2] NeuAc(??-?)Hex(??-?)HexNAc(??-?)Hex(??-?)[Hex(??-?)HexNAc(??-?)[Hex(??-?)HexNAc(??-?)]Hex(??-?)]Hex(??-?)HexNAc(??-?)HexNAc(??-
-#> [3] Hex(??-?)Hex(??-?)Hex(??-
-#> [4] Hex(??-?)Hex(??-?)Hex(??-?)Hex(??-
-#> [5] Hex(??-?)[Hex(??-?)]Hex(??-?)HexNAc(??-
-#> [6] HexNAc(??-?)Hex(??-?)[Hex(??-?)Hex(??-?)]Hex(??-?)HexNAc(??-?)HexNAc(??-
-#> [7] NeuAc(??-?)Hex(??-?)HexNAc(??-?)Hex(??-?)[Hex(??-?)Hex(??-?)HexNAc(??-?)[Hex(??-?)Hex(??-?)HexNAc(??-?)]Hex(??-?)]Hex(??-?)HexNAc(??-?)[dHex(??-?)]HexNAc(??-
-#> [8] HexNAc(??-?)[dHex(??-?)]Hex(??-?)HexNAc(??-?)[NeuGc(??-?)]HexNAc(??-
-#> [9] Hex(??-?)HexNAc(??-
-#> [10] HexNAc(??-?)[Hex(??-?)]HexNAc(??-
-#> ... (3299 more not shown)
-#> # Unique structures: 3309
+#> [3] dHex(??-?)Hex(??-?)HexNAc(??-?)Hex(??-?)HexNAc(??-
+#> [4] HexNAc(??-?)Hex(??-?)Hex(??-?)Hex(??-
+#> [5] {Hex(??-?)[dHex(??-?)]HexNAc(??-?)|10,11,12,13,14,15}{Hex(??-?)HexNAc(??-?)|10,11,12,13,14,15}{NeuAc(??-?)Hex(??-?)[dHex(??-?)]HexNAc(??-?)|10,11,12,13,14,15}Hex(??-?)[Hex(??-?)]Hex(??-?)HexNAc(??-?)[dHex(??-?)]HexNAc(??-
+#> [6] Hex(??-?)Hex(??-?)Hex(??-?)Hex(??-
+#> [7] HexNAc(??-?)HexNAc(??-?)Hex(??-?)Hex(??-
+#> [8] Hex(??-?)Hex(??-
+#> [9] HexNAc4S(??-?)HexNAc(??-?)Hex(??-?)[Hex(??-?)]Hex(??-?)HexNAc(??-?)HexNAc(??-
+#> [10] HexA(??-?)HexNAc(??-?)HexA(??-?)HexNAc(??-
+#> ... (7657 more not shown)
+#> # Unique structures: 7667
 glydb_structures(species = "Homo sapiens")
-#> <glydb_structure[1367]>
+#> <glydb_structure[1722]>
 #> [1] Gal(b1-3)GalNAc(a1-
 #> [2] Gal(b1-3)[GlcNAc(b1-6)]GalNAc(a1-
 #> [3] GlcNAc(b1-3)GalNAc(a1-
@@ -147,37 +147,37 @@ glydb_structures(species = "Homo sapiens")
 #> [8] Gal(b1-3)GlcNAc(b1-3)Gal(b1-4)Glc(b1-
 #> [9] Fuc(a1-2)Gal(b1-3)GlcNAc(b1-3)Gal(b1-4)Glc(b1-
 #> [10] Fuc(a1-3)[Gal(b1-4)]GlcNAc(b1-
-#> ... (1357 more not shown)
-#> # Unique structures: 1367
+#> ... (1712 more not shown)
+#> # Unique structures: 1722
 glydb_structures(glycan_type = "N")
-#> <glydb_structure[2780]>
+#> <glydb_structure[3567]>
 #> [1] Man(a1-3)[Man(a1-6)]Man(b1-4)GlcNAc(b1-
-#> [2] GlcNAc(b1-2)[GlcNAc(b1-4)]Man(a1-3)[GlcNAc(b1-2)[GlcNAc(b1-6)]Man(a1-6)]Man(b1-4)GlcNAc(b1-4)[Fuc(a1-6)]GlcNAc(b1-
-#> [3] Man(a1-3)Man(a1-6)[Man(a1-3)]Man(b1-4)GlcNAc(a1-
-#> [4] Fuc(a1-3)[Gal(b1-4)]GlcNAc(b1-4)Man(a1-3)Man(b1-4)GlcNAc(b1-4)[Fuc(a1-6)]GlcNAc(b1-
-#> [5] Neu5Ac(a2-3)Gal(b1-3)[Neu5Ac(a2-6)]GlcNAc(b1-2)Man(a1-3)[Neu5Ac(a2-3)Gal(b1-3)GlcNAc(b1-2)Man(a1-6)]Man(b1-4)GlcNAc(b1-4)GlcNAc(b1-
-#> [6] Man(a1-2)Man(a1-2)Man(a1-6)[Man(a1-2)Man(a1-3)]Man(b1-4)GlcNAc(b1-4)GlcNAc(b1-
-#> [7] Man(a1-2)Man(a1-3)[GlcNAc(b1-4)][Man(a1-3)[Man(a1-6)]Man(a1-6)]Man(b1-4)GlcNAc(b1-4)GlcNAc(a1-
-#> [8] Neu5Gc(a2-3)Gal(b1-4)GlcNAc(b1-4)[Gal(b1-4)GlcNAc(b1-2)]Man(a1-3)[Gal(b1-4)GlcNAc(b1-2)Man(a1-6)]Man(b1-4)GlcNAc(b1-4)[Fuc(a1-6)]GlcNAc(b1-
-#> [9] Man(a1-6)Man(b1-4)GlcNAc(b1-4)[Fuc(a1-6)]GlcNAc(b1-
-#> [10] Neu5Ac(a2-6)Gal(b1-4)GlcNAc(b1-2)[Neu5Ac(a2-6)Gal(b1-4)GlcNAc(b1-4)]Man(a1-3)[Gal(b1-4)GlcNAc(b1-2)Man(a1-6)]Man(b1-4)GlcNAc(b1-4)GlcNAc(b1-
-#> ... (2770 more not shown)
-#> # Unique structures: 2780
+#> [2] {Neu5Ac(a2-3)Gal(b1-4)GlcNAc(b1-2)}Man(a1-3)[Man(a1-6)]Man(b1-4)GlcNAc(b1-4)GlcNAc(b1-
+#> [3] {Neu5Ac(a2-3)}Gal(b1-4)GlcNAc(b1-2)Man(a1-3)[Gal(b1-4)GlcNAc(b1-2)[Gal(b1-4)GlcNAc(b1-6)]Man(a1-6)]Man(b1-4)GlcNAc(b1-4)[Fuc(a1-6)]GlcNAc(b1-
+#> [4] GlcNAc(b1-2)[GlcNAc(b1-4)]Man(a1-3)[GlcNAc(b1-2)[GlcNAc(b1-6)]Man(a1-6)]Man(b1-4)GlcNAc(b1-4)[Fuc(a1-6)]GlcNAc(b1-
+#> [5] Man(a1-3)Man(a1-6)[Man(a1-3)]Man(b1-4)GlcNAc(a1-
+#> [6] Fuc(a1-3)[Gal(b1-4)]GlcNAc(b1-4)Man(a1-3)Man(b1-4)GlcNAc(b1-4)[Fuc(a1-6)]GlcNAc(b1-
+#> [7] Neu5Ac(a2-3)Gal(b1-3)[Neu5Ac(a2-6)]GlcNAc(b1-2)Man(a1-3)[Neu5Ac(a2-3)Gal(b1-3)GlcNAc(b1-2)Man(a1-6)]Man(b1-4)GlcNAc(b1-4)GlcNAc(b1-
+#> [8] Man(a1-2)Man(a1-2)Man(a1-6)[Man(a1-2)Man(a1-3)]Man(b1-4)GlcNAc(b1-4)GlcNAc(b1-
+#> [9] Man(a1-2)Man(a1-3)[GlcNAc(b1-4)][Man(a1-3)[Man(a1-6)]Man(a1-6)]Man(b1-4)GlcNAc(b1-4)GlcNAc(a1-
+#> [10] Neu5Gc(a2-3)Gal(b1-4)GlcNAc(b1-4)[Gal(b1-4)GlcNAc(b1-2)]Man(a1-3)[Gal(b1-4)GlcNAc(b1-2)Man(a1-6)]Man(b1-4)GlcNAc(b1-4)[Fuc(a1-6)]GlcNAc(b1-
+#> ... (3557 more not shown)
+#> # Unique structures: 3567
 glydb_structures(glycan_type = "N", mono_range = list(Hex = c(5L, 10L)))
 #> <glydb_structure[0]>
 #> # Unique structures: 0
 glydb_structures(mono_range = list(Hex = c(3L, 9L), HexNAc = c(2L, 6L)))
-#> <glydb_structure[1031]>
+#> <glydb_structure[1133]>
 #> [1] GlcNAc(a1-3)GalNAc(b1-3)Gal(a1-4)Gal(b1-4)Glc(b1-
 #> [2] Man(a1-2)Man(a1-2)Man(a1-6)[Man(a1-2)Man(a1-3)]Man(b1-4)GlcNAc(b1-4)GlcNAc(b1-
 #> [3] Man(a1-2)Man(a1-3)[GlcNAc(b1-4)][Man(a1-3)[Man(a1-6)]Man(a1-6)]Man(b1-4)GlcNAc(b1-4)GlcNAc(a1-
 #> [4] Man(a1-3)Man(a1-6)[Man(b1-3)]Man(b1-4)GlcNAc(b1-4)GlcNAc(b1-
-#> [5] Gal(b1-4)GlcNAc(b1-3)[Gal(b1-4)GlcNAc(b1-6)]Gal(b1-4)GlcNAc(b1-3)[Gal(b1-4)GlcNAc(b1-6)]Gal(b1-4)GlcNAc(b1-
-#> [6] Man(a1-2)Man(a1-3)[Man(a1-3)[Man(a1-6)]Man(a1-6)]Man(a1-4)GlcNAc(b1-4)GlcNAc(b1-
-#> [7] Man(a1-6)Man(a1-3)[Man(a1-6)]Man(b1-4)GlcNAc(b1-4)GlcNAc(b1-
-#> [8] Man(a1-4)Man(a1-4)Man(a1-3)[Man(a1-4)Man(a1-3)[Man(a1-4)Man(a1-6)]Man(a1-6)]Man(b1-4)GlcNAc(b1-4)GlcNAc(b1-
-#> [9] Glc(b1-3)Man(a1-2)Man(a1-2)Man(a1-3)[Man(a1-2)Man(a1-6)[Man(a1-3)]Man(a1-6)]Man(b1-4)GlcNAc(b1-4)GlcNAc(b1-
-#> [10] Gal(b1-4)GlcNAc(b1-4)Man(a1-3)[Gal(b1-4)GlcNAc(b1-4)Man(a1-6)]Man(b1-4)GlcNAc(b1-4)GlcNAc(b1-
-#> ... (1021 more not shown)
-#> # Unique structures: 1031
+#> [5] {Gal(b1-4)|3,4,6,7,8}{Gal(b1-4)|3,4,6,7,8}GlcNAc(b1-2)[GlcNAc(b1-4)]Man(a1-3)[GlcNAc(b1-2)Man(a1-6)]Man(b1-4)GlcNAc(b1-4)GlcNAc(b1-
+#> [6] Gal(b1-4)GlcNAc(b1-3)[Gal(b1-4)GlcNAc(b1-6)]Gal(b1-4)GlcNAc(b1-3)[Gal(b1-4)GlcNAc(b1-6)]Gal(b1-4)GlcNAc(b1-
+#> [7] Man(a1-2)Man(a1-3)[Man(a1-3)[Man(a1-6)]Man(a1-6)]Man(a1-4)GlcNAc(b1-4)GlcNAc(b1-
+#> [8] Man(a1-6)Man(a1-3)[Man(a1-6)]Man(b1-4)GlcNAc(b1-4)GlcNAc(b1-
+#> [9] Man(a1-4)Man(a1-4)Man(a1-3)[Man(a1-4)Man(a1-3)[Man(a1-4)Man(a1-6)]Man(a1-6)]Man(b1-4)GlcNAc(b1-4)GlcNAc(b1-
+#> [10] Glc(b1-3)Man(a1-2)Man(a1-2)Man(a1-3)[Man(a1-2)Man(a1-6)[Man(a1-3)]Man(a1-6)]Man(b1-4)GlcNAc(b1-4)GlcNAc(b1-
+#> ... (1123 more not shown)
+#> # Unique structures: 1133
 ```

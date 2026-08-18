@@ -11,6 +11,9 @@
 
 ### New features
 
+- `glydb_data` now includes 49,019 GlyGen glycan structures parsed from
+  WURCS sequences, substantially expanding bundled GlyTouCan coverage.
+  (#15)
 - [`glydb_structures()`](https://glycoverse.github.io/glydb/dev/reference/glydb_structures.md)
   gains an independent `mono_type` argument for retrieving concrete or
   generic monosaccharide structures.

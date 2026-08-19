@@ -11,6 +11,7 @@ Description: Provides a comprehensive database of glycan structures from GlyTouC
     comparison, and research applications. 
 License: MIT + file LICENSE
 Suggests: 
+    glyparse (>= 0.7.1.9000),
     testthat (>= 3.0.0),
     tibble
 Config/testthat/edition: 3
@@ -26,8 +27,6 @@ Imports:
     glyrepr (>= 0.14.0.9000),
     checkmate,
     cli,
-    glyparse (>= 0.7.1.9000),
-    httr2,
     purrr,
     stringr,
     vctrs

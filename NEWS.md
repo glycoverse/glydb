@@ -3,6 +3,7 @@
 ## Breaking changes
 
 * `glydb_structures()` now accepts only `"intact"` and `"topological"` structure levels; use `mono_type = "generic"` with `structure_level = "topological"` instead of the removed `"basic"` level.
+* `glytoucan_to_struc()` no longer falls back to the online GlyGen API. Accessions without a bundled `glydb_data` match now return `NA`.
 
 ## New features
 

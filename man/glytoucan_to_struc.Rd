@@ -10,17 +10,13 @@ glytoucan_to_struc(glytoucan_ac)
 \item{glytoucan_ac}{A character vector of GlyTouCan accessions.}
 }
 \value{
-A \code{\link[glyrepr:glycan_structure]{glyrepr::glycan_structure()}} vector. Accessions that cannot be
-fetched or parsed are returned as \code{NA} values in their original positions,
-and a warning is emitted.
+A \code{\link[glyrepr:glycan_structure]{glyrepr::glycan_structure()}} vector. Accessions without a bundled
+match are returned as \code{NA} values in their original positions, and a
+warning is emitted.
 }
 \description{
-Look up GlyTouCan accessions from \link{glydb_data}, then fetch missing
-accessions from the GlyGen API and parse the returned IUPAC strings as
-\code{\link[glyrepr:glycan_structure]{glyrepr::glycan_structure()}} values.
+Look up GlyTouCan accessions in the bundled \link{glydb_data}.
 }
 \examples{
-\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 glytoucan_to_struc("G17689DH")
-\dontshow{\}) # examplesIf}
 }

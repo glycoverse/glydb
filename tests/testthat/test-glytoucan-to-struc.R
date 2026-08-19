@@ -43,7 +43,7 @@ test_that("glytoucan_to_struc performs GlyGen detail requests in parallel", {
       request_urls <<- purrr::map_chr(reqs, "url")
       request_methods <<- purrr::map_chr(reqs, "method")
 
-      expect_equal(on_error, "return")
+      expect_equal(on_error, "continue")
       expect_false(progress)
 
       list(
@@ -140,20 +140,26 @@ test_that("glytoucan_to_struc returns NA and warns for unparseable glycans", {
 test_that("glytoucan_to_struc returns NA and warns for API failures", {
   local_mocked_bindings(
     req_perform_parallel = function(reqs, on_error, progress, ...) {
+      expect_equal(on_error, "continue")
+
       list(
         glygen_test_response("alpha-D-Manp-(1->"),
-        errorCondition("not found")
+        errorCondition("not found"),
+        glygen_test_response("beta-D-GlcpNAc-(1->")
       )
     },
     .package = "httr2"
   )
 
   expect_warning(
-    res <- glytoucan_to_struc(c("G00001AA", "G00002BB")),
+    res <- glytoucan_to_struc(c("G00001AA", "G00002BB", "G00003CC")),
     "Failed to fetch or parse 1 GlyTouCan accession"
   )
 
-  expect_equal(vctrs::vec_data(res), c("Man(a1-", NA_character_))
+  expect_equal(
+    vctrs::vec_data(res),
+    c("Man(a1-", NA_character_, "GlcNAc(b1-")
+  )
 })
 
 test_that("glytoucan_to_struc preserves positions for HTTP and JSON response failures", {

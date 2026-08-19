@@ -112,7 +112,7 @@ glygen_glycan_details <- function(glytoucan_ac) {
   requests <- purrr::map(glytoucan_ac, glygen_glycan_detail_request)
   responses <- httr2::req_perform_parallel(
     requests,
-    on_error = "return",
+    on_error = "continue",
     progress = FALSE
   )
 

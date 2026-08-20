@@ -102,6 +102,14 @@ topological_generic_strucs <- summarise_glycans(
 ) |>
   rename(glycan_structure = glycan)
 
+normalized_glytoucan_strucs <- fill_anomer_pos(glydb_data$glycan_structure)
+normalized_glytoucan_keys <- as.character(normalized_glytoucan_strucs)
+first_normalized_glytoucan <- !duplicated(normalized_glytoucan_keys)
+struc_glytoucan_lookup <- setNames(
+  glydb_data$glytoucan_ac[first_normalized_glytoucan],
+  normalized_glytoucan_keys[first_normalized_glytoucan]
+)
+
 usethis::use_data(
   concrete_comps,
   generic_comps,
@@ -109,6 +117,7 @@ usethis::use_data(
   topological_concrete_strucs,
   intact_generic_strucs,
   topological_generic_strucs,
+  struc_glytoucan_lookup,
   internal = TRUE,
   overwrite = TRUE
 )

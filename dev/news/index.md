@@ -8,9 +8,15 @@
   now accepts only `"intact"` and `"topological"` structure levels; use
   `mono_type = "generic"` with `structure_level = "topological"` instead
   of the removed `"basic"` level.
+- [`glytoucan_to_struc()`](https://glycoverse.github.io/glydb/dev/reference/glytoucan_to_struc.md)
+  no longer falls back to the online GlyGen API. Accessions without a
+  bundled `glydb_data` match now return `NA`. (#16)
 
 ### New features
 
+- Add
+  [`struc_to_glytoucan()`](https://glycoverse.github.io/glydb/dev/reference/struc_to_glytoucan.md)
+  to map glycan structures to bundled GlyTouCan accessions. (#16)
 - `glydb_data` now includes 49,019 GlyGen glycan structures parsed from
   WURCS sequences, substantially expanding bundled GlyTouCan coverage.
   (#15)

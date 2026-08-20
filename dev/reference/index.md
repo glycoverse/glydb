@@ -12,3 +12,5 @@
   : Get Structures From Glydb Data
 - [`glytoucan_to_struc()`](https://glycoverse.github.io/glydb/dev/reference/glytoucan_to_struc.md)
   : Convert GlyTouCan Accessions to Glycan Structures
+- [`struc_to_glytoucan()`](https://glycoverse.github.io/glydb/dev/reference/struc_to_glytoucan.md)
+  : Convert Glycan Structures to GlyTouCan Accessions

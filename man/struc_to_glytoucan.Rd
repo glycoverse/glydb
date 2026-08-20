@@ -20,8 +20,9 @@ Match glycan structures to accessions in the bundled \link{glydb_data}.
 }
 \details{
 Missing anomeric positions are filled with
-\code{\link[glyrepr:fill_anomer_pos]{glyrepr::fill_anomer_pos()}} before matching. When multiple bundled rows
-have the same structure, the accession from the first row is returned.
+\code{\link[glyrepr:fill_anomer_pos]{glyrepr::fill_anomer_pos()}} in both the input and bundled structures before
+matching. When multiple bundled rows normalize to the same structure, the
+accession from the first row is returned.
 }
 \examples{
 struc_to_glytoucan(glydb_data$glycan_structure[1])

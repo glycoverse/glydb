@@ -16,6 +16,13 @@ test_that("struc_to_glytoucan accepts character structures", {
   expect_equal(result, glydb_data$glytoucan_ac[[1]])
 })
 
+test_that("struc_to_glytoucan normalizes bundled structures before matching", {
+  position <- match("G00009BX", glydb_data$glytoucan_ac)
+  struc <- glydb_data$glycan_structure[position]
+
+  expect_equal(struc_to_glytoucan(struc), "G00009BX")
+})
+
 test_that("struc_to_glytoucan preserves NA and warns for unmatched structures", {
   strucs <- c(
     glydb_data$glycan_structure[1],

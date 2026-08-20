@@ -9,8 +9,9 @@
 #'   bundled match are returned as `NA` values in their original positions, and
 #'   a warning is emitted.
 #' @details Missing anomeric positions are filled with
-#'   [glyrepr::fill_anomer_pos()] before matching. When multiple bundled rows
-#'   have the same structure, the accession from the first row is returned.
+#'   [glyrepr::fill_anomer_pos()] in both the input and bundled structures before
+#'   matching. When multiple bundled rows normalize to the same structure, the
+#'   accession from the first row is returned.
 #' @examples
 #' struc_to_glytoucan(glydb_data$glycan_structure[1])
 #' @export
@@ -22,8 +23,8 @@ struc_to_glytoucan <- function(strucs) {
   }
 
   strucs <- glyrepr::fill_anomer_pos(strucs)
-  data_position <- match(strucs, glydb_data$glycan_structure)
-  failed <- !is.na(strucs) & is.na(data_position)
+  lookup_position <- match(as.character(strucs), names(struc_glytoucan_lookup))
+  failed <- !is.na(strucs) & is.na(lookup_position)
 
   if (any(failed)) {
     cli::cli_warn(c(
@@ -32,7 +33,7 @@ struc_to_glytoucan <- function(strucs) {
     ))
   }
 
-  glydb_data$glytoucan_ac[data_position]
+  unname(struc_glytoucan_lookup[lookup_position])
 }
 
 #' Ensure input is a glycan structure vector

@@ -1,7 +1,7 @@
 # GlyGen Glycan Data
 
 A curated dataset glycan structures from GlyGen Data v2.11.1, with
-19,436 glycan structures currently available.
+49,019 glycan structures currently available.
 
 ## Usage
 
@@ -11,7 +11,7 @@ glydb_data
 
 ## Format
 
-A tibble with 19,436 rows and 6 variables:
+A tibble with 49,019 rows and 6 variables:
 
 - `glytoucan_ac`: GlyTouCan accession.
 

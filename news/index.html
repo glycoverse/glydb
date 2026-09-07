@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">glydb</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.6.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.7.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,6 +30,26 @@
 
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.7.0" id="glydb-070">glydb 0.7.0<a class="anchor" aria-label="anchor" href="#glydb-070"></a></h2>
+<div class="section level3">
+<h3 id="breaking-changes-0-7-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-7-0"></a></h3>
+<ul><li>
+<code><a href="../reference/glydb_structures.html">glydb_structures()</a></code> now accepts only <code>"intact"</code> and <code>"topological"</code> structure levels; use <code>mono_type = "generic"</code> with <code>structure_level = "topological"</code> instead of the removed <code>"basic"</code> level.</li>
+<li>
+<code><a href="../reference/glytoucan_to_struc.html">glytoucan_to_struc()</a></code> no longer falls back to the online GlyGen API. Accessions without a bundled <code>glydb_data</code> match now return <code>NA</code>. (#16)</li>
+</ul></div>
+<div class="section level3">
+<h3 id="new-features-0-7-0">New features<a class="anchor" aria-label="anchor" href="#new-features-0-7-0"></a></h3>
+<ul><li>
+<code>glydb_data</code> now includes 49,019 GlyGen glycan structures parsed from WURCS sequences, substantially expanding bundled GlyTouCan coverage. (#15)</li>
+<li>
+<code><a href="../reference/glydb_compositions.html">glydb_compositions()</a></code> and <code><a href="../reference/glydb_structures.html">glydb_structures()</a></code> now preserve their <code>confidence</code> attributes through vector operations. When identical glycans with different confidence values are combined, the maximum value is used. (#14)</li>
+<li>
+<code><a href="../reference/glydb_structures.html">glydb_structures()</a></code> gains an independent <code>mono_type</code> argument for retrieving concrete or generic monosaccharide structures. For generic topological structures, use <code>mono_type = "generic"</code> with <code>structure_level = "topological"</code> instead of the removed <code>"basic"</code> level.</li>
+<li>New <code><a href="../reference/struc_to_glytoucan.html">struc_to_glytoucan()</a></code> maps glycan structures to bundled GlyTouCan accessions. (#16)</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.6.0" id="glydb-060">glydb 0.6.0<a class="anchor" aria-label="anchor" href="#glydb-060"></a></h2>
 <div class="section level3">
@@ -149,7 +169,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer></div>

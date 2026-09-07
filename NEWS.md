@@ -1,4 +1,4 @@
-# glydb (development version)
+# glydb 0.7.0
 
 ## Breaking changes
 
@@ -7,10 +7,10 @@
 
 ## New features
 
-* Add `struc_to_glytoucan()` to map glycan structures to bundled GlyTouCan accessions. (#16)
 * `glydb_data` now includes 49,019 GlyGen glycan structures parsed from WURCS sequences, substantially expanding bundled GlyTouCan coverage. (#15)
-* `glydb_structures()` gains an independent `mono_type` argument for retrieving concrete or generic monosaccharide structures.
 * `glydb_compositions()` and `glydb_structures()` now preserve their `confidence` attributes through vector operations. When identical glycans with different confidence values are combined, the maximum value is used. (#14)
+* `glydb_structures()` gains an independent `mono_type` argument for retrieving concrete or generic monosaccharide structures. For generic topological structures, use `mono_type = "generic"` with `structure_level = "topological"` instead of the removed `"basic"` level.
+* New `struc_to_glytoucan()` maps glycan structures to bundled GlyTouCan accessions. (#16)
 
 # glydb 0.6.0
 

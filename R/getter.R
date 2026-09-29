@@ -122,40 +122,16 @@ glydb_compositions <- function(
   glycan_type = NULL,
   mono_range = NULL
 ) {
-  checkmate::assert_choice(mono_type, c("generic", "concrete"))
-  checkmate::assert_choice(species, glydb_species(), null.ok = TRUE)
-  checkmate::assert_choice(
-    glycan_type,
-    glycan_type_choices(),
-    null.ok = TRUE
+  index <- glydb_composition_index(
+    mono_type = mono_type,
+    species = species,
+    glycan_type = glycan_type,
+    mono_range = mono_range
   )
-  validate_mono_range(mono_range, mono_type)
-  data <- switch(mono_type, concrete = concrete_comps, generic = generic_comps)
-
-  if (!is.null(species)) {
-    species_list <- stringr::str_split(data$species, ";")
-    right_specie <- purrr::map_lgl(species_list, ~ species %in% .x)
-    right_specie[is.na(right_specie)] <- FALSE
-    data <- data[right_specie, ]
+  if (identical(index$active_ids, index$record_id)) {
+    return(index$glycans)
   }
-
-  if (!is.null(glycan_type)) {
-    types_list <- stringr::str_split(data$glycan_type, ";")
-    right_type <- purrr::map_lgl(types_list, match_glycan_type, glycan_type)
-    right_type[is.na(right_type)] <- FALSE
-    data <- data[right_type, ]
-  }
-
-  result <- data$glycan_composition
-  confidence <- data$confidence
-
-  if (!is.null(mono_range)) {
-    mask <- filter_by_mono_range(result, mono_range, mono_type)
-    result <- result[mask]
-    confidence <- confidence[mask]
-  }
-
-  new_glydb_composition(result, confidence)
+  index$glycans[index$active_ids]
 }
 
 #' Get Structures From Glydb Data
@@ -200,51 +176,15 @@ glydb_structures <- function(
   mono_range = NULL,
   mono_type = "concrete"
 ) {
-  checkmate::assert_choice(structure_level, c("intact", "topological"))
-  checkmate::assert_choice(mono_type, c("generic", "concrete"))
-  checkmate::assert_choice(species, glydb_species(), null.ok = TRUE)
-  checkmate::assert_choice(
-    glycan_type,
-    glycan_type_choices(),
-    null.ok = TRUE
+  index <- glydb_structure_index(
+    structure_level = structure_level,
+    mono_type = mono_type,
+    species = species,
+    glycan_type = glycan_type,
+    mono_range = mono_range
   )
-  validate_mono_range(mono_range, mono_type)
-  data <- switch(
-    mono_type,
-    concrete = switch(
-      structure_level,
-      intact = intact_concrete_strucs,
-      topological = topological_concrete_strucs
-    ),
-    generic = switch(
-      structure_level,
-      intact = intact_generic_strucs,
-      topological = topological_generic_strucs
-    )
-  )
-
-  if (!is.null(species)) {
-    species_list <- stringr::str_split(data$species, ";")
-    right_specie <- purrr::map_lgl(species_list, ~ species %in% .x)
-    right_specie[is.na(right_specie)] <- FALSE
-    data <- data[right_specie, ]
+  if (identical(index$active_ids, index$record_id)) {
+    return(index$glycans)
   }
-
-  if (!is.null(glycan_type)) {
-    types_list <- stringr::str_split(data$glycan_type, ";")
-    right_type <- purrr::map_lgl(types_list, match_glycan_type, glycan_type)
-    right_type[is.na(right_type)] <- FALSE
-    data <- data[right_type, ]
-  }
-
-  result <- data$glycan_structure
-  confidence <- data$confidence
-
-  if (!is.null(mono_range)) {
-    mask <- filter_by_mono_range(result, mono_range, mono_type)
-    result <- result[mask]
-    confidence <- confidence[mask]
-  }
-
-  new_glydb_structure(result, confidence)
+  index$glycans[index$active_ids]
 }

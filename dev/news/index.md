@@ -2,6 +2,20 @@
 
 ## glydb (development version)
 
+- New
+  [`glydb_composition_index()`](https://glycoverse.github.io/glydb/dev/reference/glydb_composition_index.md)
+  and
+  [`glydb_structure_index()`](https://glycoverse.github.io/glydb/dev/reference/glydb_composition_index.md)
+  provide precomputed compositions, component counts, candidate maps,
+  confidence ranks, and structure-resolution keys for downstream
+  annotation. Filters select record IDs without rebuilding database
+  features.
+- [`glydb_compositions()`](https://glycoverse.github.io/glydb/dev/reference/glydb_compositions.md)
+  and
+  [`glydb_structures()`](https://glycoverse.github.io/glydb/dev/reference/glydb_structures.md)
+  use precomputed metadata and component counts for filtering, avoiding
+  repeated structure conversion and monosaccharide counting.
+
 ## glydb 0.7.0
 
 ### Breaking changes

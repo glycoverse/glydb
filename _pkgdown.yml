@@ -4,3 +4,16 @@ template:
 
 development:
   mode: auto
+
+reference:
+  - title: Database access
+    contents:
+      - glydb_data
+      - glydb_species
+      - glydb_compositions
+      - glydb_structures
+      - glydb_composition_index
+  - title: Accession mapping
+    contents:
+      - glytoucan_to_struc
+      - struc_to_glytoucan

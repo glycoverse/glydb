@@ -1,5 +1,8 @@
 # glydb (development version)
 
+* New `glydb_composition_index()` and `glydb_structure_index()` provide precomputed compositions, component counts, candidate maps, confidence ranks, and structure-resolution keys for downstream annotation. Filters select record IDs without rebuilding database features.
+* `glydb_compositions()` and `glydb_structures()` use precomputed metadata and component counts for filtering, avoiding repeated structure conversion and monosaccharide counting.
+
 # glydb 0.7.0
 
 ## Breaking changes

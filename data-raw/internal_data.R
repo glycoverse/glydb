@@ -110,4 +110,14 @@ struc_glytoucan_lookup <- setNames(
   normalized_glytoucan_keys[first_normalized_glytoucan]
 )
 
-source("data-raw/annotation-indexes.R")
+usethis::use_data(
+  concrete_comps,
+  generic_comps,
+  intact_concrete_strucs,
+  topological_concrete_strucs,
+  intact_generic_strucs,
+  topological_generic_strucs,
+  struc_glytoucan_lookup,
+  internal = TRUE,
+  overwrite = TRUE
+)

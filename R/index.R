@@ -1,5 +1,10 @@
 #' Get Precomputed Glycan Database Indexes
 #'
+#' @description
+#' These two functions are mainly used by the `glyanno` package.
+#' If you're directly using `glydb`,
+#' use [glydb_compositions()] or [glydb_structures()] instead.
+#'
 #' Retrieve bundled composition or structure indexes without parsing database
 #' structures, converting their resolution, counting components, or rebuilding
 #' candidate maps. All database features are computed during data generation.

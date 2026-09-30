@@ -100,6 +100,10 @@ record, with \code{NA} for missing structures.
 }
 }
 \description{
+These two functions are mainly used by the \code{glyanno} package.
+If you're directly using \code{glydb},
+use \code{\link[=glydb_compositions]{glydb_compositions()}} or \code{\link[=glydb_structures]{glydb_structures()}} instead.
+
 Retrieve bundled composition or structure indexes without parsing database
 structures, converting their resolution, counting components, or rebuilding
 candidate maps. All database features are computed during data generation.

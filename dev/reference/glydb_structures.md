@@ -165,7 +165,7 @@ glydb_structures(glycan_type = "N")
 #> # Unique structures: 3567
 glydb_structures(glycan_type = "N", mono_range = list(Hex = c(5L, 10L)))
 #> <glydb_structure[0]>
-#> # Unique structures: 8573
+#> # Unique structures: 0
 glydb_structures(mono_range = list(Hex = c(3L, 9L), HexNAc = c(2L, 6L)))
 #> <glydb_structure[1133]>
 #> [1] GlcNAc(a1-3)GalNAc(b1-3)Gal(a1-4)Gal(b1-4)Glc(b1-

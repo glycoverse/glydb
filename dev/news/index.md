@@ -2,6 +2,11 @@
 
 ## glydb (development version)
 
+- Updated the bundled data from GlyGen 2.11.1 to 2.12.1, increasing
+  coverage from 49,019 to 49,728 glycan structures (709 additional
+  accessions, with all previous accessions retained). Regenerated all
+  internal composition, structure, and GlyTouCan lookup indexes.
+
 ## glydb 0.7.0
 
 ### Breaking changes

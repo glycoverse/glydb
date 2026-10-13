@@ -15,3 +15,24 @@ test_that("glydb_data uses GlyGen classification classes", {
     glycan_types %in% c("O", "O-GalNAc", "O-GlcNAc", "O-Man", "O-Fuc", "O-Glc")
   ))
 })
+
+test_that("glydb_data has complete, unique accessions and valid parsed data", {
+  expect_named(
+    glydb_data,
+    c(
+      "glytoucan_ac",
+      "glycan_structure",
+      "glycan_composition",
+      "species",
+      "confidence",
+      "glycan_type"
+    )
+  )
+  expect_false(anyNA(glydb_data$glytoucan_ac))
+  expect_true(all(nzchar(glydb_data$glytoucan_ac)))
+  expect_identical(anyDuplicated(glydb_data$glytoucan_ac), 0L)
+  expect_false(anyNA(glydb_data$glycan_structure))
+  expect_false(anyNA(glydb_data$glycan_composition))
+  expect_true(all(is.finite(glydb_data$confidence)))
+  expect_true(all(glydb_data$confidence >= -1))
+})

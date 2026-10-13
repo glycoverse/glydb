@@ -2,10 +2,10 @@ library(tidyverse)
 library(glyparse)
 library(glyrepr)
 
-wurcs <- read_csv("data-raw/glycan_sequences_wurcs_v2_11_1.csv")
-species <- read_csv("data-raw/glycan_species_v2_11_1.csv")
-citations <- read_csv("data-raw/glycan_citations_glytoucan_v2_11_1.csv")
-classification <- read_csv("data-raw/glycan_classification_v2_11_1.csv")
+wurcs <- read_csv("data-raw/glycan_sequences_wurcs_v2_12_1.csv")
+species <- read_csv("data-raw/glycan_species_v2_12_1.csv")
+citations <- read_csv("data-raw/glycan_citations_glytoucan_v2_12_1.csv")
+classification <- read_csv("data-raw/glycan_classification_v2_12_1.csv")
 
 wurcs_prepared <- wurcs |>
   mutate(

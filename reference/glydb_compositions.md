@@ -73,7 +73,7 @@ glycan.
 
 ``` r
 glydb_compositions()
-#> <glydb_composition[1678]>
+#> <glydb_composition[1699]>
 #> [1] Glc(1)Gal(1)Neu5Gc(2)
 #> [2] Man(3)Gal(3)GlcNAc(5)Neu5Ac(1)
 #> [3] Gal(2)GlcNAc(2)Fuc(1)
@@ -84,9 +84,9 @@ glydb_compositions()
 #> [8] Glc(1)Man(2)GlcNAc(1)
 #> [9] Gal(2)
 #> [10] Man(3)GlcNAc(3)GalNAc(1)S(1)
-#> ... (1668 more not shown)
+#> ... (1689 more not shown)
 glydb_compositions(mono_type = "generic")
-#> <glydb_composition[1061]>
+#> <glydb_composition[1069]>
 #> [1] Hex(2)NeuGc(2)
 #> [2] Hex(6)HexNAc(5)NeuAc(1)
 #> [3] Hex(2)HexNAc(2)dHex(1)
@@ -97,9 +97,9 @@ glydb_compositions(mono_type = "generic")
 #> [8] Hex(2)
 #> [9] Hex(3)HexNAc(4)S(1)
 #> [10] HexNAc(2)HexA(2)
-#> ... (1051 more not shown)
+#> ... (1059 more not shown)
 glydb_compositions(species = "Homo sapiens")
-#> <glydb_composition[1042]>
+#> <glydb_composition[1048]>
 #> [1] Glc(1)Gal(1)Neu5Gc(2)
 #> [2] Man(3)Gal(3)GlcNAc(5)Neu5Ac(1)
 #> [3] Gal(2)GlcNAc(2)Fuc(1)
@@ -110,9 +110,9 @@ glydb_compositions(species = "Homo sapiens")
 #> [8] GlcNAc(2)GlcA(2)
 #> [9] Glc(3)
 #> [10] Glc(1)Gal(1)Fuc(1)
-#> ... (1032 more not shown)
+#> ... (1038 more not shown)
 glydb_compositions(glycan_type = "N")
-#> <glydb_composition[803]>
+#> <glydb_composition[812]>
 #> [1] Man(3)Gal(3)GlcNAc(5)Neu5Ac(1)
 #> [2] Man(3)Gal(3)GlcNAc(5)Fuc(3)Neu5Ac(1)
 #> [3] Man(3)GlcNAc(3)GalNAc(1)S(1)
@@ -123,11 +123,11 @@ glydb_compositions(glycan_type = "N")
 #> [8] Man(5)GlcNAc(2)
 #> [9] Man(4)GlcNAc(3)
 #> [10] Man(3)Gal(5)GlcNAc(5)Fuc(1)Neu5Ac(1)
-#> ... (793 more not shown)
+#> ... (802 more not shown)
 glydb_compositions(glycan_type = "N", mono_range = list(Hex = c(5L, 10L)))
 #> <glydb_composition[0]>
 glydb_compositions(mono_range = list(Hex = c(3L, 9L), HexNAc = c(2L, 6L)))
-#> <glydb_composition[115]>
+#> <glydb_composition[118]>
 #> [1] Man(3)GlcNAc(2)
 #> [2] Man(5)GlcNAc(2)
 #> [3] Man(4)GlcNAc(3)
@@ -135,8 +135,8 @@ glydb_compositions(mono_range = list(Hex = c(3L, 9L), HexNAc = c(2L, 6L)))
 #> [5] Gal(3)GlcNAc(2)GalNAc(1)
 #> [6] Glc(1)Gal(2)GlcNAc(1)GalNAc(1)
 #> [7] Gal(3)GlcNAc(3)GalNAc(2)
-#> [8] Man(5)Gal(1)GlcNAc(4)
-#> [9] Man(3)Gal(3)GlcNAc(6)
-#> [10] Man(9)GlcNAc(2)
-#> ... (105 more not shown)
+#> [8] Man(3)GlcNAc(5)GalNAc(1)
+#> [9] Man(5)Gal(1)GlcNAc(4)
+#> [10] Man(3)Gal(3)GlcNAc(6)
+#> ... (108 more not shown)
 ```

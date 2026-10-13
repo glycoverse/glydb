@@ -5,7 +5,7 @@
 \alias{glydb_data}
 \title{GlyGen Glycan Data}
 \format{
-A tibble with 49,019 rows and 6 variables:
+A tibble with 49,728 rows and 6 variables:
 \itemize{
 \item \code{glytoucan_ac}: GlyTouCan accession.
 \item \code{glycan_structure}: Glycan structure (glyrepr::glycan_structure()).
@@ -17,13 +17,13 @@ A tibble with 49,019 rows and 6 variables:
 }
 }
 \source{
-\url{https://data.glygen.org}
+\url{https://data.glygen.org/ln2data/releases/data/v-2.12.1/reviewed/}
 }
 \usage{
 glydb_data
 }
 \description{
-A curated dataset glycan structures from GlyGen Data v2.11.1,
-with 49,019 glycan structures currently available.
+A curated dataset glycan structures from GlyGen Data v2.12.1,
+with 49,728 glycan structures currently available.
 }
 \keyword{datasets}

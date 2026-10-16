@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">glydb</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.7.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.7.2.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,8 +32,19 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="glydb-development-version">glydb (development version)<a class="anchor" aria-label="anchor" href="#glydb-development-version"></a></h2>
-<ul><li>Updated the bundled data from GlyGen 2.11.1 to 2.12.1, increasing coverage from 49,019 to 49,728 glycan structures (709 additional accessions, with all previous accessions retained). Regenerated all internal composition, structure, and GlyTouCan lookup indexes.</li>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.7.2" id="glydb-072">glydb 0.7.2<a class="anchor" aria-label="anchor" href="#glydb-072"></a></h2>
+<ul><li>Installation now uses the released <code>glyrepr</code> (&gt;= 1.1.0) and <code>glyparse</code> (&gt;= 0.8.1) packages instead of development versions.</li>
 </ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.7.1" id="glydb-071">glydb 0.7.1<a class="anchor" aria-label="anchor" href="#glydb-071"></a></h2>
+<div class="section level3">
+<h3 id="minor-improvements-and-bug-fixes-0-7-1">Minor improvements and bug fixes<a class="anchor" aria-label="anchor" href="#minor-improvements-and-bug-fixes-0-7-1"></a></h3>
+<ul><li>Update bundled data from GlyGen 2.11.1 to 2.12.1, increasing coverage from 49,019 to 49,728 glycan structures (709 additional accessions, with all previous accessions retained). Regenerate internal composition, structure, and GlyTouCan lookup indexes. (#18)</li>
+<li>Incorporate upstream WURCS revisions affecting 77 existing structures, with their monosaccharide compositions unchanged. For reproducible analyses, pin the glydb package version and record the bundled GlyGen data version.</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.7.0" id="glydb-070">glydb 0.7.0<a class="anchor" aria-label="anchor" href="#glydb-070"></a></h2>
 <div class="section level3">

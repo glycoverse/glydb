@@ -2,10 +2,23 @@
 
 ## glydb (development version)
 
-- Updated the bundled data from GlyGen 2.11.1 to 2.12.1, increasing
-  coverage from 49,019 to 49,728 glycan structures (709 additional
-  accessions, with all previous accessions retained). Regenerated all
-  internal composition, structure, and GlyTouCan lookup indexes.
+## glydb 0.7.2
+
+- Installation now uses the released `glyrepr` (\>= 1.1.0) and
+  `glyparse` (\>= 0.8.1) packages instead of development versions.
+
+## glydb 0.7.1
+
+### Minor improvements and bug fixes
+
+- Update bundled data from GlyGen 2.11.1 to 2.12.1, increasing coverage
+  from 49,019 to 49,728 glycan structures (709 additional accessions,
+  with all previous accessions retained). Regenerate internal
+  composition, structure, and GlyTouCan lookup indexes. (#18)
+- Incorporate upstream WURCS revisions affecting 77 existing structures,
+  with their monosaccharide compositions unchanged. For reproducible
+  analyses, pin the glydb package version and record the bundled GlyGen
+  data version.
 
 ## glydb 0.7.0
 

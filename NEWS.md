@@ -1,3 +1,7 @@
+# glydb 0.7.2
+
+* Installation now uses the released `glyrepr` (>= 1.1.0) and `glyparse` (>= 0.8.1) packages instead of development versions.
+
 # glydb 0.7.1
 
 ## Minor improvements and bug fixes
